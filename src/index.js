@@ -13,7 +13,7 @@ root.render(
     clientId="ZHgmcL9KH5oGlIAKUpR7NRthesGEKOrV"
     authorizationParams={{
       redirect_uri: window.location.origin,
-      audience: "http://localhost:3000/"
+      audience: "http://fundit.azurewebsites.net/"
     }}
   >
     <App />

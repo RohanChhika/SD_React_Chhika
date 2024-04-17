@@ -10,7 +10,7 @@ const LoginButton = () => {
 
       try {
         const token = await getAccessTokenSilently();
-        const response = await fetch('http://localhost:3000/signup', {
+        const response = await fetch('http://fundit.azurewebsites.net/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
