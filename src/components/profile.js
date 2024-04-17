@@ -11,7 +11,7 @@ const Profile = () => {
         if (!isAuthenticated || !user?.sub) return; // Exit if user is not authenticated or user.sub is undefined
 
         const token = await getAccessTokenSilently(); // Get the Auth0 access token
-        const response = await fetch('https://fundit.azurewebsites.net/login', { // Replace 'https://your-api-endpoint/login' with your actual API endpoint URL
+        const response = await fetch('https://fundit.azurewebsites.net/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const Profile = () => {
     };
 
     fetchUserData();
-  }, [isAuthenticated, getAccessTokenSilently, user?.sub]); // Include user.sub as a dependency
+  }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
 
   if (isLoading) {
     return <>Loading...</>;
@@ -47,14 +47,10 @@ const Profile = () => {
 
   return (
     <>
-      <p>{user.nickname}</p>
-      <p>{user.email}</p>
-      <p>User ID: {user.sub}</p>
-      {userInfo && (
-        <>
-          <p>Role: {userInfo.role}</p>
-        </>
-      )}
+      <p>{user?.nickname}</p>
+      <p>{user?.email}</p>
+      {user?.sub && <p>User ID: {user.sub}</p>}
+      {userInfo && <p>Role: {userInfo.role}</p>}
     </>
   );
 };
