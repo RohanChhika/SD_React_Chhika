@@ -12,7 +12,7 @@ const Profile = () => {
       const fetchUserData = async () => {
         try {
           const token = await getAccessTokenSilently(); // Get the Auth0 access token
-          const response = await fetch('http://fundit.azurewebsites.net/login', {
+          const response = await fetch('https://fundit.azurewebsites.net/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
