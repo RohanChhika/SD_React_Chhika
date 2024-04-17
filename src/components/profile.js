@@ -5,38 +5,37 @@ const Profile = () => {
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
   const [userInfo, setUserInfo] = useState(null);
 
-  // Move the conditional check inside the useEffect
   useEffect(() => {
-    // Only execute the code inside the useEffect if isAuthenticated is true
-    if (isAuthenticated) {
-      const fetchUserData = async () => {
-        try {
-          const token = await getAccessTokenSilently(); // Get the Auth0 access token
-          const response = await fetch('https://fundit.azurewebsites.net/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-              userID: user.sub
-            })
-          });
+    const fetchUserData = async () => {
+      try {
+        if (!isAuthenticated) return; // Exit if user is not authenticated
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+        const token = await getAccessTokenSilently(); // Get the Auth0 access token
+        const response = await fetch('https://fundit.azurewebsites.net/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            userID: user?.sub // Access user.sub safely
+          })
+        });
 
-          const data = await response.json();
-          setUserInfo(data);
-        } catch (error) {
-          console.error('Failed to fetch user data:', error);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      };
 
-      fetchUserData();
-    }
-  }, [isAuthenticated, getAccessTokenSilently, user?.email, user.sub]);  // Dependencies remain the same
+        const data = await response.json();
+        setUserInfo(data);
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+        // Handle error here, e.g., display an error message to the user
+      }
+    };
+
+    fetchUserData();
+  }, [isAuthenticated, getAccessTokenSilently, user]); // Include user object as a dependency
 
   if (isLoading) {
     return <>Loading...</>;
@@ -48,7 +47,7 @@ const Profile = () => {
 
   return (
     <>
-    <p>{user.nickname}</p>
+      <p>{user.nickname}</p>
       <p>{user.email}</p>
       <p>User ID: {user.sub}</p>
       {userInfo && (
