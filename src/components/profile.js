@@ -8,17 +8,17 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (!isAuthenticated) return; // Exit if user is not authenticated
+        if (!isAuthenticated || !user?.sub) return; // Exit if user is not authenticated or user.sub is undefined
 
         const token = await getAccessTokenSilently(); // Get the Auth0 access token
-        const response = await fetch('https://fundit.azurewebsites.net/login', {
+        const response = await fetch('https://your-api-endpoint/login', { // Replace 'https://your-api-endpoint/login' with your actual API endpoint URL
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
-            userID: user?.sub // Access user.sub safely
+            userID: user.sub
           })
         });
 
@@ -35,7 +35,7 @@ const Profile = () => {
     };
 
     fetchUserData();
-  }, [isAuthenticated, getAccessTokenSilently, user]); // Include user object as a dependency
+  }, [isAuthenticated, getAccessTokenSilently, user?.sub]); // Include user.sub as a dependency
 
   if (isLoading) {
     return <>Loading...</>;
