@@ -11,7 +11,7 @@ const Profile = () => {
         if (!isAuthenticated || !user?.sub) return; // Exit if user is not authenticated or user.sub is undefined
 
         const token = await getAccessTokenSilently(); // Get the Auth0 access token
-        const response = await fetch('https://your-api-endpoint/login', { // Replace 'https://your-api-endpoint/login' with your actual API endpoint URL
+        const response = await fetch('https://fundit.azurewebsites.net/login', { // Replace 'https://your-api-endpoint/login' with your actual API endpoint URL
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
