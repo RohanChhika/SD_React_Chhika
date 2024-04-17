@@ -12,7 +12,8 @@ root.render(
     domain="dev-32ptb8idfvaxx33n.eu.auth0.com"
     clientId="ZHgmcL9KH5oGlIAKUpR7NRthesGEKOrV"
     authorizationParams={{
-      redirect_uri: window.location.origin
+      redirect_uri: window.location.origin,
+      audience: "http://fundit.azurewebsites.net/"
     }}
   >
     <App />
