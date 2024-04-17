@@ -36,7 +36,7 @@ const Profile = () => {
 
       fetchUserData();
     }
-  }, [isAuthenticated, getAccessTokenSilently, user?.email]);  // Dependencies remain the same
+  }, [isAuthenticated, getAccessTokenSilently, user?.email, user.sub]);  // Dependencies remain the same
 
   if (isLoading) {
     return <>Loading...</>;
