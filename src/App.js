@@ -6,12 +6,15 @@ import LogoutButton from "./components/LogoutButton";
 import Profile from "./components/profile";
 const App = () => {
   const [isUserAdded, setIsUserAdded] = useState(false);
+  const onUserAdded = useCallback(() => {
+    setIsUserAdded(true);
+  }, []);
   return (
     <>
       <main>
         <img src={logo} className="App-logo" alt="logo" />
         <h1>My App</h1>
-        <LoginButton onUserAdded={() => setIsUserAdded(true)} />
+        <LoginButton onUserAdded={onUserAdded} />
         <LogoutButton />
         {isUserAdded && <Profile />}
       </main>
