@@ -7,7 +7,7 @@ const LoginButton = ({onUserAdded}) => {
   useEffect(() => {
     const addUserToDatabase = async () => {
       if (!user) return; // Only proceed if the user is defined
-
+      if(onUserAdded)return;
       try {
         const token = await getAccessTokenSilently();
         const response = await fetch('https://fundit.azurewebsites.net/signup', {
