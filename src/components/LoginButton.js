@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const LoginButton = () => {
+const LoginButton = ({onUserAdded}) => {
   const { loginWithRedirect, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
@@ -31,6 +31,7 @@ const LoginButton = () => {
       } catch (error) {
         console.error('Failed to add user to the database:', error);
       }
+      onUserAdded();
     };
 
     if (isAuthenticated) {
