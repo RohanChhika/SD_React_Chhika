@@ -37,7 +37,7 @@ const LoginButton = ({onUserAdded}) => {
     if (isAuthenticated) {
       addUserToDatabase();
     }
-  }, [isAuthenticated, user, getAccessTokenSilently]);
+  }, [isAuthenticated, user, getAccessTokenSilently, onUserAdded]);
 
   return !isAuthenticated && (
     <button onClick={() => loginWithRedirect()}>
