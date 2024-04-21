@@ -39,7 +39,7 @@ const LoginButton = ({onUserAdded}) => {
   }, [isAuthenticated, user, getAccessTokenSilently, onUserAdded]);
 
   return !isAuthenticated && (
-    <button onClick={() => loginWithRedirect()}>
+    <button className="button" onClick={() => loginWithRedirect()}>
       Log In
     </button>
   );
