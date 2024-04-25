@@ -7,6 +7,8 @@ import Profile from "./components/profile";
 import { Routes, Route } from "react-router-dom";
 import ApplyFundManagerButton from "./components/ApplyFundManagerButton";
 import FundManagerApplication from "./components/FundManagerApplication";
+import AdminViewFundRequests from "./components/AdminViewFundRequestsButton";
+import AdminFundReq from "./components/AdminFundReq";
 const App = () => {
   const [isUserAdded, setIsUserAdded] = useState(false);
   const onUserAdded = useCallback(() => {
@@ -25,6 +27,7 @@ const App = () => {
         <div className="login-container">
           <LoginButton onUserAdded={onUserAdded} />
           {isUserAdded && <ApplyFundManagerButton/>}
+          {isUserAdded && <AdminViewFundRequests/>}
           <LogoutButton />
         </div>
       </header>
@@ -36,6 +39,9 @@ const App = () => {
   } />
     <Route path = {'/fund-manager-request'} element = {
       <FundManagerApplication/>
+    } />
+      <Route path = {'/admin-fund-manager-requests'} element = {
+      <AdminFundReq/>
     } />
 
  
