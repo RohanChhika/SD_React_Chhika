@@ -4,7 +4,9 @@ import './App.css';
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
 import Profile from "./components/profile";
-
+import { Routes, Route } from "react-router-dom";
+import ApplyFundManagerButton from "./components/ApplyFundManagerButton";
+import FundManagerApplication from "./components/FundManagerApplication";
 const App = () => {
   const [isUserAdded, setIsUserAdded] = useState(false);
   const onUserAdded = useCallback(() => {
@@ -12,6 +14,8 @@ const App = () => {
   }, []);
 
   return (
+    <Routes>
+      <Route index element = {
     <main className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -20,6 +24,7 @@ const App = () => {
         </div>
         <div className="login-container">
           <LoginButton onUserAdded={onUserAdded} />
+          {isUserAdded && <ApplyFundManagerButton/>}
           <LogoutButton />
         </div>
       </header>
@@ -28,7 +33,14 @@ const App = () => {
         © 2024 FundIT. All rights reserved.
       </footer>
     </main>
+  } />
+    <Route path = {'/fund-manager-request'} element = {
+      <FundManagerApplication/>
+    } />
+
+ 
+    </Routes>
   );
-};
+}
 
 export default App;
