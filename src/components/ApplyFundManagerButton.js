@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-
-
 const ApplyFundManagerButton = () => {
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [userInfo, setUserInfo] = useState(null);
-  const userRole = '' 
+  const userRoleRef = useRef('');
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (!isAuthenticated || !user?.sub) return; // Exit if user is not authenticated or user.sub is undefined
+        if (!isAuthenticated || !user?.sub) return;
 
-        const token = await getAccessTokenSilently(); // Get the Auth0 access token
+        const token = await getAccessTokenSilently();
         const response = await fetch('https://fundit.azurewebsites.net/login', {
           method: 'POST',
           headers: {
@@ -32,22 +30,18 @@ const ApplyFundManagerButton = () => {
 
         const data = await response.json();
         setUserInfo(data);
-        userRole = data.role;
+        userRoleRef.current = data.role; // Update userRoleRef instead of userRole
       } catch (error) {
         console.error('Failed to fetch user data:', error);
-        // Handle error here, e.g., display an error message to the user
       }
     };
 
     fetchUserData();
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
 
-
-
-
   return (
     <>
-      { userInfo && userRole === 'applicant' && (
+      {userInfo && userRoleRef.current === 'applicant' && (
         <Link to="/fund-manager-request">
           <button>Apply for Fund Manager</button>
         </Link>
