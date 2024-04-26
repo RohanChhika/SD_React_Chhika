@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const AdminFundReq = () => {
-  const [motivations, setMotivations] = useState([]);
   const [selectedMotivation, setSelectedMotivation] = useState(null);
 
   // Sample motivations data
