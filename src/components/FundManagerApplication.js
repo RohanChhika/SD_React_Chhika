@@ -37,8 +37,8 @@ const FundManagerApplication = () => {
       } else if (response.ok) {
         console.log('Request created successfully:', responseData);
         alert("Request made successfully")
+        //for chhika: at this point we should maybe redirect them back to the index route 
         // Additional success handling logic here
-        alert('Request created successfully!');
       } else {
         throw new Error(responseData.message || 'Failed to create request');
       }
