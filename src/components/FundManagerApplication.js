@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useHistory } from "react-router-dom";
+
 const FundManagerApplication = () => {
   const [motivation, setMotivation] = useState('');
   const {isAuthenticated, user, getAccessTokenSilently } = useAuth0();
