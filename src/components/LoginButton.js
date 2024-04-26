@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const LoginButton = () => {
+const LoginButton = ({onUserAdded}) => {
   const { loginWithRedirect, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
     const addUserToDatabase = async () => {
       if (!user) return; // Only proceed if the user is defined
-
       try {
         const token = await getAccessTokenSilently();
         const response = await fetch('https://fundit.azurewebsites.net/signup', {
@@ -31,15 +30,16 @@ const LoginButton = () => {
       } catch (error) {
         console.error('Failed to add user to the database:', error);
       }
+      onUserAdded();
     };
 
     if (isAuthenticated) {
       addUserToDatabase();
     }
-  }, [isAuthenticated, user, getAccessTokenSilently]);
+  }, [isAuthenticated, user, getAccessTokenSilently, onUserAdded]);
 
   return !isAuthenticated && (
-    <button onClick={() => loginWithRedirect()}>
+    <button className="button" onClick={() => loginWithRedirect()}>
       Log In
     </button>
   );

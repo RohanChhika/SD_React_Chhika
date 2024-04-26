@@ -29,6 +29,7 @@ const ApplyFundManagerButton = () => {
         }
 
         const data = await response.json();
+        console.log('User data:', data); // Log user data to inspect it
         setUserInfo(data);
         userRoleRef.current = data.role; // Update userRoleRef instead of userRole
       } catch (error) {
@@ -38,6 +39,8 @@ const ApplyFundManagerButton = () => {
 
     fetchUserData();
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
+
+  console.log('UserRoleRef:', userRoleRef.current); // Log userRoleRef to inspect its value
 
   return (
     <>

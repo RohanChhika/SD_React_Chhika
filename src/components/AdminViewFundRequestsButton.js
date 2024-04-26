@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const ApplyFundManagerButton = () => {
+const AdminViewFundRequestsButton = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [userInfo, setUserInfo] = useState(null);
   const userRoleRef = useRef('');
@@ -29,6 +29,7 @@ const ApplyFundManagerButton = () => {
         }
 
         const data = await response.json();
+        console.log('User data:', data); // Log user data to inspect it
         setUserInfo(data);
         userRoleRef.current = data.role; // Update userRoleRef instead of userRole
       } catch (error) {
@@ -39,15 +40,17 @@ const ApplyFundManagerButton = () => {
     fetchUserData();
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
 
+  console.log('UserRoleRef:', userRoleRef.current); // Log userRoleRef to inspect its value
+
   return (
     <>
-      {userInfo && userRoleRef.current === 'applicant' && (
-        <Link to="/fund-manager-request">
-          <button>Apply for Fund Manager</button>
+      {userInfo && userRoleRef.current === 'admin' && (
+        <Link to="/admin-fund-manager-requests">
+          <button>View Fund Manager Requests</button>
         </Link>
       )}
     </>
   );
 };
 
-export default ApplyFundManagerButton;
+export default AdminViewFundRequestsButton;
