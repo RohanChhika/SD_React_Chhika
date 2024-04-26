@@ -8,6 +8,7 @@ const FundManagerApplication = () => {
   };
 
   const handleSubmit =async (e) => {
+    e.preventDefault();
     if (!isAuthenticated) {
       alert('You must be logged in to submit your application.');
       return;
