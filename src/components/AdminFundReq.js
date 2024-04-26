@@ -1,39 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getMotivationsFromDatabase, updateMotivationInDatabase } from './api'; // Import functions for fetching and updating motivations
 
 const AdminFundReq = () => {
-  // Sample motivations data
-  const [motivations, setMotivations] = useState([
-    { id: 1, text: "Motivation 1", status: "pending" },
-    { id: 2, text: "Motivation 2", status: "pending" },
-    { id: 3, text: "Motivation 3", status: "pending" },
-  ]);
+  const [motivations, setMotivations] = useState([]);
+  const [selectedMotivation, setSelectedMotivation] = useState(null);
 
-  // Function to handle allow/deny action
+  useEffect(() => {
+    // Fetch motivations from the database when the component mounts
+    getMotivationsFromDatabase()
+      .then(data => setMotivations(data))
+      .catch(error => console.error('Error fetching motivations:', error));
+  }, []);
+
   const handleAction = (motivationId, action) => {
     // Update the status of the motivation
-    setMotivations(prevMotivations =>
-      prevMotivations.map(motivation =>
-        motivation.id === motivationId ? { ...motivation, status: action } : motivation
-      )
-    );
+    setSelectedMotivation(motivations.find(motivation => motivation.id === motivationId));
+    updateMotivationInDatabase(motivationId, action)
+      .then(() => console.log('Motivation status updated successfully'))
+      .catch(error => console.error('Error updating motivation:', error));
   };
 
   return (
     <>
-      <h1>Admin Page</h1>
-      <h2>Motivations List</h2>
-      {motivations.map(motivation => (
-        <React.Fragment key={motivation.id}>
-          <p>{motivation.text}</p>
-          <select defaultValue="pending" onChange={(e) => handleAction(motivation.id, e.target.value)}>
-            <option value="pending">Pending</option>
-            <option value="allow">Allow</option>
-            <option value="deny">Deny</option>
-          </select>
-          <button onClick={() => handleAction(motivation.id, 'allow')}>Allow</button>
-          <button onClick={() => handleAction(motivation.id, 'deny')}>Deny</button>
-        </React.Fragment>
-      ))}
+      <h1 style={{ textAlign: 'center' }}>Admin Page</h1>
+      <h2 style={{ textAlign: 'center' }}>Motivations List</h2>
+      <h3 style={{ textAlign: 'center', marginBottom: '10px' }}>Scroll through the list:</h3>
+      <select style={{ display: 'block', margin: '0 auto 20px' }} multiple>
+        {motivations.map(motivation => (
+          <option key={motivation.id}>
+            {motivation.text} - User ID: {motivation.userId} - Motivation ID: {motivation.id}
+          </option>
+        ))}
+      </select>
+      <h2 style={{ textAlign: 'center' }}>Selected Motivation</h2>
+      {selectedMotivation && (
+        <>
+          <p>User ID: {selectedMotivation.userId}</p>
+          <p>Motivation ID: {selectedMotivation.id}</p>
+          <p>Motivation Text: {selectedMotivation.text}</p>
+          {/* Add input fields for editing motivation details */}
+        </>
+      )}
     </>
   );
 };
