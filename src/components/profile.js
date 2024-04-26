@@ -41,11 +41,18 @@ const ApplyFundManagerButton = () => {
 
   return (
     <>
-      {userInfo && userRoleRef.current === 'applicant' && (
-        <Link to="/fund-manager-request">
-          <button>Apply for Fund Manager</button>
-        </Link>
+      <p>{user.nickname}</p>
+      <p>{user.email}</p>
+      <p>User ID: {user.sub}</p>
+      {userInfo && (
+        <>
+          <p>Role: {userInfo.role}</p>
+        </>
       )}
+      <p>{user?.nickname}</p>
+      <p>{user?.email}</p>
+      {user?.sub && <p>User ID: {user.sub}</p>}
+      {userInfo && <p>Role: {userInfo.role}</p>}
     </>
   );
 };
