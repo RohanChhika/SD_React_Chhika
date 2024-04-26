@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { getMotivationsFromDatabase, updateMotivationInDatabase } from './api'; // Import functions for fetching and updating motivations
+// import { getMotivationsFromDatabase, updateMotivationInDatabase } from './api'; // Import functions for fetching and updating motivations
 
-const AdminFundReq = () => {
-  const [motivations, setMotivations] = useState([]);
-  const [selectedMotivation, setSelectedMotivation] = useState(null);
+// const AdminFundReq = () => {
+//   const [motivations, setMotivations] = useState([]);
+//   const [selectedMotivation, setSelectedMotivation] = useState(null);
 
-  useEffect(() => {
-    // Fetch motivations from the database when the component mounts
-    getMotivationsFromDatabase()
-      .then(data => setMotivations(data))
-      .catch(error => console.error('Error fetching motivations:', error));
-  }, []);
+//   useEffect(() => {
+//     // Fetch motivations from the database when the component mounts
+//     getMotivationsFromDatabase()
+//       .then(data => setMotivations(data))
+//       .catch(error => console.error('Error fetching motivations:', error));
+//   }, []);
 
-  const handleAction = (motivationId, action) => {
-    // Update the status of the motivation
-    setSelectedMotivation(motivations.find(motivation => motivation.id === motivationId));
-    updateMotivationInDatabase(motivationId, action)
-      .then(() => console.log('Motivation status updated successfully'))
-      .catch(error => console.error('Error updating motivation:', error));
-  };
+//   const handleAction = (motivationId, action) => {
+//     // Update the status of the motivation
+//     setSelectedMotivation(motivations.find(motivation => motivation.id === motivationId));
+//     updateMotivationInDatabase(motivationId, action)
+//       .then(() => console.log('Motivation status updated successfully'))
+//       .catch(error => console.error('Error updating motivation:', error));
+//   };
 
   return (
     <>
@@ -43,6 +43,6 @@ const AdminFundReq = () => {
       )}
     </>
   );
-};
+
 
 export default AdminFundReq;
