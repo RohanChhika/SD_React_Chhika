@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-
+import { useAuth0 } from "@auth0/auth0-react";
 const FundManagerApplication = () => {
   const [motivation, setMotivation] = useState('');
-
+  const {isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   const handleChange = (e) => {
     setMotivation(e.target.value);
   };
