@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 
 const AdminFundReq = () => {
+  const [motivations, setMotivations] = useState([
+    { id: 1, text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat arcu non venenatis viverra.", userId: "user1" },
+    { id: 2, text: "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed ut quam sed ex sagittis fermentum.", userId: "user2" },
+    { id: 3, text: "Fusce vestibulum, nisi quis vulputate ultrices, quam sapien tristique velit, auctor condimentum lacus turpis vel eros.", userId: "user3" }
+  ]);
   const [selectedMotivation, setSelectedMotivation] = useState(null);
-
-  // Sample motivations data
-  const sampleMotivations = [
-    { id: 1, text: "Motivation 1", userId: "user1" },
-    { id: 2, text: "Motivation 2", userId: "user2" },
-    { id: 3, text: "Motivation 3", userId: "user3" }
-  ];
 
   // Function to handle selecting a motivation
   const handleSelectMotivation = (motivation) => {
-    setSelectedMotivation(motivation === selectedMotivation ? null : motivation);
+    setSelectedMotivation(motivation);
   };
 
   // Function to handle accepting a motivation
@@ -36,26 +34,28 @@ const AdminFundReq = () => {
   };
 
   return (
-    <>
-      <h1 style={{ textAlign: 'center', marginBottom: '10px' }}>Admin Page</h1>
-      <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Motivations List</h2>
-      <select style={{ display: 'block', margin: '0 auto 20px' }} multiple={false}>
-        {sampleMotivations.map(motivation => (
-          <option key={motivation.id} selected={selectedMotivation && selectedMotivation.id === motivation.id} onClick={() => handleSelectMotivation(motivation)}>
-            {motivation.text} - User ID: {motivation.userId}
-          </option>
-        ))}
-      </select>
-      {selectedMotivation && (
-        <>
-          <h2 style={{ textAlign: 'center', marginTop: '20px' }}>Selected Motivation</h2>
-          <p style={{ textAlign: 'center' }}>User ID: {selectedMotivation.userId}</p>
-          <p style={{ textAlign: 'center' }}>Motivation Text: {selectedMotivation.text}</p>
-          <button style={{ display: 'block', margin: '0 auto', marginBottom: '10px', marginRight: '10px' }} onClick={handleAcceptMotivation}>Accept</button>
-          <button style={{ display: 'block', margin: '0 auto', marginBottom: '10px' }} onClick={handleDeclineMotivation}>Decline</button>
-        </>
-      )}
-    </>
+    <div style={{ textAlign: 'center' }}>
+      <h1>Admin Page</h1>
+      <h2>Motivations List</h2>
+      <div style={{ marginBottom: '20px' }}>
+        <select style={{ marginBottom: '10px' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))}>
+          <option value="">Select a motivation</option>
+          {motivations.map(motivation => (
+            <option key={motivation.id} value={JSON.stringify(motivation)}>
+              {motivation.text}
+            </option>
+          ))}
+        </select>
+        <div style={{ border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '10px' }}>
+          <h3>User ID: {selectedMotivation ? selectedMotivation.userId : ''}</h3>
+          <textarea rows="6" style={{ width: '100%', marginBottom: '10px' }} value={selectedMotivation ? selectedMotivation.text : 'Select a motivation to view full details'} readOnly />
+        </div>
+        <div>
+          <button style={{ marginRight: '10px' }} onClick={handleAcceptMotivation} disabled={!selectedMotivation}>Accept</button>
+          <button onClick={handleDeclineMotivation} disabled={!selectedMotivation}>Decline</button>
+        </div>
+      </div>
+    </div>
   );
 };
 
