@@ -40,14 +40,6 @@ const ApplyFundManagerButton = () => {
 
   return (
     <>
-      <p>{user.nickname}</p>
-      <p>{user.email}</p>
-      <p>User ID: {user.sub}</p>
-      {userInfo && (
-        <>
-          <p>Role: {userInfo.role}</p>
-        </>
-      )}
       <p>{user?.nickname}</p>
       <p>{user?.email}</p>
       {user?.sub && <p>User ID: {user.sub}</p>}
