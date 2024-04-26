@@ -43,8 +43,6 @@ const App = () => {
       <Route path = {'/admin-fund-manager-requests'} element = {
       <AdminFundReq/>
     } />
-
- 
     </Routes>
   );
 }

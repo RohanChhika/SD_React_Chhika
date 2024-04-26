@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const ApplyFundManagerButton = () => {
+const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [userInfo, setUserInfo] = useState(null);
   const userRoleRef = useRef('');
@@ -48,4 +48,4 @@ const ApplyFundManagerButton = () => {
   );
 };
 
-export default ApplyFundManagerButton;
+export default Profile;
