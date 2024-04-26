@@ -1,48 +1,63 @@
-import React, { useState, useEffect } from 'react';
-// import { getMotivationsFromDatabase, updateMotivationInDatabase } from './api'; // Import functions for fetching and updating motivations
+import React, { useState } from 'react';
 
-// const AdminFundReq = () => {
-//   const [motivations, setMotivations] = useState([]);
-//   const [selectedMotivation, setSelectedMotivation] = useState(null);
+const AdminFundReq = () => {
+  const [motivations, setMotivations] = useState([]);
+  const [selectedMotivation, setSelectedMotivation] = useState(null);
 
-//   useEffect(() => {
-//     // Fetch motivations from the database when the component mounts
-//     getMotivationsFromDatabase()
-//       .then(data => setMotivations(data))
-//       .catch(error => console.error('Error fetching motivations:', error));
-//   }, []);
+  // Sample motivations data
+  const sampleMotivations = [
+    { id: 1, text: "Motivation 1", userId: "user1" },
+    { id: 2, text: "Motivation 2", userId: "user2" },
+    { id: 3, text: "Motivation 3", userId: "user3" }
+  ];
 
-//   const handleAction = (motivationId, action) => {
-//     // Update the status of the motivation
-//     setSelectedMotivation(motivations.find(motivation => motivation.id === motivationId));
-//     updateMotivationInDatabase(motivationId, action)
-//       .then(() => console.log('Motivation status updated successfully'))
-//       .catch(error => console.error('Error updating motivation:', error));
-//   };
+  // Function to handle selecting a motivation
+  const handleSelectMotivation = (motivation) => {
+    setSelectedMotivation(motivation === selectedMotivation ? null : motivation);
+  };
+
+  // Function to handle accepting a motivation
+  const handleAcceptMotivation = () => {
+    if (selectedMotivation) {
+      // Perform action to accept the selected motivation
+      console.log("Accepted:", selectedMotivation);
+    } else {
+      console.log("Please select a motivation first.");
+    }
+  };
+
+  // Function to handle declining a motivation
+  const handleDeclineMotivation = () => {
+    if (selectedMotivation) {
+      // Perform action to decline the selected motivation
+      console.log("Declined:", selectedMotivation);
+    } else {
+      console.log("Please select a motivation first.");
+    }
+  };
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>Admin Page</h1>
-      <h2 style={{ textAlign: 'center' }}>Motivations List</h2>
-      <h3 style={{ textAlign: 'center', marginBottom: '10px' }}>Scroll through the list:</h3>
-      <select style={{ display: 'block', margin: '0 auto 20px' }} multiple>
-        {motivations.map(motivation => (
-          <option key={motivation.id}>
-            {motivation.text} - User ID: {motivation.userId} - Motivation ID: {motivation.id}
+      <h1 style={{ textAlign: 'center', marginBottom: '10px' }}>Admin Page</h1>
+      <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Motivations List</h2>
+      <select style={{ display: 'block', margin: '0 auto 20px' }} multiple={false}>
+        {sampleMotivations.map(motivation => (
+          <option key={motivation.id} selected={selectedMotivation && selectedMotivation.id === motivation.id} onClick={() => handleSelectMotivation(motivation)}>
+            {motivation.text} - User ID: {motivation.userId}
           </option>
         ))}
       </select>
-      <h2 style={{ textAlign: 'center' }}>Selected Motivation</h2>
       {selectedMotivation && (
         <>
-          <p>User ID: {selectedMotivation.userId}</p>
-          <p>Motivation ID: {selectedMotivation.id}</p>
-          <p>Motivation Text: {selectedMotivation.text}</p>
-          {/* Add input fields for editing motivation details */}
+          <h2 style={{ textAlign: 'center', marginTop: '20px' }}>Selected Motivation</h2>
+          <p style={{ textAlign: 'center' }}>User ID: {selectedMotivation.userId}</p>
+          <p style={{ textAlign: 'center' }}>Motivation Text: {selectedMotivation.text}</p>
+          <button style={{ display: 'block', margin: '0 auto', marginBottom: '10px', marginRight: '10px' }} onClick={handleAcceptMotivation}>Accept</button>
+          <button style={{ display: 'block', margin: '0 auto', marginBottom: '10px' }} onClick={handleDeclineMotivation}>Decline</button>
         </>
       )}
     </>
   );
-
+};
 
 export default AdminFundReq;
