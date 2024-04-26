@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
+import { useHistory } from "react-router-dom";
 const FundManagerApplication = () => {
   const [motivation, setMotivation] = useState('');
   const {isAuthenticated, user, getAccessTokenSilently } = useAuth0();
+  const history = useHistory();
   const handleChange = (e) => {
     setMotivation(e.target.value);
   };
@@ -37,7 +39,7 @@ const FundManagerApplication = () => {
       } else if (response.ok) {
         console.log('Request created successfully:', responseData);
         alert("Request made successfully")
-        //for chhika: at this point we should maybe redirect them back to the index route 
+       history.push('/');
         // Additional success handling logic here
       } else {
         throw new Error(responseData.message || 'Failed to create request');
