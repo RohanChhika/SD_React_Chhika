@@ -21,7 +21,7 @@ const FundManagerApplication = () => {
   
     try {
       const accessToken = await getAccessTokenSilently(); // Fetch the access token silently
-      const response = await fetch('/managerRequest', {
+      const response = await fetch('https://fundit.azurewebsites.net/managerRequest', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
