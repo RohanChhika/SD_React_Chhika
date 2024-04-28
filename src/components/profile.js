@@ -39,12 +39,12 @@ const Profile = () => {
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
 
   return (
-    <>
+    <div className='profile-details'>
       <p>{user?.nickname}</p>
       <p>{user?.email}</p>
       {user?.sub && <p>User ID: {user.sub}</p>}
       {userInfo && <p>Role: {userInfo.role}</p>}
-    </>
+    </div>
   );
 };
 

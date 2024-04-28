@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from '../components/LoginButton';
+import '@testing-library/jest-dom';
 
 // Mock the Auth0 hook and its return values
 jest.mock("@auth0/auth0-react");
