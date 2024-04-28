@@ -46,7 +46,7 @@ const AdminViewFundRequestsButton = () => {
     <>
       {userInfo && userRoleRef.current === 'admin' && (
         <Link to="/admin-fund-manager-requests">
-          <button>View Fund Manager Requests</button>
+          <button className='button'>View Fund Manager Requests</button>
         </Link>
       )}
     </>

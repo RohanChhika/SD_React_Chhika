@@ -46,7 +46,7 @@ const ApplyFundManagerButton = () => {
     <>
       {userInfo && userRoleRef.current === 'applicant' && (
         <Link to="/fund-manager-request">
-          <button>Apply for Fund Manager</button>
+          <button className='button'>Apply for Fund Manager</button>
         </Link>
       )}
     </>
