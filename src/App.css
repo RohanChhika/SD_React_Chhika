@@ -100,24 +100,48 @@ html, body {
   display: none;
 }
 
-/* AdminFundReq */
+
+/* Styles specific to AdminFundReq */
 .admin-page {
-  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-top: 20px;
 }
 
 .motivation-select {
   width: 300px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .motivation-detail {
   width: 600px;
   border: 1px solid #ccc;
-  padding: 10px;
-  text-align: left;
-  margin-bottom: 20px;
-  margin: 0 auto;
+  padding: 15px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+.motivation-detail h3 {
+  margin-top: 0;
+  color: #0c75b3;
+}
+
+.motivation-detail p {
+  font-size: 16px;
+  color: #666;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+
 
 /* AdminViewFundRequestsButton and ApplyFundManager */
 .admin-button {

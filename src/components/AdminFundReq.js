@@ -35,9 +35,9 @@ const AdminFundReq = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }} className='admin-page'>Admin Page</h1>
-      <h2 style={{ textAlign: 'center' }}>Motivations List</h2>
-      <select style={{ width: '300px', marginBottom: '20px' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))} className='motivation-select'>
+      <h1 className='admin-page' style={{ textAlign: 'center' }}>Admin Page</h1>
+      <h2 className='admin-page' style={{ textAlign: 'center' }}>Motivations List</h2>
+      <select className="motivation-select" style={{ width: '300px', marginBottom: '20px' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))}>
         <option value="">Select a motivation</option>
         {motivations.map(motivation => (
           <option key={motivation.id} value={JSON.stringify(motivation)}>
@@ -51,9 +51,9 @@ const AdminFundReq = () => {
           <p>{selectedMotivation.text}</p>
         </div>
       )}
-      <div style={{ textAlign: 'center' }}>
-        <button style={{ marginRight: '10px' }} onClick={handleAcceptMotivation} disabled={!selectedMotivation}>Accept</button>
-        <button onClick={handleDeclineMotivation} disabled={!selectedMotivation}>Decline</button>
+      <div className="button-container" style={{ textAlign: 'center' }}>
+        <button className='button' style={{ marginRight: '10px' }} onClick={handleAcceptMotivation} disabled={!selectedMotivation}>Accept</button>
+        <button className='button' onClick={handleDeclineMotivation} disabled={!selectedMotivation}>Decline</button>
       </div>
     </>
   );
