@@ -35,20 +35,58 @@ const AdminFundReq = () => {
   };
 
   // Function to handle accepting a motivation
-  const handleAcceptMotivation = () => {
+  const handleAcceptMotivation = async() => {
     if (selectedMotivation) {
-      // Perform action to accept the selected motivation
-      console.log("Accepted:", selectedMotivation);
+      try {
+        const token = await getAccessTokenSilently(); // Retrieve the token
+        const url = `https://fundit.azurewebsites.net/process-request/${selectedMotivation.userID}`;
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ decision: 'accept'}) // Sending "accept" as true
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    
+        console.log("Accepted:", selectedMotivation);
+        alert('Request accepted successfully!'); // Optionally, display a success message to the user
+      } catch (error) {
+        console.error('Failed to accept request:', error.message);
+      }
     } else {
       console.log("Please select a motivation first.");
     }
   };
 
   // Function to handle declining a motivation
-  const handleDeclineMotivation = () => {
+  const handleDeclineMotivation = async () => {
     if (selectedMotivation) {
-      // Perform action to decline the selected motivation
-      console.log("Declined:", selectedMotivation);
+      try {
+        const token = await getAccessTokenSilently(); // Retrieve the token
+        const url = `https://fundit.azurewebsites.net/process-request/${selectedMotivation.userID}`;
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ decision: 'reject'}) // Sending "accept" as true
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    
+        console.log("Rejected:", selectedMotivation);
+        alert('Request rejected successfully!'); // Optionally, display a success message to the user
+      } catch (error) {
+        console.error('Failed to accept request:', error.message);
+      }
     } else {
       console.log("Please select a motivation first.");
     }
