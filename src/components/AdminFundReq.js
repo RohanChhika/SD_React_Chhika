@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 const AdminFundReq = () => {
-  const [motivations] = useState([
-    { id: 1, text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat arcu non venenatis viverra.", userId: "user1" },
-    { id: 2, text: "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed ut quam sed ex sagittis fermentum.", userId: "user2" },
-    { id: 3, text: "Fusce vestibulum, nisi quis vulputate ultrices, quam sapien tristique velit, auctor condimentum lacus turpis vel eros.", userId: "user3" }
-  ]);
   const [selectedMotivation, setSelectedMotivation] = useState(null);
-
+  const [motivations, setMotivations] = useState([]);
+  useEffect(() => {
+    fetch('https://fundit.azurewebsites.net/viewManagerRequests')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setMotivations(data);
+      })
+      .catch(error => {
+        console.error('Failed to fetch requests:', error.message);
+      });
+  }, []); 
   // Function to handle selecting a motivation
   const handleSelectMotivation = (motivation) => {
     setSelectedMotivation(motivation);
