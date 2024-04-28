@@ -1,23 +1,33 @@
 import React, { useState,useEffect } from 'react';
-
+import { useAuth0 } from "@auth0/auth0-react";
 const AdminFundReq = () => {
   const [selectedMotivation, setSelectedMotivation] = useState(null);
   const [motivations, setMotivations] = useState([]);
+  const { getAccessTokenSilently } = useAuth0();
   useEffect(() => {
-    fetch('https://fundit.azurewebsites.net/viewManagerRequests')
-      .then(response => {
+    const fetchManagerRequests = async () => {
+      try {
+        const token = await getAccessTokenSilently(); // Assuming you have a way to retrieve the token
+        const response = await fetch('https://fundit.azurewebsites.net/viewManagerRequests', {
+          method: 'GET', // Explicitly setting the method for clarity
+          headers: {
+            'Authorization': `Bearer ${token}` // Sending the token for authorization
+          }
+        });
+    
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return response.json();
-      })
-      .then(data => {
-        setMotivations(data);
-      })
-      .catch(error => {
+    
+        const data = await response.json();
+        setMotivations(data); // Assuming setMotivations is a state setter function in your React component
+        console.log('Requests fetched successfully.');
+      } catch (error) {
         console.error('Failed to fetch requests:', error.message);
-      });
-  }, []); 
+      }
+    };
+    fetchManagerRequests();
+  }, [getAccessTokenSilently]); 
   // Function to handle selecting a motivation
   const handleSelectMotivation = (motivation) => {
     setSelectedMotivation(motivation);
