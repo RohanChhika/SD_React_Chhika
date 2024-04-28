@@ -35,9 +35,9 @@ const AdminFundReq = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }} className='admin-page'>Admin Page</h1>
+      <h1 style={{ textAlign: 'center' }}>Admin Page</h1>
       <h2 style={{ textAlign: 'center' }}>Motivations List</h2>
-      <select style={{ width: '300px', marginBottom: '20px' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))} className='motivation-select'>
+      <select style={{ width: '300px', marginBottom: '20px' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))}>
         <option value="">Select a motivation</option>
         {motivations.map(motivation => (
           <option key={motivation.id} value={JSON.stringify(motivation)}>
@@ -46,7 +46,7 @@ const AdminFundReq = () => {
         ))}
       </select>
       {selectedMotivation && (
-        <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
+        <div style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
           <h3>User ID: {selectedMotivation.userId}</h3>
           <p>{selectedMotivation.text}</p>
         </div>

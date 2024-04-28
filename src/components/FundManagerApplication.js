@@ -55,12 +55,12 @@ const FundManagerApplication = () => {
     <div>
       <h1>Apply to be a Fund Manager</h1>
       <h2>Please provide your motivation</h2>
-      <form className='fund-manager-form' onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label>
           Motivation:
           <textarea value={motivation} onChange={handleChange} />
         </label>
-        <button className='button' type="submit">Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
