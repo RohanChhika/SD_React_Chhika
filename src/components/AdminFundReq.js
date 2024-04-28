@@ -22,6 +22,7 @@ const AdminFundReq = () => {
         const data = await response.json();
         setMotivations(data); // Assuming setMotivations is a state setter function in your React component
         console.log('Requests fetched successfully.');
+        console.log(data);
       } catch (error) {
         console.error('Failed to fetch requests:', error.message);
       }
@@ -60,15 +61,15 @@ const AdminFundReq = () => {
       <select style={{ width: '300px', marginBottom: '20px' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))}>
         <option value="">Select a motivation</option>
         {motivations.map(motivation => (
-          <option key={motivation.id} value={JSON.stringify(motivation)}>
-            {motivation.text}
+          <option key={motivation.userID} value={JSON.stringify(motivation)}>
+            {motivation.motivation}
           </option>
         ))}
       </select>
       {selectedMotivation && (
         <div style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
-          <h3>User ID: {selectedMotivation.userId}</h3>
-          <p>{selectedMotivation.text}</p>
+          <h3>User ID: {selectedMotivation.userID}</h3>
+          <p>{selectedMotivation.motivation}</p>
         </div>
       )}
       <div style={{ textAlign: 'center' }}>
