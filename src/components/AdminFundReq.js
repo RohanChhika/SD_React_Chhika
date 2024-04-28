@@ -100,7 +100,6 @@ const AdminFundReq = () => {
     <>
       <h1 className='admin-page' style={{ textAlign: 'center' }}>Admin Page</h1>
       <h2 className='admin-page' style={{ textAlign: 'center' }}>Motivations List</h2>
-      <select className="motivation-select" style={{ width: '300px', marginBottom: '20px', textAlign: 'center' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))}>
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
         <select className="motivation-select" style={{ width: '300px', textAlign: 'center' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))}>
           <option value="">Select a motivation</option>
@@ -111,6 +110,7 @@ const AdminFundReq = () => {
           ))}
         </select>
       </div>
+
       {selectedMotivation && (
         <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
           <h3>User ID: {selectedMotivation.userID}</h3>
