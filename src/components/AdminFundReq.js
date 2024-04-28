@@ -100,7 +100,7 @@ const AdminFundReq = () => {
     <>
       <h1 className='admin-page' style={{ textAlign: 'center' }}>Admin Page</h1>
       <h2 className='admin-page' style={{ textAlign: 'center' }}>Motivations List</h2>
-      <select className="motivation-select" style={{ width: '300px', marginBottom: '20px' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))}>
+      <select className="motivation-select" style={{ width: '300px', marginBottom: '20px', textAlign: 'center' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))}>
         <option value="">Select a motivation</option>
         {motivations.map(motivation => (
           <option key={motivation.userID} value={JSON.stringify(motivation)}>
