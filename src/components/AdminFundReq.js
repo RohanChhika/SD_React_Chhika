@@ -1,9 +1,11 @@
 import React, { useState,useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 const AdminFundReq = () => {
   const [selectedMotivation, setSelectedMotivation] = useState(null);
   const [motivations, setMotivations] = useState([]);
   const { getAccessTokenSilently } = useAuth0();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchManagerRequests = async () => {
       try {
@@ -55,6 +57,7 @@ const AdminFundReq = () => {
     
         console.log("Accepted:", selectedMotivation);
         alert('Request accepted successfully!'); // Optionally, display a success message to the user
+        navigate(0); 
       } catch (error) {
         console.error('Failed to accept request:', error.message);
       }
@@ -84,6 +87,7 @@ const AdminFundReq = () => {
     
         console.log("Rejected:", selectedMotivation);
         alert('Request rejected successfully!'); // Optionally, display a success message to the user
+        navigate(0); 
       } catch (error) {
         console.error('Failed to accept request:', error.message);
       }
