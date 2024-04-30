@@ -60,7 +60,7 @@ const FundManagerApplication = () => {
           <h1>Fund Manager Application</h1>
         </div>
       </header>
-      <main>
+      <main style={{ paddingTop: '100px' }}>
       <h1 style={{textAlign: 'center'}}>Apply to be a Fund Manager</h1>
       <h2 style={{textAlign: 'center'}}>Please provide your motivation</h2>
       <form className='fund-manager-form' onSubmit={handleSubmit}>

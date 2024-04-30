@@ -23,10 +23,6 @@ html, body {
   margin-left: 0;
 }
 
-.main {
-  padding-top: 100px; /* Adjust this value based on the actual height of your header */
-}
-
 .center-text {
   flex-grow: 1; /* Allows the center text to take up any remaining space */
   text-align: center; /* Centers the text within its division */
