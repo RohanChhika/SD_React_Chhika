@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
+import logo from '../components/Images/logo1.png';
 
 const FundManagerApplication = () => {
   const [motivation, setMotivation] = useState('');
@@ -52,7 +53,14 @@ const FundManagerApplication = () => {
   };
 
   return (
-    <div className="main-content">
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <div className="center-text">
+          <h1>Fund Requests</h1>
+        </div>
+      </header>
+      <main>
       <h1 style={{textAlign: 'center'}}>Apply to be a Fund Manager</h1>
       <h2 style={{textAlign: 'center'}}>Please provide your motivation</h2>
       <form className='fund-manager-form' onSubmit={handleSubmit}>
@@ -62,6 +70,11 @@ const FundManagerApplication = () => {
         </label>
         <button className='button' type="submit">Submit</button>
       </form>
+      </main>
+      
+      <footer className="App-footer">
+      © 2024 FundIT. All rights reserved.
+    </footer>
     </div>
   );
 };
