@@ -1,3 +1,4 @@
+/* General styling for the entire application */
 html, body {
   height: 100%;
   width: 100%;
@@ -20,31 +21,12 @@ html, body {
   height: 80px;
   /* Align logo to the left */
   margin-left: 0;
+  animation: App-logo-spin infinite 20s linear;
 }
 
 .center-text {
   flex-grow: 1; /* Allows the center text to take up any remaining space */
   text-align: center; /* Centers the text within its division */
-}
-
-.App-footer {
-  width: 100%;
-  padding: 20px 10px;
-  background-color: #0c75b3; 
-  color: white;              
-  text-align: center;
-  border-top: 1px solid #444; 
-  position: absolute;
-  bottom: 0;                 
-  left: 0;
-}
-
-.login-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  /* Align buttons to the right */
-  margin-right: 0;
 }
 
 .App-header {
@@ -56,6 +38,30 @@ html, body {
   background-color: #0c75b3;
   color: white;
   box-sizing: border-box;
+  position: fixed; /* Fixed at the top */
+  top: 0;
+  z-index: 1000;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* Align buttons to the right */
+  margin-right: 0;
+}
+
+.App-footer {
+  width: 100%;
+  padding: 20px 10px;
+  background-color: #0c75b3; 
+  color: white;              
+  text-align: center;
+  border-top: 1px solid #444; 
+  position: fixed; /* Fixed at the bottom */
+  bottom: 0;                 
+  left: 0;
+  z-index: 1000;
 }
 
 .App-link {
@@ -99,7 +105,6 @@ html, body {
 .hidden {
   display: none;
 }
-
 
 /* Styles specific to AdminFundReq */
 .admin-page {
@@ -152,8 +157,6 @@ html, body {
   text-align: center;
   margin-top: 20px;
 }
-
-
 
 /* AdminViewFundRequestsButton and ApplyFundManager */
 .admin-button {
