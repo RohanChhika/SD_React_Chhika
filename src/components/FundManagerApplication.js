@@ -57,7 +57,7 @@ const FundManagerApplication = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <div className="center-text">
-          <h1>Fund Requests</h1>
+          <h1>Fund Manager Application</h1>
         </div>
       </header>
       <main>
@@ -71,7 +71,7 @@ const FundManagerApplication = () => {
         <button className='button' type="submit">Submit</button>
       </form>
       </main>
-      
+
       <footer className="App-footer">
       © 2024 FundIT. All rights reserved.
     </footer>
