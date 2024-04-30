@@ -21,7 +21,6 @@ html, body {
   height: 80px;
   /* Align logo to the left */
   margin-left: 0;
-  animation: App-logo-spin infinite 20s linear;
 }
 
 .center-text {
