@@ -40,10 +40,17 @@ const Profile = () => {
 
   return (
     <div className='profile-details'>
-      <p>{user?.nickname}</p>
-      <p>{user?.email}</p>
-      {user?.sub && <p>User ID: {user.sub}</p>}
-      {userInfo && <p>Role: {userInfo.role}</p>}
+      {/* Conditionally render based on user's role */}
+      {userInfo && userRoleRef.current !== 'blocked' ? (
+        <>
+          {user?.nickname && <p>User Nickname: {user.nickname}</p>}
+          {user?.email && <p>User Email: {user.email}</p>}
+          {user?.sub && <p>User ID: {user.sub}</p>}
+          <p>Role: {userInfo.role}</p>
+        </>
+      ) : (
+        <p>Your account has been blocked. Please contact the administrator for assistance.</p>
+      )}
     </div>
   );
 };
