@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from '../components/Images/logo1.png';
 import { useNavigate } from "react-router-dom";
@@ -6,16 +6,18 @@ import { useNavigate } from "react-router-dom";
 const AdminBlockUsers = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [Users, setUsers] = useState([]);
+  const [userInfo, setUserInfo] = useState({ username: '', role: '' }); // State to store selected user info
   const { getAccessTokenSilently } = useAuth0();
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const token = await getAccessTokenSilently(); // Assuming you have a way to retrieve the token
         const response = await fetch('https://fundit.azurewebsites.net/viewUsers', {
-          method: 'GET', // Explicitly setting the method for clarity
+          method: 'GET',
           headers: {
-            'Authorization': `Bearer ${token}` // Sending the token for authorization
+            'Authorization': `Bearer ${token}`
           }
         });
     
@@ -25,31 +27,32 @@ const AdminBlockUsers = () => {
     
         const data = await response.json();
         setUsers(data); 
-        console.log('Requests fetched successfully.');
-        console.log(data);
+        console.log('Users fetched successfully.');
       } catch (error) {
-        console.error('Failed to fetch requests:', error.message);
+        console.error('Failed to fetch users:', error.message);
       }
     };
     fetchUsers();
   }, [getAccessTokenSilently]); 
+
   // Function to handle selecting a user info
   const handleSelectUser = (user) => {
     setSelectedUser(user);
+    // Set user info when a user is selected
+    setUserInfo({ username: user.contact, role: user.role });
   };
 
   // Function to handle blocking a user
-  const handleBlockUser = async() => {
+  const handleBlockUser = async () => {
     if (selectedUser) {
       try {
         const token = await getAccessTokenSilently(); // Retrieve the token
         const url = `https://fundit.azurewebsites.net/process-blockedUser/${selectedUser.userID}`;
         const response = await fetch(url, {
-          method: 'GET ',
+          method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
           },
-          
         });
     
         if (!response.ok) {
@@ -67,7 +70,6 @@ const AdminBlockUsers = () => {
     }
   };
 
-
   return (
     <div className="App">
       <header className="App-header">
@@ -84,16 +86,17 @@ const AdminBlockUsers = () => {
             <option value="">Select a User</option>
             {Users.map(user => (
               <option key={user.userID} value={JSON.stringify(user)}>
-                {user.user}
+                {user.contact}
               </option>
             ))}
-        </select>
+          </select>
         </div>
 
         {selectedUser && (
           <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
             <h3>User ID: {selectedUser.userID}</h3>
-            <p>{selectedUser.user}</p>
+            <p>Username: {userInfo.username}</p> {/* Display username */}
+            <p>Role: {userInfo.role}</p> {/* Display user role */}
           </div>
         )}
         <div className="button-container" style={{ textAlign: 'center' }}>
@@ -102,8 +105,8 @@ const AdminBlockUsers = () => {
       </main>
 
       <footer className="App-footer">
-      © 2024 FundIT. All rights reserved.
-    </footer>
+        © 2024 FundIT. All rights reserved.
+      </footer>
     </div>
   );
 };
