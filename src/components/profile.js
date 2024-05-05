@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Add `useRef` import
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Profile = () => {
@@ -41,7 +41,7 @@ const Profile = () => {
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
 
   return (
-    <div>
+    <div className='profile-details'>
       {userInfo && userRoleRef.current !== 'blocked' ? (
         <>
           <p>Email: {user.email}</p>
