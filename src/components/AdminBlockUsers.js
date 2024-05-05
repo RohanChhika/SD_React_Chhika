@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from '../components/Images/logo1.png';
 import { useNavigate } from "react-router-dom";
-import AdminBlockUsersButton from './buttons/AdminBlockUsersButton';
+
 const AdminBlockUsers = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [Users, setUsers] = useState([]);
