@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'; // Add `useRef` import
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [userInfo, setUserInfo] = useState(null);
-  const [userRole, setUserRole] = useState(null);
   const userRoleRef = useRef('');
 
   useEffect(() => {
@@ -30,7 +29,6 @@ const Profile = () => {
 
         const userData = await response.json();
         setUserInfo(userData);
-        setUserRole(userData.role);
         userRoleRef.current = userData.role;
       } catch (error) {
         console.error('Failed to fetch user data:', error);
@@ -41,18 +39,19 @@ const Profile = () => {
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
 
   return (
-    <div className='profile-details'>
+    <>
+      {/* Conditionally render based on user's role */}
       {userInfo && userRoleRef.current !== 'blocked' ? (
         <>
-          <p>Email: {user.email}</p>
-          <p>Nickname: {user.nickname}</p>
-          <p>User ID: {user.sub}</p>
-          <p>Role: {userRole}</p>
+          {user?.nickname && <p>User Nickname: {user.nickname}</p>}
+          {user?.email && <p>User Email: {user.email}</p>}
+          {user?.sub && <p>User ID: {user.sub}</p>}
+          <p>Role: {userInfo.role}</p>
         </>
       ) : (
         <p>Your account has been blocked. Please contact the administrator for assistance.</p>
       )}
-    </div>
+    </>
   );
 };
 
