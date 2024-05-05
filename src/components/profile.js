@@ -8,42 +8,46 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      try {
-        if (!isAuthenticated || !user?.sub) return;
+      if (!isAuthenticated || !user?.sub) return; // Early exit if not authenticated or user.sub is undefined
 
-        const token = await getAccessTokenSilently();
+      try {
+        const token = await getAccessTokenSilently(); // Get the access token silently
         const response = await fetch('https://fundit.azurewebsites.net/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({
-            userID: user.sub
-          })
+          body: JSON.stringify({ userID: user.sub })
         });
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`); // Throw error if response is not OK
         }
 
         const data = await response.json();
         setUserInfo(data);
-        userRoleRef.current = data.role; // Update userRoleRef instead of userRole
+        userRoleRef.current = data.role; // Store user role in ref
       } catch (error) {
-        console.error('Failed to fetch user data:', error);
+        console.error('Failed to fetch user data:', error); // Log errors to console
       }
     };
 
     fetchUserData();
-  }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
+  }, [isAuthenticated, getAccessTokenSilently, user?.sub]); // Dependency array for useEffect
 
   return (
-    <div>
-      <p>{user?.nickname}</p>
-      <p>{user?.email}</p>
-      {user?.sub && <p>User ID: {user.sub}</p>}
-      {userInfo && <p>Role: {userInfo.role}</p>}
+    <div className='profile-details'>
+      {userRoleRef.current === 'blocked' ? (
+        <p>Your account has been blocked. Please contact the administrator for assistance.</p> // Display this if user is blocked
+      ) : (
+        <>
+          <p>{user?.nickname}</p>
+          <p>{user?.email}</p>
+          {user?.sub && <p>User ID: {user.sub}</p>}
+          {userInfo && <p>Role: {userInfo.role}</p>}
+        </>
+      )}
     </div>
   );
 };
