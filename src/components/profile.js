@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [userInfo, setUserInfo] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   const userRoleRef = useRef('');
 
   useEffect(() => {
@@ -12,7 +13,7 @@ const Profile = () => {
         if (!isAuthenticated || !user?.sub) return;
 
         const token = await getAccessTokenSilently();
-        const response = await fetch('https://fundit.azurewebsites.net/login', {
+        const response = await fetch('https://fundit.azurewebsites.net/userData', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -27,9 +28,10 @@ const Profile = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();
-        setUserInfo(data);
-        userRoleRef.current = data.role; // Update userRoleRef instead of userRole
+        const userData = await response.json();
+        setUserInfo(userData);
+        setUserRole(userData.role);
+        userRoleRef.current = userData.role;
       } catch (error) {
         console.error('Failed to fetch user data:', error);
       }
@@ -39,14 +41,13 @@ const Profile = () => {
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
 
   return (
-    <div className='profile-details'>
-      {/* Conditionally render based on user's role */}
+    <div>
       {userInfo && userRoleRef.current !== 'blocked' ? (
         <>
-          {user?.nickname && <p>User Nickname: {user.nickname}</p>}
-          {user?.email && <p>User Email: {user.email}</p>}
-          {user?.sub && <p>User ID: {user.sub}</p>}
-          <p>Role: {userInfo.role}</p>
+          <p>Email: {user.email}</p>
+          <p>Nickname: {user.nickname}</p>
+          <p>User ID: {user.sub}</p>
+          <p>Role: {userRole}</p>
         </>
       ) : (
         <p>Your account has been blocked. Please contact the administrator for assistance.</p>
