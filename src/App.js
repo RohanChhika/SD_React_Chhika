@@ -1,14 +1,17 @@
 import React, { useState, useCallback } from "react";
 import logo from './components/Images/logo1.png';
 import './App.css';
-import LoginButton from "./components/LoginButton";
-import LogoutButton from "./components/LogoutButton";
+import LoginButton from "./components/buttons/LoginButton";
+import LogoutButton from "./components/buttons/LogoutButton";
 import Profile from "./components/profile";
 import { Routes, Route } from "react-router-dom";
-import ApplyFundManagerButton from "./components/ApplyFundManagerButton";
+import ApplyFundManagerButton from "./components/buttons/ApplyFundManagerButton";
 import FundManagerApplication from "./components/FundManagerApplication";
-import AdminViewFundRequests from "./components/AdminViewFundRequestsButton";
+import AdminViewFundRequests from "./components/buttons/AdminViewFundRequestsButton";
 import AdminFundReq from "./components/AdminFundReq";
+import AdminBlockUsers from "./components/AdminBlockUsers";
+import AdminBlockUsersButton from "./components/buttons/AdminBlockUsersButton";
+
 const App = () => {
   const [isUserAdded, setIsUserAdded] = useState(false);
   const onUserAdded = useCallback(() => {
@@ -17,33 +20,43 @@ const App = () => {
 
   return (
     <Routes>
-      <Route index element = {
-    <main className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div className="center-text">
-          <h1>Welcome to FundIT</h1>
-        </div>
-        <div className="login-container">
-          <LoginButton onUserAdded={onUserAdded} />
-          {isUserAdded && <ApplyFundManagerButton/>}
-          {isUserAdded && <AdminViewFundRequests/>}
-          <LogoutButton />
-        </div>
-      </header>
-      {isUserAdded && <Profile />}
-      <footer className="App-footer">
-        © 2024 FundIT. All rights reserved.
-      </footer>
-    </main>
-  } />
-    <Route path = {'/fund-manager-request'} element = {
-      <FundManagerApplication/>
-    } />
-      <Route path = {'/admin-fund-manager-requests'} element = {
-      <AdminFundReq/>
-    } />
+      <Route index element={
+        <main className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <div className="center-text">
+              <h1>Welcome to FundIT</h1>
+            </div>
+            <div className="login-container">
+              <LoginButton onUserAdded={onUserAdded} />
+              {isUserAdded && <ApplyFundManagerButton />}
+              {isUserAdded && <AdminViewFundRequests />}
+              {isUserAdded && <AdminBlockUsersButton/>}
+              <LogoutButton />
+            </div>
+          </header>
+          {isUserAdded && <Profile />}
+          <footer className="App-footer">
+            © 2024 FundIT. All rights reserved.
+          </footer>
+        </main>
+      } />
+      <Route path="/fund-manager-request" element={<FundManagerApplication />} />
+      <Route path="/admin-fund-manager-requests" element={<AdminFundReq />} />
+      < Route path ="/admin-handle-users" element = {<AdminBlockUsers />}/>
+      {/* Wildcard route to handle all other routes */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
+  );
+}
+
+// A component to render when the route is not found
+const NotFound = () => {
+  return (
+    <div>
+      <h1>404 - Not Found</h1>
+      <p>The page you are looking for does not exist.</p>
+    </div>
   );
 }
 
