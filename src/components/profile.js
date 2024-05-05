@@ -12,7 +12,7 @@ const Profile = () => {
         if (!isAuthenticated || !user?.sub) return;
 
         const token = await getAccessTokenSilently();
-        const response = await fetch('https://fundit.azurewebsites.net/userData', {
+        const response = await fetch('https://fundit.azurewebsites.net/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -27,9 +27,9 @@ const Profile = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const userData = await response.json();
-        setUserInfo(userData);
-        userRoleRef.current = userData.role;
+        const data = await response.json();
+        setUserInfo(data);
+        userRoleRef.current = data.role; // Update userRoleRef instead of userRole
       } catch (error) {
         console.error('Failed to fetch user data:', error);
       }
@@ -39,19 +39,12 @@ const Profile = () => {
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
 
   return (
-    <>
-      {/* Conditionally render based on user's role */}
-      {userInfo && userRoleRef.current !== 'blocked' ? (
-        <>
-          {user?.nickname && <p>User Nickname: {user.nickname}</p>}
-          {user?.email && <p>User Email: {user.email}</p>}
-          {user?.sub && <p>User ID: {user.sub}</p>}
-          <p>Role: {userInfo.role}</p>
-        </>
-      ) : (
-        <p>Your account has been blocked. Please contact the administrator for assistance.</p>
-      )}
-    </>
+    <div>
+      <p>{user?.nickname}</p>
+      <p>{user?.email}</p>
+      {user?.sub && <p>User ID: {user.sub}</p>}
+      {userInfo && <p>Role: {userInfo.role}</p>}
+    </div>
   );
 };
 
