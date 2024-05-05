@@ -12,7 +12,7 @@ const AdminBlockUsers = () => {
     const fetchUsers = async () => {
       try {
         const token = await getAccessTokenSilently(); // Assuming you have a way to retrieve the token
-        const response = await fetch('https://fundit.azurewebsites.net/viewManagerRequests', {
+        const response = await fetch('https://fundit.azurewebsites.net/viewUsers', {
           method: 'GET', // Explicitly setting the method for clarity
           headers: {
             'Authorization': `Bearer ${token}` // Sending the token for authorization
@@ -43,14 +43,14 @@ const AdminBlockUsers = () => {
     if (selectedUser) {
       try {
         const token = await getAccessTokenSilently(); // Retrieve the token
-        const url = `https://fundit.azurewebsites.net/process-request/${selectedUser.userID}`;
+        const url = `https://fundit.azurewebsites.net/process-blockedUser/${selectedUser.userID}`;
         const response = await fetch(url, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({ decision: 'accept'}) // Sending "accept" as true
+          
         });
     
         if (!response.ok) {
