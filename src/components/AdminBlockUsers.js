@@ -45,9 +45,8 @@ const AdminBlockUsers = () => {
         const token = await getAccessTokenSilently(); // Retrieve the token
         const url = `https://fundit.azurewebsites.net/process-blockedUser/${selectedUser.userID}`;
         const response = await fetch(url, {
-          method: 'POST',
+          method: 'GET ',
           headers: {
-            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
           
@@ -57,8 +56,8 @@ const AdminBlockUsers = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
     
-        console.log("Accepted:", selectedUser);
-        alert('Request accepted successfully!'); // Optionally, display a success message to the user
+        console.log("Blocked:", selectedUser);
+        alert('User Blocked!'); // Optionally, display a success message to the user
         navigate(0); 
       } catch (error) {
         console.error('Failed to block user:', error.message);
