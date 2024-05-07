@@ -13,7 +13,7 @@ const FundsPage = () => {
     const fetchFunds = async () => {
       try {
         const token = await getAccessTokenSilently();
-        const response = await fetch('https://fundit.azurewebsites.net/viewFundsOpps', {
+        const response = await fetch('https://fundit.azurewebsites.net/viewFundOpps', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
