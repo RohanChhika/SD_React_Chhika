@@ -66,7 +66,7 @@ const CreateFund = () => {
         throw new Error(responseData.message || 'Failed to create fund');
       }
     } catch (error) {
-      console.error('Failed to create fund:', error.message);
+      console.error('Ensure all fields are filled in: ', error.message);
       alert('Error: ' + error.message);
     }
   };
@@ -85,7 +85,7 @@ const CreateFund = () => {
             <input type="text" value={fundName} onChange={handleFundNameChange} />
           </label>
           <label>
-            Manager Name:
+            Company Name:
             <input type="text" value={CompanyName} onChange={handleCompanyNameChange} />
           </label>
           <label>
