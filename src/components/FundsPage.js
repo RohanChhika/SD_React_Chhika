@@ -47,13 +47,7 @@ const FundsPage = () => {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div className="center-text">
-          <h1>Funds</h1>
-        </div>
-      </header>
+    <div>
       <main>
         <h1 className='admin-page' style={{ textAlign: 'center' }}>Fund Page</h1>
         <h2 className='admin-page' style={{ textAlign: 'center' }}>Funds List</h2>
@@ -79,9 +73,6 @@ const FundsPage = () => {
         </div>
       </main>
 
-      <footer className="App-footer">
-        © 2024 FundIT. All rights reserved.
-      </footer>
     </div>
   );
 };
