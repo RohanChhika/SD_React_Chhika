@@ -3,7 +3,6 @@ import logo from './components/Images/logo1.png';
 import './App.css';
 import LoginButton from "./components/buttons/LoginButton";
 import LogoutButton from "./components/buttons/LogoutButton";
-import Profile from "./components/profile";
 import { Routes, Route } from "react-router-dom";
 import ApplyFundManagerButton from "./components/buttons/ApplyFundManagerButton";
 import FundManagerApplication from "./components/FundManagerApplication";
@@ -16,6 +15,7 @@ import AddFundButton from "./components/buttons/AddFundButton"
 import ViewFundRequests from "./components/ViewFundRequests";
 import ViewMyFundRequestsButton from "./components/buttons/ViewMyFundRequestsButtton"
 import FundsPage from "./components/FundsPage";
+import ApplyForFund from "./components/ApplyForFund"
 
 const App = () => {
   const [isUserAdded, setIsUserAdded] = useState(false);
@@ -53,6 +53,8 @@ const App = () => {
       < Route path ="/admin-handle-users" element = {<AdminBlockUsers />}/>
       <Route path = "/add-fund" element = {<AddFundPage/>}/>
       <Route path = "/view-my-fund-requests" element ={<ViewFundRequests/>}/>
+      <Route path="/apply/:userId/:fundName" element={<ApplyForFund />} />
+
       {/* Wildcard route to handle all other routes */}
       <Route path="*" element={<NotFound />} />
     </Routes>
