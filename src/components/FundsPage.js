@@ -54,7 +54,7 @@ const FundsPage = () => {
           <select className="motivation-select" style={{ width: '300px', textAlign: 'center' }} onChange={(e) => handleSelectFund(JSON.parse(e.target.value))}>
             <option value="">Select a Fund that you would like to apply for</option>
             {funds.map(fund => (
-              <option key={fund.userID} value={JSON.stringify(fund)}>
+              <option key={fund.fundName} value={JSON.stringify(fund)}>
                 {fund.fundName}
               </option>
             ))}
@@ -63,8 +63,10 @@ const FundsPage = () => {
 
         {selectedFund && (
           <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
-            <h3>User ID: {selectedFund.userID}</h3>
+            <h3>CompanyName: {selectedFund.CompanyName}</h3>
             <p>{selectedFund.fundName}</p>
+            <p>{selectedFund.fundType}</p>
+            <p>{selectedFund.description}</p>
           </div>
         )}
         <div className="button-container" style={{ textAlign: 'center' }}>

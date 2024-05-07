@@ -19,10 +19,11 @@ const FundApplication = () => {
       alert('You must be logged in to submit your application.');
       return;
     }
-  
+    const managerUserID=userId
     const userID = user.sub;
     const data = {
       userID,
+      managerUserID,
       fundName,
       motivation
     };
@@ -65,7 +66,7 @@ const FundApplication = () => {
       <main style={{ paddingTop: '100px' }}>
         <h1 style={{textAlign: 'center'}}>Apply to be a Fund Manager</h1>
         <h2 style={{textAlign: 'center'}}>Fund Name: {decodeURIComponent(fundName)}</h2>
-        <h2 style={{textAlign: 'center'}}>User ID: {userId}</h2>
+        <h2 style={{textAlign: 'center'}}> Manager User ID: {userId}</h2>
         <h3 style={{textAlign: 'center'}}>Please provide your motivation</h3>
         <form className='fund-manager-form' onSubmit={handleSubmit}>
           <label>
