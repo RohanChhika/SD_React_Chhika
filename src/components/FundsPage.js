@@ -11,7 +11,7 @@ const FundsPage = () => {
     const fetchFunds = async () => {
       try {
         const token = await getAccessTokenSilently(); // Assuming you have a way to retrieve the token
-        const response = await fetch('https://fundit.azurewebsites.net/viewManagerRequests', {
+        const response = await fetch('https://fundit.azurewebsites.net/viewFundsOpps', {
           method: 'GET', // Explicitly setting the method for clarity
           headers: {
             'Authorization': `Bearer ${token}` // Sending the token for authorization
@@ -38,65 +38,7 @@ const FundsPage = () => {
   };
 
   // Function to handle accepting a motivation
-  const handleAcceptFund = async() => {
-    if (selectedFund) {
-      try {
-        const token = await getAccessTokenSilently(); // Retrieve the token
-        const url = `https://fundit.azurewebsites.net/process-request/${selectedMotivation.userID}`;
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ decision: 'accept'}) // Sending "accept" as true
-        });
-    
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-    
-        console.log("Accepted:", selectedMotivation);
-        alert('Request accepted successfully!'); // Optionally, display a success message to the user
-        navigate(0); 
-      } catch (error) {
-        console.error('Failed to accept request:', error.message);
-      }
-    } else {
-      console.log("Please select a motivation first.");
-    }
-  };
-
-  // Function to handle declining a motivation
-  const handleDeclineFund = async () => {
-    if (selectedFund) {
-      try {
-        const token = await getAccessTokenSilently(); // Retrieve the token
-        const url = `https://fundit.azurewebsites.net/process-request/${selectedMotivation.userID}`;
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ decision: 'reject'}) // Sending "accept" as true
-        });
-    
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-    
-        console.log("Rejected:", selectedMotivation);
-        alert('Request rejected successfully!'); // Optionally, display a success message to the user
-        navigate(0); 
-      } catch (error) {
-        console.error('Failed to accept request:', error.message);
-      }
-    } else {
-      console.log("Please select a motivation first.");
-    }
-  };
-
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -126,8 +68,7 @@ const FundsPage = () => {
           </div>
         )}
         <div className="button-container" style={{ textAlign: 'center' }}>
-          <button className='button' style={{ marginRight: '10px' }} onClick={handleAcceptFund} disabled={!selectedFund}>Accept</button>
-          <button className='button' onClick={handleDeclineFund} disabled={!selectedFund}>Decline</button>
+          <button className='button' style={{ marginRight: '10px' }} onClick={handleAcceptFund} disabled={!selectedFund}>Apply</button>
         </div>
       </main>
 

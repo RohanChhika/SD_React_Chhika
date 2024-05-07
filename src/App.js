@@ -15,6 +15,7 @@ import AddFundPage from "./components/AddFundPage";
 import AddFundButton from "./components/buttons/AddFundButton"
 import ViewFundRequests from "./components/ViewFundRequests";
 import ViewMyFundRequestsButton from "./components/buttons/ViewMyFundRequestsButtton"
+import FundsPage from "./components/FundsPage";
 
 const App = () => {
   const [isUserAdded, setIsUserAdded] = useState(false);
@@ -41,7 +42,7 @@ const App = () => {
               <LogoutButton />
             </div>
           </header>
-          {isUserAdded && <Profile />}
+          {isUserAdded && <FundsPage />}
           <footer className="App-footer">
             © 2024 FundIT. All rights reserved.
           </footer>
