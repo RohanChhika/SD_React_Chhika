@@ -46,11 +46,11 @@ const CreateFund = () => {
   
     try {
       const accessToken = await getAccessTokenSilently();
-      const response = await fetch('https://your-backend-url/createFund', {
+      const response = await fetch(`https://fundit.azurewebsites.net/AddFund`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
+          'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(data)
       });
