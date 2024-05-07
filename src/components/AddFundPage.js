@@ -44,31 +44,31 @@ const CreateFund = () => {
       description
     };
   
-//     try {
-//       const accessToken = await getAccessTokenSilently();
-//       const response = await fetch('https://your-backend-url/createFund', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           Authorization: `Bearer ${accessToken}`
-//         },
-//         body: JSON.stringify(data)
-//       });
+    try {
+      const accessToken = await getAccessTokenSilently();
+      const response = await fetch('https://your-backend-url/createFund', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify(data)
+      });
   
-//       const responseData = await response.json();
-//       if (response.status === 409) {
-//         alert('A fund with this name already exists.');
-//       } else if (response.ok) {
-//         console.log('Fund created successfully:', responseData);
-//         alert("Fund created successfully");
-//         navigate('/'); // Redirect to the index route
-//       } else {
-//         throw new Error(responseData.message || 'Failed to create fund');
-//       }
-//     } catch (error) {
-//       console.error('Failed to create fund:', error.message);
-//       alert('Error: ' + error.message);
-//     }
+      const responseData = await response.json();
+      if (response.status === 409) {
+        alert('A fund with this name already exists.');
+      } else if (response.ok) {
+        console.log('Fund created successfully:', responseData);
+        alert("Fund created successfully");
+        navigate('/'); // Redirect to the index route
+      } else {
+        throw new Error(responseData.message || 'Failed to create fund');
+      }
+    } catch (error) {
+      console.error('Failed to create fund:', error.message);
+      alert('Error: ' + error.message);
+    }
   };
 
   return (
