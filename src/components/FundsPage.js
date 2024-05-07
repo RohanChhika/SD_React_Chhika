@@ -64,9 +64,9 @@ const FundsPage = () => {
         {selectedFund && (
           <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
             <h3>CompanyName: {selectedFund.CompanyName}</h3>
-            <p>{selectedFund.fundName}</p>
-            <p>{selectedFund.fundType}</p>
-            <p>{selectedFund.description}</p>
+            <p>FundName: {selectedFund.fundName}</p>
+            <p>Fund Type: {selectedFund.fundType}</p>
+            <p>Descrtiption: {selectedFund.description}</p>
           </div>
         )}
         <div className="button-container" style={{ textAlign: 'center' }}>
