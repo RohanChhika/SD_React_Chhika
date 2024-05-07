@@ -11,6 +11,10 @@ import AdminViewFundRequests from "./components/buttons/AdminViewFundRequestsBut
 import AdminFundReq from "./components/AdminFundReq";
 import AdminBlockUsers from "./components/AdminBlockUsers";
 import AdminBlockUsersButton from "./components/buttons/AdminBlockUsersButton";
+import AddFundPage from "./components/AddFundPage";
+import AddFundButton from "./components/buttons/AddFundButton"
+import ViewFundRequests from "./components/ViewFundRequests";
+import ViewMyFundRequestsButton from "./components/buttons/ViewMyFundRequestsButtton"
 
 const App = () => {
   const [isUserAdded, setIsUserAdded] = useState(false);
@@ -32,6 +36,8 @@ const App = () => {
               {isUserAdded && <ApplyFundManagerButton />}
               {isUserAdded && <AdminViewFundRequests />}
               {isUserAdded && <AdminBlockUsersButton/>}
+              {isUserAdded && <AddFundButton/>}
+              {isUserAdded && <ViewMyFundRequestsButton/>}
               <LogoutButton />
             </div>
           </header>
@@ -44,6 +50,8 @@ const App = () => {
       <Route path="/fund-manager-request" element={<FundManagerApplication />} />
       <Route path="/admin-fund-manager-requests" element={<AdminFundReq />} />
       < Route path ="/admin-handle-users" element = {<AdminBlockUsers />}/>
+      <Route path = "/add-fund" element = {<AddFundPage/>}/>
+      <Route path = "/view-my-fund-requests" element ={<ViewFundRequests/>}/>
       {/* Wildcard route to handle all other routes */}
       <Route path="*" element={<NotFound />} />
     </Routes>
