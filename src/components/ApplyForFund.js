@@ -8,7 +8,7 @@ const FundApplication = () => {
   const navigate = useNavigate();
   const { userId, fundName } = useParams();
   const [motivation, setMotivation] = useState('');
-
+  const managerUserID=userId;
   const handleChange = (e) => {
     setMotivation(e.target.value);
   };
@@ -19,7 +19,6 @@ const FundApplication = () => {
       alert('You must be logged in to submit your application.');
       return;
     }
-    const managerUserID=userId
     const userID = user.sub;
     const data = {
       userID,
