@@ -17,6 +17,7 @@ import ViewMyFundRequestsButton from "./components/buttons/ViewMyFundRequestsBut
 import FundsPage from "./components/FundsPage";
 import ApplyForFund from "./components/ApplyForFund"
 import Profile from "./components/profile"
+import ViewProfileButton from "./components/buttons/ViewProfileButton";
 
 const App = () => {
   const [isUserAdded, setIsUserAdded] = useState(false);
@@ -40,6 +41,7 @@ const App = () => {
               {isUserAdded && <AdminBlockUsersButton/>}
               {isUserAdded && <AddFundButton/>}
               {isUserAdded && <ViewMyFundRequestsButton/>}
+              {isUserAdded && <ViewProfileButton/>}
               <LogoutButton />
             </div>
           </header>
