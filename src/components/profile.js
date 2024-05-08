@@ -38,7 +38,7 @@ const Profile = () => {
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]); // Dependency array for useEffect
 
   return (
-    <>
+    <div className="profile-centered">
     <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>My Profile</h1>
@@ -55,7 +55,7 @@ const Profile = () => {
         </>
       )}
     </div>
-    </>
+    </div>
     
   );
 };
