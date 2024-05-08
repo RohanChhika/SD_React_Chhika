@@ -32,7 +32,7 @@ const ViewFundRequests = () => {
       }
     };
     fetchApplications();
-  }, [getAccessTokenSilently]); 
+  }, [getAccessTokenSilently,user.sub]); 
   // Function to handle selecting a motivation
   const handleSelectApplication = (application) => {
     setSelectedApplication(application);
