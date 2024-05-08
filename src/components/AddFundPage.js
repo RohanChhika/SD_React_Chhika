@@ -73,43 +73,30 @@ const CreateFund = () => {
 
   return (
     <>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Create Fund</h1>
-      </header>
-      <main style={{ paddingTop: '100px' }}>
-        <div className="create-fund-form">
-          <h1 style={{ textAlign: 'center' }}>Create a New Fund</h1>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Fund Name:
-              <input type="text" value={fundName} onChange={handleFundNameChange} />
-            </label>
-            <label>
-              Company Name:
-              <input type="text" value={CompanyName} onChange={handleCompanyNameChange} />
-            </label>
-            <label>
-              Fund Type:
-              <select value={fundType} onChange={handleFundTypeChange}>
-                <option value="education">Education</option>
-                <option value="healthcare">Healthcare</option>
-                <option value="community">Community</option>
-              </select>
-            </label>
-            <label>
-              Description:
-              <textarea value={description} onChange={handleDescriptionChange} />
-            </label>
-            <button className='button' type="submit">Create Fund</button>
-          </form>
-        </div>
-      </main>
-
-      <footer className="App-footer">
-        © 2024 YourCompany. All rights reserved.
-      </footer>
-    </>
+  <header className="App-header">
+    <img src={logo} className="App-logo" alt="logo" />
+    <h1>Create Fund</h1>
+  </header>
+  <div className="App"> {/* This ensures flex centering takes full effect */}
+    <div className="create-fund-form">
+      <h1 style={{ textAlign: 'center' }}>Create a New Fund</h1>
+      <form onSubmit={handleSubmit}>
+        <label>Fund Name:<input type="text" value={fundName} onChange={handleFundNameChange} /></label>
+        <label>Company Name:<input type="text" value={CompanyName} onChange={handleCompanyNameChange} /></label>
+        <label>Fund Type:
+          <select value={fundType} onChange={handleFundTypeChange}>
+            <option value="education">Education</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="community">Community</option>
+          </select>
+        </label>
+        <label>Description:<textarea value={description} onChange={handleDescriptionChange} /></label>
+        <button className='button' type="submit">Create Fund</button>
+      </form>
+    </div>
+  </div>
+  <footer className="App-footer">© 2024 YourCompany. All rights reserved.</footer>
+</>
   );
 };
 
