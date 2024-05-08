@@ -8,7 +8,7 @@ const ViewFundRequests = () => {
   const { getAccessTokenSilently,user } = useAuth0();
   const navigate = useNavigate();
   useEffect(() => {
-    const managerUserID=user.sub;
+    const managerUserID=user?.sub;
     console.log(user.sub)
     const fetchApplications = async () => {
       try {
@@ -123,7 +123,7 @@ const ViewFundRequests = () => {
         {selectedApplication && (
           <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
             <h3>Applicant ID: {selectedApplication.userID}</h3>
-            <p>Fund Name: {selectedApplication.userID} </p>
+            <p>Fund Name: {selectedApplication.fundName} </p>
             <p>Motivation: {selectedApplication.motivation} </p>
             <p>Application Status: {selectedApplication.applicationStatus} </p>
           </div>
