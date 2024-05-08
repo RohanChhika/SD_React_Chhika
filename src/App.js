@@ -16,6 +16,7 @@ import ViewFundRequests from "./components/ViewFundRequests";
 import ViewMyFundRequestsButton from "./components/buttons/ViewMyFundRequestsButtton"
 import FundsPage from "./components/FundsPage";
 import ApplyForFund from "./components/ApplyForFund"
+import Profile from "./components/profile"
 
 const App = () => {
   const [isUserAdded, setIsUserAdded] = useState(false);
@@ -54,6 +55,7 @@ const App = () => {
       <Route path = "/add-fund" element = {<AddFundPage/>}/>
       <Route path = "/view-my-fund-requests" element ={<ViewFundRequests/>}/>
       <Route path="/apply/:userId/:fundName" element={<ApplyForFund />} />
+      <Route path ="/view-profile" element = {<Profile/>}/>
 
       {/* Wildcard route to handle all other routes */}
       <Route path="*" element={<NotFound />} />
