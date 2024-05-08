@@ -42,16 +42,20 @@ const ViewFundRequests = () => {
   // Function to handle accepting a motivation
   const handleAcceptApplication = async() => {
     if (selectedApplication) {
+      const dataBody={
+        fundName:selectedApplication.fundName,
+        decision:'accepted'
+      }
       try {
         const token = await getAccessTokenSilently(); // Retrieve the token
-        const url = `https://fundit.azurewebsites.net/process-request/${selectedApplication.userID}`;
+        const url = `https://fundit.azurewebsites.net/process-fundApplication/${selectedApplication.userID}`;
         const response = await fetch(url, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({ decision: 'accept'}) // Sending "accept" as true
+          body: JSON.stringify(dataBody) 
         });
     
         if (!response.ok) {
@@ -59,7 +63,7 @@ const ViewFundRequests = () => {
         }
     
         console.log("Accepted:", selectedApplication);
-        alert('Request accepted successfully!'); // Optionally, display a success message to the user
+        alert('Application Accepeted successfully!'); // Optionally, display a success message to the user
         navigate(0); 
       } catch (error) {
         console.error('Failed to accept request:', error.message);
@@ -71,16 +75,20 @@ const ViewFundRequests = () => {
 
   const handleDeclineApplication = async () => {
     if (selectedApplication) {
+      const dataBody={
+        fundName:selectedApplication.fundName,
+        decision:'rejected'
+      }
       try {
         const token = await getAccessTokenSilently(); // Retrieve the token
-        const url = `https://fundit.azurewebsites.net/process-request/${selectedApplication.userID}`;
+        const url = `https://fundit.azurewebsites.net/process-fundApplication/${selectedApplication.userID}`;
         const response = await fetch(url, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({ decision: 'reject'}) // Sending "accept" as true
+          body: JSON.stringify(dataBody) 
         });
     
         if (!response.ok) {
@@ -88,7 +96,7 @@ const ViewFundRequests = () => {
         }
     
         console.log("Rejected:", selectedApplication);
-        alert('Request rejected successfully!'); // Optionally, display a success message to the user
+        alert('Application rejected successfully!'); // Optionally, display a success message to the user
         navigate(0); 
       } catch (error) {
         console.error('Failed to accept request:', error.message);
