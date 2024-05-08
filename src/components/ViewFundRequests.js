@@ -5,13 +5,14 @@ import { useNavigate } from "react-router-dom";
 const ViewFundRequests = () => {
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [applications, setApplications] = useState([]);
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently,user } = useAuth0();
   const navigate = useNavigate();
+  const managerUserID=user.sub;
   useEffect(() => {
     const fetchApplications = async () => {
       try {
         const token = await getAccessTokenSilently(); // Assuming you have a way to retrieve the token
-        const response = await fetch('https://fundit.azurewebsites.net/viewManagerRequests', {
+        const response = await fetch(`https://fundit.azurewebsites.net/viewFundApplications/${managerUserID}`, {
           method: 'GET', // Explicitly setting the method for clarity
           headers: {
             'Authorization': `Bearer ${token}` // Sending the token for authorization
