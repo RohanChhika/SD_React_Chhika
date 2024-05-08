@@ -12,7 +12,7 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center; /* Adjusted for centering content vertically */
-  align-items: center;
+  /*align-items: center;*/
   min-height: 100vh;
   width: 100vw;
 }
@@ -30,7 +30,8 @@ html, body {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: center;
   padding: 10px 20px;
   background-color: #0c75b3;
   color: white;
@@ -208,6 +209,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .profile-details p {
