@@ -64,11 +64,11 @@ const FundManagerApplication = () => {
       <h1 style={{textAlign: 'center'}}>Apply to be a Fund Manager</h1>
       <h2 style={{textAlign: 'center'}}>Please provide your motivation</h2>
       <form className='fund-manager-form' onSubmit={handleSubmit}>
-        <label>
+        <label style={{textAlign: 'center'}}>
           Motivation:
           <textarea value={motivation} onChange={handleChange} />
         </label>
-        <button className='button' type="submit">Submit</button>
+        <button className='button' type="submit" style={{margin: '20px auto'}}>Submit</button>
       </form>
       </main>
 
