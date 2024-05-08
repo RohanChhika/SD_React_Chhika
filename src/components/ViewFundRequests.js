@@ -63,13 +63,13 @@ const ViewFundRequests = () => {
         }
     
         console.log("Accepted:", selectedApplication);
-        alert('Application Accepeted successfully!'); // Optionally, display a success message to the user
+        alert('Application accepted successfully!'); // Optionally, display a success message to the user
         navigate(0); 
       } catch (error) {
         console.error('Failed to accept request:', error.message);
       }
     } else {
-      console.log("Please select a application first.");
+      console.log("Please select an application first.");
     }
   };
 
@@ -102,7 +102,7 @@ const ViewFundRequests = () => {
         console.error('Failed to accept request:', error.message);
       }
     } else {
-      console.log("Please select a application first.");
+      console.log("Please select an application first.");
     }
   };
 
@@ -119,7 +119,7 @@ const ViewFundRequests = () => {
         <h2 className='admin-page' style={{ textAlign: 'center' }}>Applications List</h2>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
           <select className="motivation-select" style={{ width: '300px', textAlign: 'center' }} onChange={(e) => handleSelectApplication(JSON.parse(e.target.value))}>
-            <option value="">Select a application</option>
+            <option value="">Select an application</option>
             {applications.map(application => (
              <option key={`${application.userID}-${application.fundName}`} value={JSON.stringify(application)}>
              {application.userID}
