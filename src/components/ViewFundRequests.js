@@ -8,6 +8,7 @@ const ViewFundRequests = () => {
   const { getAccessTokenSilently,user } = useAuth0();
   const navigate = useNavigate();
   useEffect(() => {
+    if (!user?.sub) return;
     const managerUserID=user?.sub;
     const fetchApplications = async () => {
       try {
