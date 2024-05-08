@@ -24,25 +24,26 @@ const FundApplication = () => {
       userID,
       managerUserID,
       fundName,
-      motivation
+      motivation,
+      applicationStatus:'pending'
     };
   
     try {
       const accessToken = await getAccessTokenSilently();
-      const response = await fetch('https://fundit.azurewebsites.net/managerRequest', {
+      const response = await fetch('https://fundit.azurewebsites.net/AddFundApplication', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
+          'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(data)
       });
   
       const responseData = await response.json();
       if (response.status === 409) {
-        alert('A request with this user ID already exists.');
+        alert('You have already applied to this fund.');
       } else if (response.ok) {
-        console.log('Request created successfully:', responseData);
+        console.log('Application created succesfully created successfully:', responseData);
         alert("Request made successfully");
         navigate('/'); // Redirect to the index route
       } else {
