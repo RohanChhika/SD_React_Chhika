@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import logo from '../components/Images/logo1.png';
 
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -37,7 +38,12 @@ const Profile = () => {
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]); // Dependency array for useEffect
 
   return (
-    <div className='profile-details'>
+    <>
+    <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1>My Profile</h1>
+      </header>
+      <div className='profile-details'>
       {userRoleRef.current === 'blocked' ? (
         <p className="blocked">Your account has been blocked. Please contact the administrator for assistance.</p> // Display this if user is blocked
       ) : (
@@ -49,6 +55,8 @@ const Profile = () => {
         </>
       )}
     </div>
+    </>
+    
   );
 };
 

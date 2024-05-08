@@ -11,7 +11,7 @@ html, body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* This aligns content to the top */
+  justify-content: center; /* Adjusted for centering content vertically */
   align-items: center;
   min-height: 100vh;
   width: 100vw;
@@ -19,25 +19,23 @@ html, body {
 
 .App-logo {
   height: 80px;
-  /* Align logo to the left */
-  margin-left: 0;
 }
 
 .center-text {
-  flex-grow: 1; /* Allows the center text to take up any remaining space */
-  text-align: center; /* Centers the text within its division */
+  flex-grow: 1; 
+  text-align: center;
 }
 
 .App-header {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ensures space distribution between logo, text, and buttons */
+  justify-content: space-between;
   padding: 10px 20px;
   background-color: #0c75b3;
   color: white;
   box-sizing: border-box;
-  position: fixed; /* Fixed at the top */
+  position: fixed;
   top: 0;
   z-index: 1000;
 }
@@ -46,18 +44,16 @@ html, body {
   display: flex;
   align-items: center;
   gap: 10px;
-  /* Align buttons to the right */
-  margin-right: 0;
 }
 
 .App-footer {
   width: 100%;
   padding: 20px 10px;
   background-color: #0c75b3; 
-  color: white;              
+  color: white;
   text-align: center;
-  border-top: 1px solid #444; 
-  position: fixed; /* Fixed at the bottom */
+  border-top: 1px solid #444;
+  position: fixed;
   bottom: 0;                 
   left: 0;
   z-index: 1000;
@@ -105,7 +101,6 @@ html, body {
   display: none;
 }
 
-/* Styles specific to AdminFundReq */
 .admin-page {
   font-size: 24px;
   color: #333;
@@ -114,23 +109,23 @@ html, body {
 
 .motivation-select {
   width: 300px;
-  padding: 8px 12px; /* Added right padding for custom arrow */
+  padding: 8px 12px;
   border-radius: 4px;
   border: 1px solid #ccc;
   margin-bottom: 20px;
   cursor: pointer;
-  appearance: none; /* Removes native dropdown styling */
+  appearance: none;
   background-color: white;
   position: relative;
 }
 
 .motivation-select:hover {
-  background-color: #f0f0f0; /* Subtle hover effect */
+  background-color: #f0f0f0;
 }
 
 .motivation-select:focus {
-  border-color: #007BFF; /* Focus color that stands out */
-  outline: none; /* Remove default focus outline */
+  border-color: #007BFF;
+  outline: none;
 }
 
 .motivation-detail {
@@ -157,7 +152,6 @@ html, body {
   margin-top: 20px;
 }
 
-/* AdminViewFundRequestsButton and ApplyFundManager */
 .admin-button {
   background-color: #61dafb;
   color: white;
@@ -173,7 +167,6 @@ html, body {
   transform: scale(1.1);
 }
 
-/* FundManagerApplication */
 .fund-manager-form {
   text-align: left;
   margin: 20px auto;
@@ -204,51 +197,48 @@ html, body {
   transform: scale(1.1);
 }
 
-/* Styling for Profile Component */
 .profile-details {
   margin: 100px auto;
   padding: 20px;
-  max-width: 600px; /* Maximum width of the profile box */
+  max-width: 600px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center alignment of all content */
+  align-items: center;
   justify-content: center;
 }
 
 .profile-details p {
-  font-size: 16px; /* Font size for the text */
-  color: #333; /* Dark gray color for better readability */
-  margin: 10px 0; /* Margin to separate paragraphs */
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
 }
 
 .profile-details p:first-child {
-  font-weight: bold; /* Bold the nickname to distinguish it */
-  font-size: 20px; /* Larger font size for the nickname or first paragraph */
+  font-weight: bold;
+  font-size: 20px;
 }
 
-/* Styling for error or blocked message */
 .profile-details p.blocked {
-  color: #b30000; /* Red color for critical messages like blocked accounts */
+  color: #b30000;
   font-size: 18px;
   font-weight: bold;
 }
 
-/* Enhancements for the entire AddFundPage */
 .create-fund-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 120px; /* Adjust based on header height */
+  margin-top: calc(50vh - 250px); /* Adjust for vertical centering */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
-  width: 90%; /* Responsive width */
-  max-width: 500px; /* Maximum width */
+  width: 90%;
+  max-width: 500px;
 }
 
 .create-fund-form label {
@@ -273,10 +263,9 @@ html, body {
   margin-top: 20px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
   .create-fund-form {
-    margin-top: 80px; /* Smaller top margin for smaller screens */
+    margin-top: 80px;
     width: 80%;
   }
 }
