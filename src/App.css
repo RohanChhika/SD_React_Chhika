@@ -204,8 +204,79 @@ html, body {
   transform: scale(1.1);
 }
 
-/* Profile */
+/* Styling for Profile Component */
 .profile-details {
-  text-align: left;
-  margin: 100px;
+  margin: 100px auto;
+  padding: 20px;
+  max-width: 600px; /* Maximum width of the profile box */
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center alignment of all content */
+  justify-content: center;
+}
+
+.profile-details p {
+  font-size: 16px; /* Font size for the text */
+  color: #333; /* Dark gray color for better readability */
+  margin: 10px 0; /* Margin to separate paragraphs */
+}
+
+.profile-details p:first-child {
+  font-weight: bold; /* Bold the nickname to distinguish it */
+  font-size: 20px; /* Larger font size for the nickname or first paragraph */
+}
+
+/* Styling for error or blocked message */
+.profile-details p.blocked {
+  color: #b30000; /* Red color for critical messages like blocked accounts */
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Enhancements for the entire AddFundPage */
+.create-fund-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 120px; /* Adjust based on header height */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  width: 90%; /* Responsive width */
+  max-width: 500px; /* Maximum width */
+}
+
+.create-fund-form label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.create-fund-form input,
+.create-fund-form select,
+.create-fund-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.create-fund-form button {
+  margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .create-fund-form {
+    margin-top: 80px; /* Smaller top margin for smaller screens */
+    width: 80%;
+  }
 }

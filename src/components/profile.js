@@ -39,7 +39,7 @@ const Profile = () => {
   return (
     <div className='profile-details'>
       {userRoleRef.current === 'blocked' ? (
-        <p>Your account has been blocked. Please contact the administrator for assistance.</p> // Display this if user is blocked
+        <p className="blocked">Your account has been blocked. Please contact the administrator for assistance.</p> // Display this if user is blocked
       ) : (
         <>
           <p>{user?.nickname}</p>
