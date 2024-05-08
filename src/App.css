@@ -11,8 +11,8 @@ html, body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Adjusted for centering content vertically */
-  /*align-items: center;*/
+  /*justify-content: center; /* Adjusted for centering content vertically */
+  align-items: center;
   min-height: 100vh;
   width: 100vw;
 }
@@ -39,6 +39,12 @@ html, body {
   position: fixed;
   top: 0;
   z-index: 1000;
+}
+
+.App-header img {
+  position: absolute; /* Allows the logo to be positioned absolutely relative to its positioned parent */
+  left: 20px; /* Or adjust according to your layout */
+  height: 80px;
 }
 
 .login-container {
