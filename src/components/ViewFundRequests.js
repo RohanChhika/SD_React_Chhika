@@ -9,6 +9,7 @@ const ViewFundRequests = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const managerUserID=user.sub;
+    console.log(user.sub)
     const fetchApplications = async () => {
       try {
         const token = await getAccessTokenSilently(); // Assuming you have a way to retrieve the token
