@@ -111,7 +111,7 @@ const ViewFundRequests = () => {
 
   const getPdfUrl = (pdfData) => {
     if (!pdfData) return null;
-    const pdfBlob = new Blob([new Uint8Array(application.pdf.data)], { type: application.pdf.contentType });
+    const pdfBlob = new Blob([new Uint8Array(pdfData.data)], { type: pdfData.contentType });
     return URL.createObjectURL(pdfBlob);
   };
 
