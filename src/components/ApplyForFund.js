@@ -8,9 +8,15 @@ const FundApplication = () => {
   const navigate = useNavigate();
   const { userId, fundName } = useParams();
   const [motivation, setMotivation] = useState('');
-  const managerUserID=userId;
+  const [file, setFile] = useState(null);
+  const managerUserID = userId;
+
   const handleChange = (e) => {
     setMotivation(e.target.value);
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
@@ -19,30 +25,41 @@ const FundApplication = () => {
       alert('You must be logged in to submit your application.');
       return;
     }
+
+    if (!file) {
+      alert('Please select a file to upload.');
+      return;
+    }
+
     const userID = user.sub;
-    const data = {
-      userID,
-      managerUserID,
-      fundName,
-      motivation,
-      applicationStatus:'pending'
-    };
-  
+    const applicationStatus = 'pending';
+    const pdfFormData = new FormData();
+    pdfFormData.append('userID', userID);
+    pdfFormData.append('managerUserID', managerUserID);
+    pdfFormData.append('motivation', motivation);
+    pdfFormData.append('fundName', fundName);
+    pdfFormData.append('applicationStatus', applicationStatus);
+    pdfFormData.append('pdf', file);
+
     try {
       const accessToken = await getAccessTokenSilently();
-      const response = await fetch('https://fundit.azurewebsites.net/AddFundApplication', {
+      const pdfResponse = await fetch('https://fundit.azurewebsites.net/uploadPDF', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`
         },
-        body: JSON.stringify(data)
+        body: pdfFormData
       });
-  
-      const responseData = await response.json();
-      if (response.status === 409) {
+
+      if (!pdfResponse.ok) {
+        throw new Error('Failed to upload PDF');
+      }
+
+      // Create fund application
+     const responseData = await pdfResponse.json();
+      if (pdfResponse.status === 409) {
         alert('You have already applied to this fund.');
-      } else if (response.ok) {
+      } else if (pdfResponse.ok) {
         console.log('Application created succesfully created successfully:', responseData);
         alert("Request made successfully");
         navigate('/'); // Redirect to the index route
@@ -64,21 +81,23 @@ const FundApplication = () => {
         </div>
       </header>
       <main style={{ paddingTop: '100px' }}>
-        <h1 style={{textAlign: 'center'}}>Apply to be a Fund Manager</h1>
-        <h2 style={{textAlign: 'center'}}>Fund Name: {decodeURIComponent(fundName)}</h2>
-        <h2 style={{textAlign: 'center'}}> Manager User ID: {managerUserID}</h2>
-        <h3 style={{textAlign: 'center'}}>Please provide your motivation</h3>
+        <h1 style={{ textAlign: 'center' }}>Apply for a fund</h1>
+        <h2 style={{ textAlign: 'center' }}>Fund Name: {decodeURIComponent(fundName)}</h2>
+        <h2 style={{ textAlign: 'center' }}>Manager User ID: {managerUserID}</h2>
+        <h3 style={{ textAlign: 'center' }}>Please provide your motivation</h3>
         <form className='fund-manager-form' onSubmit={handleSubmit}>
           <label>
             Motivation:
             <textarea value={motivation} onChange={handleChange} />
           </label>
+          <input type="file" className='form-control' accept='application/pdf' required onChange={handleFileChange} />
+          <br />
           <button className='button' type="submit">Submit</button>
         </form>
       </main>
 
       <footer className="App-footer">
-        Â© 2024 FundIT. All rights reserved.
+        © 2024 FundIT. All rights reserved.
       </footer>
     </div>
   );
