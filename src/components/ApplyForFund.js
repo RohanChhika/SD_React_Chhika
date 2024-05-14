@@ -73,6 +73,9 @@ const FundApplication = () => {
             Motivation:
             <textarea value={motivation} onChange={handleChange} />
           </label>
+          <input type = "file" required />
+          <br></br>
+          <button className='button' type="submit">Upload File</button>
           <button className='button' type="submit">Submit</button>
         </form>
       </main>
