@@ -38,7 +38,6 @@ const FundApplication = () => {
     formData.append('fundName', fundName);
     formData.append('motivation', motivation);
     formData.append('applicationStatus', 'pending');
-    formData.append('file', file);
     const pdfFormData = new FormData();
     pdfFormData.append('userID', userID);
     pdfFormData.append('fundName', fundName);
@@ -90,7 +89,7 @@ const FundApplication = () => {
         </div>
       </header>
       <main style={{ paddingTop: '100px' }}>
-        <h1 style={{ textAlign: 'center' }}>Apply to be a Fund Manager</h1>
+        <h1 style={{ textAlign: 'center' }}>Apply for a fund</h1>
         <h2 style={{ textAlign: 'center' }}>Fund Name: {decodeURIComponent(fundName)}</h2>
         <h2 style={{ textAlign: 'center' }}>Manager User ID: {managerUserID}</h2>
         <h3 style={{ textAlign: 'center' }}>Please provide your motivation</h3>
