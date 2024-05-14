@@ -41,17 +41,17 @@ const FundApplication = () => {
       const accessToken = await getAccessTokenSilently();
       
       // Upload PDF
-      const pdfResponse = await fetch('https://fundit.azurewebsites.net/uploadPDF', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
-        },
-        body: pdfFormData
-      });
+      // const pdfResponse = await fetch('https://fundit.azurewebsites.net/uploadPDF', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Authorization': `Bearer ${accessToken}`
+      //   },
+      //   body: pdfFormData
+      // });
 
-      if (!pdfResponse.ok) {
-        throw new Error('Failed to upload PDF');
-      }
+      // if (!pdfResponse.ok) {
+      //   throw new Error('Failed to upload PDF');
+      // }
 
       // Create fund application
       const applicationData = {
