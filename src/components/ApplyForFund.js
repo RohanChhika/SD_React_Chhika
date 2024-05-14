@@ -65,24 +65,21 @@ const FundApplication = () => {
       const response = await fetch('https://fundit.azurewebsites.net/AddFundApplication', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(applicationData)
       });
 
-      if (!response.ok) {
-        const responseData = await response.json();
-        if (response.status === 409) {
-          alert('You have already applied to this fund.');
-        } else {
-          throw new Error(responseData.message || 'Failed to create request');
-        }
-      } else {
-        const responseData = await response.json();
-        console.log('Application created successfully:', responseData);
+      const responseData = await response.json();
+      if (response.status === 409) {
+        alert('You have already applied to this fund.');
+      } else if (response.ok) {
+        console.log('Application created succesfully created successfully:', responseData);
         alert("Request made successfully");
         navigate('/'); // Redirect to the index route
+      } else {
+        throw new Error(responseData.message || 'Failed to create request');
       }
     } catch (error) {
       console.error('Failed to submit application:', error.message);
