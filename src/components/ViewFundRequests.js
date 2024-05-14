@@ -109,6 +109,13 @@ const ViewFundRequests = () => {
     }
   };
 
+  const getPdfUrl = (pdfData) => {
+    if (!pdfData) return null;
+    const byteArray = new Uint8Array(pdfData.data);
+    const blob = new Blob([byteArray], { type: pdfData.contentType });
+    return URL.createObjectURL(blob);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -137,10 +144,10 @@ const ViewFundRequests = () => {
             <p>Fund Name: {selectedApplication.fundName}</p>
             <p>Motivation: {selectedApplication.motivation}</p>
             <p>Application Status: {selectedApplication.applicationStatus}</p>
-            {selectedApplication.pdfUrl && (
+            {selectedApplication.pdf && (
               <div>
                 <h3>Attached PDF:</h3>
-                <iframe src={selectedApplication.pdfUrl} width="100%" height="600px" title="Application PDF" />
+                <iframe src={getPdfUrl(selectedApplication.pdf)} width="100%" height="600px" title="Application PDF" />
               </div>
             )}
           </div>
