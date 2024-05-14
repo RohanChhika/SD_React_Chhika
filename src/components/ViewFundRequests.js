@@ -1,53 +1,56 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from '../components/Images/logo1.png';
 import { useNavigate } from "react-router-dom";
+
 const ViewFundRequests = () => {
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [applications, setApplications] = useState([]);
-  const { getAccessTokenSilently,user } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!user?.sub) return;
-    const managerUserID=user?.sub;
+    const managerUserID = user?.sub;
+
     const fetchApplications = async () => {
       try {
-        const token = await getAccessTokenSilently(); // Assuming you have a way to retrieve the token
+        const token = await getAccessTokenSilently();
         const response = await fetch(`https://fundit.azurewebsites.net/viewFundApplications/${managerUserID}`, {
-          method: 'GET', // Explicitly setting the method for clarity
+          method: 'GET',
           headers: {
-            'Authorization': `Bearer ${token}` // Sending the token for authorization
+            'Authorization': `Bearer ${token}`
           }
         });
-    
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-    
+
         const data = await response.json();
-        setApplications(data); // Assuming setMotivations is a state setter function in your React component
+        setApplications(data);
         console.log('Requests fetched successfully.');
         console.log(data);
       } catch (error) {
         console.error('Failed to fetch requests:', error.message);
       }
     };
+
     fetchApplications();
-  }, [getAccessTokenSilently,user?.sub]); 
-  // Function to handle selecting a motivation
+  }, [getAccessTokenSilently, user?.sub]);
+
   const handleSelectApplication = (application) => {
     setSelectedApplication(application);
   };
 
-  // Function to handle accepting a motivation
-  const handleAcceptApplication = async() => {
+  const handleAcceptApplication = async () => {
     if (selectedApplication) {
-      const dataBody={
-        fundName:selectedApplication.fundName,
-        decision:'accepted'
-      }
+      const dataBody = {
+        fundName: selectedApplication.fundName,
+        decision: 'accepted'
+      };
       try {
-        const token = await getAccessTokenSilently(); // Retrieve the token
+        const token = await getAccessTokenSilently();
         const url = `https://fundit.azurewebsites.net/process-fundApplication/${selectedApplication.userID}`;
         const response = await fetch(url, {
           method: 'POST',
@@ -55,16 +58,16 @@ const ViewFundRequests = () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify(dataBody) 
+          body: JSON.stringify(dataBody)
         });
-    
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-    
+
         console.log("Accepted:", selectedApplication);
-        alert('Application accepted successfully!'); // Optionally, display a success message to the user
-        navigate(0); 
+        alert('Application accepted successfully!');
+        navigate(0);
       } catch (error) {
         console.error('Failed to accept request:', error.message);
       }
@@ -75,12 +78,12 @@ const ViewFundRequests = () => {
 
   const handleDeclineApplication = async () => {
     if (selectedApplication) {
-      const dataBody={
-        fundName:selectedApplication.fundName,
-        decision:'rejected'
-      }
+      const dataBody = {
+        fundName: selectedApplication.fundName,
+        decision: 'rejected'
+      };
       try {
-        const token = await getAccessTokenSilently(); // Retrieve the token
+        const token = await getAccessTokenSilently();
         const url = `https://fundit.azurewebsites.net/process-fundApplication/${selectedApplication.userID}`;
         const response = await fetch(url, {
           method: 'POST',
@@ -88,16 +91,16 @@ const ViewFundRequests = () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify(dataBody) 
+          body: JSON.stringify(dataBody)
         });
-    
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-    
+
         console.log("Rejected:", selectedApplication);
-        alert('Application rejected successfully!'); // Optionally, display a success message to the user
-        navigate(0); 
+        alert('Application rejected successfully!');
+        navigate(0);
       } catch (error) {
         console.error('Failed to accept request:', error.message);
       }
@@ -121,19 +124,25 @@ const ViewFundRequests = () => {
           <select className="motivation-select" style={{ width: '300px', textAlign: 'center' }} onChange={(e) => handleSelectApplication(JSON.parse(e.target.value))}>
             <option value="">Select an application</option>
             {applications.map(application => (
-             <option key={`${application.userID}-${application.fundName}`} value={JSON.stringify(application)}>
-             {application.userID}
-           </option>
+              <option key={`${application.userID}-${application.fundName}`} value={JSON.stringify(application)}>
+                {application.userID}
+              </option>
             ))}
-        </select>
+          </select>
         </div>
 
         {selectedApplication && (
           <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
             <h3>Applicant ID: {selectedApplication.userID}</h3>
-            <p>Fund Name: {selectedApplication.fundName} </p>
-            <p>Motivation: {selectedApplication.motivation} </p>
-            <p>Application Status: {selectedApplication.applicationStatus} </p>
+            <p>Fund Name: {selectedApplication.fundName}</p>
+            <p>Motivation: {selectedApplication.motivation}</p>
+            <p>Application Status: {selectedApplication.applicationStatus}</p>
+            {selectedApplication.pdfUrl && (
+              <div>
+                <h3>Attached PDF:</h3>
+                <iframe src={selectedApplication.pdfUrl} width="100%" height="600px" title="Application PDF" />
+              </div>
+            )}
           </div>
         )}
         <div className="button-container" style={{ textAlign: 'center' }}>
@@ -143,8 +152,8 @@ const ViewFundRequests = () => {
       </main>
 
       <footer className="App-footer">
-      © 2024 FundIT. All rights reserved.
-    </footer>
+        © 2024 FundIT. All rights reserved.
+      </footer>
     </div>
   );
 };
