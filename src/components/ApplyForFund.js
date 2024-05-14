@@ -32,6 +32,13 @@ const FundApplication = () => {
     }
 
     const userID = user.sub;
+    const applicationData = {
+      userID,
+      managerUserID,
+      fundName,
+      motivation,
+      applicationStatus: 'pending'
+    };
     const pdfFormData = new FormData();
     pdfFormData.append('userID', userID);
     pdfFormData.append('fundName', fundName);
@@ -54,14 +61,6 @@ const FundApplication = () => {
       // }
 
       // Create fund application
-      const applicationData = {
-        userID,
-        managerUserID,
-        fundName,
-        motivation,
-        applicationStatus: 'pending'
-      };
-
       const response = await fetch('https://fundit.azurewebsites.net/AddFundApplication', {
         method: 'POST',
         headers: {
