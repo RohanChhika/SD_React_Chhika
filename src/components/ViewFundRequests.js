@@ -111,9 +111,14 @@ const ViewFundRequests = () => {
 
   const getPdfUrl = (pdfData) => {
     if (!pdfData) return null;
-    const byteArray = new Uint8Array(pdfData.data);
-    const blob = new Blob([byteArray], { type: pdfData.contentType });
-    return URL.createObjectURL(blob);
+    try {
+      const byteArray = new Uint8Array(pdfData.data);
+      const blob = new Blob([byteArray], { type: pdfData.contentType });
+      return URL.createObjectURL(blob);
+    } catch (error) {
+      console.error('Error creating PDF URL:', error);
+      return null;
+    }
   };
 
   return (
