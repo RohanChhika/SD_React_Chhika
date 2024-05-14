@@ -46,7 +46,7 @@ const FundApplication = () => {
 
     try {
       const accessToken = await getAccessTokenSilently();
-      const pdfResponse = await fetch('http://localhost:3000/uploadPDF', {
+      const pdfResponse = await fetch('https://fundit.azurewebsites.net/uploadPDF', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${accessToken}`
