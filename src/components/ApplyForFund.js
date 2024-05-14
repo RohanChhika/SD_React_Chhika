@@ -39,9 +39,24 @@ const FundApplication = () => {
     formData.append('motivation', motivation);
     formData.append('applicationStatus', 'pending');
     formData.append('file', file);
+    const pdfFormData = new FormData();
+    pdfFormData.append('userID', userID);
+    pdfFormData.append('fundName', fundName);
+    pdfFormData.append('pdf', file);
 
     try {
       const accessToken = await getAccessTokenSilently();
+      const pdfResponse = await fetch('http://localhost:3000/uploadPDF', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: pdfFormData
+      });
+
+      if (!pdfResponse.ok) {
+        throw new Error('Failed to upload PDF');
+      }
       const response = await fetch('https://fundit.azurewebsites.net/AddFundApplication', {
         method: 'POST',
         headers: {
