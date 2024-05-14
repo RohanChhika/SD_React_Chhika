@@ -43,9 +43,8 @@ const FundApplication = () => {
     pdfFormData.append('userID', userID);
     pdfFormData.append('fundName', fundName);
     pdfFormData.append('pdf', file);
-
+    const accessToken = await getAccessTokenSilently();
     try {
-      const accessToken = await getAccessTokenSilently();
       const pdfResponse = await fetch('https://fundit.azurewebsites.net/uploadPDF', {
         method: 'POST',
         headers: {
@@ -57,6 +56,11 @@ const FundApplication = () => {
       if (!pdfResponse.ok) {
         throw new Error('Failed to upload PDF');
       }
+    } catch (error) {
+      console.error('Failed to submit pdf:', error.message);
+      alert('Error: ' + error.message);
+    }
+    try{
       const response = await fetch('https://fundit.azurewebsites.net/AddFundApplication', {
         method: 'POST',
         headers: {
@@ -76,7 +80,8 @@ const FundApplication = () => {
       } else {
         throw new Error(responseData.message || 'Failed to create request');
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Failed to submit application:', error.message);
       alert('Error: ' + error.message);
     }
