@@ -32,19 +32,15 @@ const FundApplication = () => {
     }
 
     const userID = user.sub;
-    const data = {
-      userID,
-      managerUserID,
-      fundName,
-      motivation,
-      applicationStatus:'pending'
-    };
     const pdfFormData = new FormData();
     pdfFormData.append('userID', userID);
     pdfFormData.append('fundName', fundName);
     pdfFormData.append('pdf', file);
-    const accessToken = await getAccessTokenSilently();
+
     try {
+      const accessToken = await getAccessTokenSilently();
+      
+      // Upload PDF
       const pdfResponse = await fetch('https://fundit.azurewebsites.net/uploadPDF', {
         method: 'POST',
         headers: {
@@ -56,32 +52,39 @@ const FundApplication = () => {
       if (!pdfResponse.ok) {
         throw new Error('Failed to upload PDF');
       }
-    } catch (error) {
-      console.error('Failed to submit pdf:', error.message);
-      alert('Error: ' + error.message);
-    }
-    try{
+
+      // Create fund application
+      const applicationData = {
+        userID,
+        managerUserID,
+        fundName,
+        motivation,
+        applicationStatus: 'pending'
+      };
+
       const response = await fetch('https://fundit.azurewebsites.net/AddFundApplication', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(applicationData)
       });
-  
-      const responseData = await response.json();
-      if (response.status === 409) {
-        alert('You have already applied to this fund.');
-      } else if (response.ok) {
-        console.log('Application created succesfully created successfully:', responseData);
+
+      if (!response.ok) {
+        const responseData = await response.json();
+        if (response.status === 409) {
+          alert('You have already applied to this fund.');
+        } else {
+          throw new Error(responseData.message || 'Failed to create request');
+        }
+      } else {
+        const responseData = await response.json();
+        console.log('Application created successfully:', responseData);
         alert("Request made successfully");
         navigate('/'); // Redirect to the index route
-      } else {
-        throw new Error(responseData.message || 'Failed to create request');
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Failed to submit application:', error.message);
       alert('Error: ' + error.message);
     }
