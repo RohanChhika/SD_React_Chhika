@@ -32,12 +32,13 @@ const FundApplication = () => {
     }
 
     const userID = user.sub;
-    const formData = new FormData();
-    formData.append('userID', userID);
-    formData.append('managerUserID', managerUserID);
-    formData.append('fundName', fundName);
-    formData.append('motivation', motivation);
-    formData.append('applicationStatus', 'pending');
+    const data = {
+      userID,
+      managerUserID,
+      fundName,
+      motivation,
+      applicationStatus:'pending'
+    };
     const pdfFormData = new FormData();
     pdfFormData.append('userID', userID);
     pdfFormData.append('fundName', fundName);
@@ -59,16 +60,17 @@ const FundApplication = () => {
       const response = await fetch('https://fundit.azurewebsites.net/AddFundApplication', {
         method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`
         },
-        body: formData
+        body: JSON.stringify(data)
       });
-
+  
       const responseData = await response.json();
       if (response.status === 409) {
         alert('You have already applied to this fund.');
       } else if (response.ok) {
-        console.log('Application created successfully:', responseData);
+        console.log('Application created succesfully created successfully:', responseData);
         alert("Request made successfully");
         navigate('/'); // Redirect to the index route
       } else {
