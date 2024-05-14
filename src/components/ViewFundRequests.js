@@ -112,7 +112,8 @@ const ViewFundRequests = () => {
   const getPdfUrl = (pdfData) => {
     if (!pdfData) return null;
     try {
-      const byteArray = new Uint8Array(pdfData.data);
+      console.log('PDF Data:', pdfData); // Debugging log
+      const byteArray = new Uint8Array(pdfData.data.data); // Adjusted for potential structure
       const blob = new Blob([byteArray], { type: pdfData.contentType });
       return URL.createObjectURL(blob);
     } catch (error) {
