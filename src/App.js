@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react"; 
 import logo from './components/Images/logo1.png';
 import './App.css';
 import LoginButton from "./components/buttons/LoginButton";
@@ -20,12 +20,17 @@ import Profile from "./components/profile"
 import ViewProfileButton from "./components/buttons/ViewProfileButton";
 
 const App = () => {
+  // State to track if the user has been added
   const [isUserAdded, setIsUserAdded] = useState(false);
+
+  // Callback function to set the user added state
   const onUserAdded = useCallback(() => {
     setIsUserAdded(true);
   }, []);
 
   return (
+    
+    //Default route 
     <Routes>
       <Route index element={
         <main className="App">
@@ -34,7 +39,9 @@ const App = () => {
             <div className="center-text">
               <h1>Welcome to FundIT</h1>
             </div>
+            {/* Login button with callback to set user added state */}
             <div className="login-container">
+              {/* Conditional rendering of buttons based on user added state */}
               <LoginButton onUserAdded={onUserAdded} />
               {isUserAdded && <ApplyFundManagerButton />}
               {isUserAdded && <AdminViewFundRequests />}
@@ -45,19 +52,27 @@ const App = () => {
               <LogoutButton />
             </div>
           </header>
+          {/* Conditional rendering of FundsPage component based on user added state */}
           {isUserAdded && <FundsPage />}
           <footer className="App-footer">
             © 2024 FundIT. All rights reserved.
           </footer>
         </main>
       } />
+      {/* Route for fund manager application */}
       <Route path="/fund-manager-request" element={<FundManagerApplication />} />
+      {/* Route for admin to view fund manager requests */}
       <Route path="/admin-fund-manager-requests" element={<AdminFundReq />} />
-      < Route path ="/admin-handle-users" element = {<AdminBlockUsers />}/>
-      <Route path = "/add-fund" element = {<AddFundPage/>}/>
-      <Route path = "/view-my-fund-requests" element ={<ViewFundRequests/>}/>
+      {/* Route for admin to handle users */}
+      <Route path="/admin-handle-users" element={<AdminBlockUsers />}/>
+      {/* Route to add a fund */}
+      <Route path="/add-fund" element={<AddFundPage />}/>
+      {/* Route to view user's fund requests */}
+      <Route path="/view-my-fund-requests" element={<ViewFundRequests />}/>
+      {/* Route to apply for a fund */}
       <Route path="/apply/:userId/:fundName" element={<ApplyForFund />} />
-      <Route path ="/view-profile" element = {<Profile/>}/>
+      {/* Route to view user profile */}
+      <Route path="/view-profile" element={<Profile />}/>
 
       {/* Wildcard route to handle all other routes */}
       <Route path="*" element={<NotFound />} />
@@ -75,4 +90,4 @@ const NotFound = () => {
   );
 }
 
-export default App;
+export default App; //Export the App component
