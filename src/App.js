@@ -18,6 +18,10 @@ import FundsPage from "./components/FundsPage";
 import ApplyForFund from "./components/ApplyForFund"
 import Profile from "./components/profile"
 import ViewProfileButton from "./components/buttons/ViewProfileButton";
+import ViewMyFundButton from "./components/buttons/ViewMyFundButton";
+import ViewFundStatus from "./components/ViewFundStatus";
+import ViewMyFundManagerReqStatusButton from "./components/buttons/ViewFundManagerReqStatusButton";
+import ViewMyFundManagerReqStatus from "./components/ViewMyFundManagerReqStatus";
 
 const App = () => {
   // State to track if the user has been added
@@ -49,6 +53,8 @@ const App = () => {
               {isUserAdded && <AddFundButton/>}
               {isUserAdded && <ViewMyFundRequestsButton/>}
               {isUserAdded && <ViewProfileButton/>}
+              {isUserAdded && <ViewMyFundButton/>}
+              {isUserAdded && <ViewMyFundManagerReqStatusButton/>}
               <LogoutButton />
             </div>
           </header>
@@ -73,7 +79,8 @@ const App = () => {
       <Route path="/apply/:userId/:fundName" element={<ApplyForFund />} />
       {/* Route to view user profile */}
       <Route path="/view-profile" element={<Profile />}/>
-
+      <Route path ="/fund-status" element = {<ViewFundStatus/>}/>
+      <Route path = "/fund-req-status" element = {<ViewMyFundManagerReqStatus/>} />
       {/* Wildcard route to handle all other routes */}
       <Route path="*" element={<NotFound />} />
     </Routes>
