@@ -130,7 +130,7 @@ const ViewFundRequests = () => {
           <h1>Funding Applications</h1>
         </div>
       </header>
-      <main>
+      <main style={{ paddingTop: '120px', paddingBottom: '80px' }}> {/* Adjust padding to account for fixed header and footer */}
         <h1 className='admin-page' style={{ textAlign: 'center' }}>Applications Page</h1>
         <h2 className='admin-page' style={{ textAlign: 'center' }}>Applications List</h2>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
@@ -145,8 +145,8 @@ const ViewFundRequests = () => {
         </div>
 
         {selectedApplication && (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+            <div className='motivation-detail' style={{ maxWidth: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', width: '90%' }}>
               <h3>Applicant ID: {selectedApplication.userID}</h3>
               <p>Fund Name: {selectedApplication.fundName}</p>
               <p>Motivation: {selectedApplication.motivation}</p>
