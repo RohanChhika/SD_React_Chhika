@@ -145,7 +145,7 @@ const ViewFundRequests = () => {
         </div>
 
         {selectedApplication && (
-          <div className='motivation-detail-container' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px' }}>
               <h3>Applicant ID: {selectedApplication.userID}</h3>
               <p>Fund Name: {selectedApplication.fundName}</p>
