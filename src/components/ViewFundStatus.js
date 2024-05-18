@@ -9,12 +9,12 @@ const ViewFundStatus = () => {
 
   useEffect(() => {
     if (!user?.sub) return;
-    const managerUserID = user?.sub;
+    const userID = user?.sub;
 
     const fetchApplications = async () => {
       try {
         const token = await getAccessTokenSilently();
-        const response = await fetch(`https://fundit.azurewebsites.net/viewFundApplications/${managerUserID}`, {
+        const response = await fetch(`https://fundit.azurewebsites.net/viewFundStatus/${userID}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
