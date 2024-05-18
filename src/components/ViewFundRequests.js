@@ -145,25 +145,25 @@ const ViewFundRequests = () => {
         </div>
 
         {selectedApplication && (
-          <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
-            <h3>Applicant ID: {selectedApplication.userID}</h3>
-            <p>Fund Name: {selectedApplication.fundName}</p>
-            <p>Motivation: {selectedApplication.motivation}</p>
-            <p>Application Status: {selectedApplication.applicationStatus}</p>
-            {selectedApplication.pdf && (
-              <div>
-                <h3>Attached PDF:</h3>
-                <iframe src={getPdfUrl(selectedApplication.pdf)} width="100%" height="600px" title="Application PDF" />
-              </div>
-            )}
+          <div className='motivation-detail-container' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px' }}>
+              <h3>Applicant ID: {selectedApplication.userID}</h3>
+              <p>Fund Name: {selectedApplication.fundName}</p>
+              <p>Motivation: {selectedApplication.motivation}</p>
+              <p>Application Status: {selectedApplication.applicationStatus}</p>
+              {selectedApplication.pdf && (
+                <div>
+                  <h3>Attached PDF:</h3>
+                  <iframe src={getPdfUrl(selectedApplication.pdf)} width="100%" height="600px" title="Application PDF" />
+                </div>
+              )}
+            </div>
+            <div className="button-container" style={{ textAlign: 'center', marginBottom: '20px' }}>
+              <button className='button' style={{ marginRight: '10px' }} onClick={handleAcceptApplication} disabled={!selectedApplication}>Accept</button>
+              <button className='button' onClick={handleDeclineApplication} disabled={!selectedApplication}>Decline</button>
+            </div>
           </div>
         )}
-
-        {/* Buttons are always visible */}
-        <div className="button-container" style={{ textAlign: 'center', marginBottom: '20px' }}>
-          <button className='button' style={{ marginRight: '10px' }} onClick={handleAcceptApplication} disabled={!selectedApplication}>Accept</button>
-          <button className='button' onClick={handleDeclineApplication} disabled={!selectedApplication}>Decline</button>
-        </div>
       </main>
 
       <footer className="App-footer">
