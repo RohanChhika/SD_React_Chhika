@@ -80,7 +80,7 @@ const MyFundOpps = () => {
             <h3>Fund Name: {selectedFund.fundName}</h3>
             <p>Total Amount allocated to fund: {selectedFund.totalAmount}</p>
             <p>Remaining fund balance: {selectedFund.currentAmount}</p>
-            <p>Amount allocated to applicant: {selectedFund.currentAmount}</p>
+            <p>Amount allocated to applicant: {selectedFund.amountPerApplicant}</p>
           </div>
         )}
       </main>
