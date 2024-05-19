@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import logo from '../components/Images/logo1.png';
+
 
 const Profile = () => {
   // Destructure Auth0 hook to get user, authentication status, and token functions
