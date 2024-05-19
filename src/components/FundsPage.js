@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";  // Import useAuth0 hook for authentication
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook for navigation
+import logo from '../components/Images/logo1.png';
 
 const FundsPage = () => {
   // State to track the selected fund
@@ -59,6 +60,10 @@ const FundsPage = () => {
 
   return (
     <div>
+    <header className="App-header">
+    <img src={logo} className="App-logo" alt="logo" />
+    <h1>All Funds</h1>
+    </header>
       <main>
         <h1 className='admin-page' style={{ textAlign: 'center' }}>Fund Page</h1>
         <h2 className='admin-page' style={{ textAlign: 'center' }}>Funds List</h2>
@@ -88,8 +93,9 @@ const FundsPage = () => {
           <button className='button' style={{ marginRight: '10px' }} onClick={handleApply} disabled={!selectedFund}>Apply</button>
         </div>
       </main>
-
+      <footer className="App-footer">© 2024 YourCompany. All rights reserved.</footer>
     </div>
+    
   );
 };
 
