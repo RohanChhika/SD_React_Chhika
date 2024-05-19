@@ -12,7 +12,9 @@ const CreateFund = () => {
   const [fundType, setFundType] = useState('education');
   // State for description input
   const [description, setDescription] = useState('');
-
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [amountPerApplicant, setAmountPerApplicant] = useState(0);
+  const [currentAmount, setCurrentAmount] = useState(0);
   // Destructure Auth0 hook to get authentication status, user, and token functions
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   // Hook to navigate programmatically
@@ -21,6 +23,13 @@ const CreateFund = () => {
   // Handle change in the fund name input
   const handleFundNameChange = (e) => {
     setFundName(e.target.value);
+  };
+  const handleTotalAmountChange = (e) => {
+    setTotalAmount(e.target.value);
+    setCurrentAmount(totalAmount)
+  };
+  const handleAmountPerApplicantChange = (e) => {
+    setAmountPerApplicant(e.target.value);
   };
 
   // Handle change in the company name input
@@ -54,7 +63,10 @@ const CreateFund = () => {
       fundName,   // Include fund name in the data
       CompanyName,// Include company name in the data
       fundType,   // Include fund type in the data
-      description // Include description in the data
+      description, // Include description in the data
+      totalAmount,
+      amountPerApplicant,
+      currentAmount
     };
   
     try {
@@ -106,6 +118,8 @@ const CreateFund = () => {
           </select>
         </label>
         <label>Description:<textarea value={description} onChange={handleDescriptionChange} /></label>
+        <label>Total Amount Allocated to fund:<input type="number" value={totalAmount} onChange={handleTotalAmountChange} /></label>
+        <label>Amount Per Applicant:<input type="number" value={amountPerApplicant} onChange={handleAmountPerApplicantChange} /></label>
         <button className='button' type="submit">Create Fund</button>
       </form>
     </div>

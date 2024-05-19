@@ -71,6 +71,22 @@ const ViewFundRequests = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
+        // Call the new endpoint to update the fund amount
+        const updateFundAmountResponse = await fetch(`https://fundit.azurewebsites.net/updateFundAmount`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            fundName: selectedApplication.fundName
+          })
+        });
+
+        if (!updateFundAmountResponse.ok) {
+          throw new Error(`HTTP error! status: ${updateFundAmountResponse.status}`);
+        }
+
         console.log("Accepted:", selectedApplication);
         alert('Application accepted successfully!');
         navigate(0);

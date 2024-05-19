@@ -82,7 +82,6 @@ const FundApplication = () => {
       }
     } catch (error) {
       console.error('Failed to submit application:', error.message);
-      alert('Error: ' + error.message);
     }
   };
 
