@@ -70,15 +70,15 @@ const ViewFundStatus = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <div className="center-text">
-          <h1>My Funds Statuses</h1>
+          <h1>My Fund Status</h1>
         </div>
       </header>
       <main>
-        <h1 className='admin-page' style={{ textAlign: 'center' }}>My Funds Statuses</h1>
+        <h1 className='admin-page' style={{ textAlign: 'center' }}>My Fund Status</h1>
         <h2 className='admin-page' style={{ textAlign: 'center' }}>Funds List</h2>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
           <select className="motivation-select" style={{ width: '300px', textAlign: 'center' }} onChange={(e) => handleSelectApplication(JSON.parse(e.target.value))}>
-            <option value="">Select an Fund</option>
+            <option value="">Select a Fund</option>
             {applications.map(application => (
               <option key={`${application.userID}-${application.fundName}`} value={JSON.stringify(application)}>
                 {application.userID}

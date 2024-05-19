@@ -74,7 +74,7 @@ const FundApplication = () => {
       if (pdfResponse.status === 409) {
         alert('You have already applied to this fund.');
       } else if (pdfResponse.ok) {
-        console.log('Application created succesfully created successfully:', responseData);
+        console.log('Application created succesfully:', responseData);
         alert("Request made successfully");
         navigate('/'); // Redirect to the index route
       } else {
