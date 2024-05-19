@@ -4,16 +4,23 @@ import { useNavigate } from "react-router-dom";
 import logo from '../components/Images/logo1.png';
 
 const FundManagerApplication = () => {
+  // State to track the motivation input
   const [motivation, setMotivation] = useState('');
+  // Destructure Auth0 hook to get authentication status, user, and token functions
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
-  const navigate = useNavigate(); // Using useNavigate instead of useHistory
+  // Using useNavigate instead of useHistory
+  const navigate = useNavigate(); 
 
+  // Handle change in the motivation textarea
   const handleChange = (e) => {
     setMotivation(e.target.value);
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
+    // Prevent default form submission
     e.preventDefault();
+    //If user is not logged in
     if (!isAuthenticated) {
       alert('You must be logged in to submit your application.');
       return;
@@ -26,7 +33,9 @@ const FundManagerApplication = () => {
     };
   
     try {
+      // Get the access token silently
       const accessToken = await getAccessTokenSilently();
+      // Post the application data to the server
       const response = await fetch('https://fundit.azurewebsites.net/managerRequest', {
         method: 'POST',
         headers: {
@@ -42,7 +51,8 @@ const FundManagerApplication = () => {
       } else if (response.ok) {
         console.log('Request created successfully:', responseData);
         alert("Request made successfully");
-        navigate('/'); // Redirect to the index route
+        // Redirect to the index route
+        navigate('/'); 
       } else {
         throw new Error(responseData.message || 'Failed to create request');
       }
