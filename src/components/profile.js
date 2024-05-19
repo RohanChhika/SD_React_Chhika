@@ -47,10 +47,6 @@ const Profile = () => {
 
   return (
     <div className="profile-centered">
-    <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>My Profile</h1>
-      </header>
       <div className='profile-details'>
       {userRoleRef.current === 'blocked' ? (
         <p className="blocked">Your account has been blocked. Please contact the administrator for assistance.</p> // Display this if user is blocked
