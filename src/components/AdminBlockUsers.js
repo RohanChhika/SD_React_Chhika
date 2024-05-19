@@ -4,16 +4,23 @@ import logo from '../components/Images/logo1.png';
 import { useNavigate } from "react-router-dom";
 
 const AdminBlockUsers = () => {
+  // State to track the selected user
   const [selectedUser, setSelectedUser] = useState(null);
+  // State to store all users
   const [Users, setUsers] = useState([]);
-  const [userInfo, setUserInfo] = useState({ username: '', role: '' }); // State to store selected user info
+  // State to store selected user info
+  const [userInfo, setUserInfo] = useState({ username: '', role: '' });
+  // Destructure Auth0 hook to get the token function
   const { getAccessTokenSilently } = useAuth0();
+  // Hook to navigate programmatically
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Function to fetch users from the API
     const fetchUsers = async () => {
       try {
         const token = await getAccessTokenSilently(); // Assuming you have a way to retrieve the token
+        // Fetch users from the server
         const response = await fetch('https://fundit.azurewebsites.net/viewUsers', {
           method: 'GET',
           headers: {
@@ -21,10 +28,12 @@ const AdminBlockUsers = () => {
           }
         });
     
+        // Check if the response is not ok
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
     
+        // Parse and set the users data
         const data = await response.json();
         setUsers(data); 
         console.log('Users fetched successfully.');
@@ -47,7 +56,9 @@ const AdminBlockUsers = () => {
     if (selectedUser) {
       try {
         const token = await getAccessTokenSilently(); // Retrieve the token
+        // Construct the URL for blocking the user
         const url = `https://fundit.azurewebsites.net/process-blockedUser/${selectedUser.userID}`;
+        // Send request to block the user
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -55,13 +66,14 @@ const AdminBlockUsers = () => {
           },
         });
     
+        // Check if the response is not ok
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
     
         console.log("Blocked:", selectedUser);
         alert('User Blocked!'); // Optionally, display a success message to the user
-        navigate(0); 
+        navigate(0); //refresh page
       } catch (error) {
         console.error('Failed to block user:', error.message);
       }
@@ -82,6 +94,7 @@ const AdminBlockUsers = () => {
         <h1 className='admin-page' style={{ textAlign: 'center' }}>Admin View Users Page</h1>
         <h2 className='admin-page' style={{ textAlign: 'center' }}>Users</h2>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+          {/* Dropdown to select a user */}
           <select className="motivation-select" style={{ width: '300px', textAlign: 'center' }} onChange={(e) => handleSelectUser(JSON.parse(e.target.value))}>
             <option value="">Select a User</option>
             {Users.map(user => (
@@ -92,6 +105,7 @@ const AdminBlockUsers = () => {
           </select>
         </div>
 
+        {/* Display selected user details */}
         {selectedUser && (
           <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
             <h3>User ID: {selectedUser.userID}</h3>
@@ -100,6 +114,7 @@ const AdminBlockUsers = () => {
           </div>
         )}
         <div className="button-container" style={{ textAlign: 'center' }}>
+          {/* Block user button */}
           <button className='button' style={{ marginRight: '10px' }} onClick={handleBlockUser} disabled={!selectedUser}>Block User</button>
         </div>
       </main>
