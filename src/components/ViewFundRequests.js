@@ -11,8 +11,10 @@ const ViewFundRequests = () => {
 
   useEffect(() => {
     if (!user?.sub) return;
+    // Check if user is available
     const managerUserID = user?.sub;
 
+    // Fetch applications for the logged-in user
     const fetchApplications = async () => {
       try {
         const token = await getAccessTokenSilently();
@@ -23,10 +25,12 @@ const ViewFundRequests = () => {
           }
         });
 
+        // Check if the response is not ok
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
+        // Parse and set the applications data
         const data = await response.json();
         setApplications(data);
         console.log('Requests fetched successfully.');
@@ -39,10 +43,12 @@ const ViewFundRequests = () => {
     fetchApplications();
   }, [getAccessTokenSilently, user?.sub]);
 
+  // Handle application selection from the dropdown
   const handleSelectApplication = (application) => {
     setSelectedApplication(application);
   };
 
+  // Handle accepting an application
   const handleAcceptApplication = async () => {
     if (selectedApplication) {
       const dataBody = {
@@ -76,6 +82,7 @@ const ViewFundRequests = () => {
     }
   };
 
+  // Handle declining an application
   const handleDeclineApplication = async () => {
     if (selectedApplication) {
       const dataBody = {
@@ -109,6 +116,7 @@ const ViewFundRequests = () => {
     }
   };
 
+  // Function to create a URL for the PDF
   const getPdfUrl = (pdfData) => {
     if (!pdfData) return null;
     try {
@@ -144,6 +152,7 @@ const ViewFundRequests = () => {
           </select>
         </div>
 
+        {/* Display selected application details */}
         {selectedApplication && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
             <div className='motivation-detail' style={{ maxWidth: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', width: '90%' }}>
