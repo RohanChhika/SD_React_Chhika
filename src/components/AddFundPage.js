@@ -25,8 +25,9 @@ const CreateFund = () => {
     setFundName(e.target.value);
   };
   const handleTotalAmountChange = (e) => {
-    setTotalAmount(e.target.value);
-    setCurrentAmount(totalAmount)
+    const value = parseInt(e.target.value, 10);
+    setTotalAmount(value);
+    setCurrentAmount(value);
   };
   const handleAmountPerApplicantChange = (e) => {
     setAmountPerApplicant(e.target.value);
