@@ -17,7 +17,7 @@ import ViewMyFundRequestsButton from "./components/buttons/ViewMyFundRequestsBut
 import FundsPage from "./components/FundsPage";
 import ApplyForFund from "./components/ApplyForFund"
 import Profile from "./components/profile"
-import ViewProfileButton from "./components/buttons/ViewProfileButton";
+import ViewProfileButton from "./components/buttons/ViewAllFundsButton";
 import ViewMyFundButton from "./components/buttons/ViewMyFundButton";
 import ViewFundStatus from "./components/ViewFundStatus";
 import ViewMyFundManagerReqStatusButton from "./components/buttons/ViewFundManagerReqStatusButton";
@@ -59,7 +59,7 @@ const App = () => {
             </div>
           </header>
           {/* Conditional rendering of FundsPage component based on user added state */}
-          {isUserAdded && <FundsPage />}
+          {isUserAdded && <Profile />}
           <footer className="App-footer">
             © 2024 FundIT. All rights reserved.
           </footer>
@@ -78,7 +78,7 @@ const App = () => {
       {/* Route to apply for a fund */}
       <Route path="/apply/:userId/:fundName" element={<ApplyForFund />} />
       {/* Route to view user profile */}
-      <Route path="/view-profile" element={<Profile />}/>
+      <Route path="/apply-for-fund" element={<FundsPage />}/>
       {/* Route to view user application status */}
       <Route path ="/fund-status" element = {<ViewFundStatus/>}/>
       {/* Route to view user fund manager application status */}
