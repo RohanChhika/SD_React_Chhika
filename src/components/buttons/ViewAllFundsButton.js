@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 const ViewAllFundsButton = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-  const [setUserInfo] = useState(null);
   const userRoleRef = useRef('');
 
   useEffect(() => {
@@ -27,7 +26,6 @@ const ViewAllFundsButton = () => {
         }
 
         const data = await response.json();
-        setUserInfo(data);
         userRoleRef.current = data.role;
       } catch (error) {
         console.error('Failed to fetch user data:', error);
