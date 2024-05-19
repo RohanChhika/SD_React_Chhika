@@ -3,17 +3,24 @@ import { useAuth0 } from "@auth0/auth0-react";
 import logo from '../components/Images/logo1.png';
 
 const ViewFundStatus = () => {
+  // State to track the selected application
   const [selectedApplication, setSelectedApplication] = useState(null);
+  // State to store all applications
   const [applications, setApplications] = useState([]);
+  // Destructure Auth0 hook to get user and token functions
   const { getAccessTokenSilently, user } = useAuth0();
 
   useEffect(() => {
     if (!user?.sub) return;
+    // Check if user is available
     const userID = user?.sub;
 
+    // Function to fetch applications from the API
     const fetchApplications = async () => {
       try {
+        // Get access token silently
         const token = await getAccessTokenSilently();
+        // Fetch applications for the logged-in user
         const response = await fetch(`https://fundit.azurewebsites.net/viewFundStatus/${userID}`, {
           method: 'GET',
           headers: {
@@ -21,10 +28,12 @@ const ViewFundStatus = () => {
           }
         });
 
+        // Check if the response is not ok
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
+        // Parse and set the applications data
         const data = await response.json();
         setApplications(data);
         console.log('Requests fetched successfully.');
@@ -37,10 +46,12 @@ const ViewFundStatus = () => {
     fetchApplications();
   }, [getAccessTokenSilently, user?.sub]);
 
+  // Handle application selection from the dropdown
   const handleSelectApplication = (application) => {
     setSelectedApplication(application);
   };
 
+  // Function to create a URL for the PDF
   const getPdfUrl = (pdfData) => {
     if (!pdfData) return null;
     try {
