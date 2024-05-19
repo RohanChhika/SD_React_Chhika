@@ -81,7 +81,7 @@ const ViewFundStatus = () => {
             <option value="">Select a Fund</option>
             {applications.map(application => (
               <option key={`${application.userID}-${application.fundName}`} value={JSON.stringify(application)}>
-                {application.userID}
+                {application.fundName}
               </option>
             ))}
           </select>
@@ -89,8 +89,7 @@ const ViewFundStatus = () => {
 
         {selectedApplication && (
           <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
-            <h3>Applicant ID: {selectedApplication.userID}</h3>
-            <p>Fund Name: {selectedApplication.fundName}</p>
+            <h3>Fund Name: {selectedApplication.fundName}</h3>
             <p>Motivation: {selectedApplication.motivation}</p>
             <p>Application Status: {selectedApplication.applicationStatus}</p>
             {selectedApplication.pdf && (

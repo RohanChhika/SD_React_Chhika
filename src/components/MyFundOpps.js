@@ -21,7 +21,7 @@ const MyFundOpps = () => {
         // Get access token silently
         const token = await getAccessTokenSilently();
         // Fetch applications for the logged-in user
-        const response = await fetch(`https://fundit.azurewebsites.net/viewFundStatus/${userID}`, {
+        const response = await fetch(`https://fundit.azurewebsites.net/viewMyFunds/${userID}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -52,18 +52,6 @@ const MyFundOpps = () => {
   };
 
   // Function to create a URL for the PDF
-  const getPdfUrl = (pdfData) => {
-    if (!pdfData) return null;
-    try {
-      console.log('PDF Data:', pdfData); // Debugging log
-      const byteArray = new Uint8Array(pdfData.data.data); // Adjusted for potential structure
-      const blob = new Blob([byteArray], { type: pdfData.contentType });
-      return URL.createObjectURL(blob);
-    } catch (error) {
-      console.error('Error creating PDF URL:', error);
-      return null;
-    }
-  };
 
   return (
     <div className="App">
@@ -80,8 +68,8 @@ const MyFundOpps = () => {
           <select className="motivation-select" style={{ width: '300px', textAlign: 'center' }} onChange={(e) => handleSelectFund(JSON.parse(e.target.value))}>
             <option value="">Select a Fund</option>
             {funds.map(fund => (
-              <option key={`${fund.userID}-${fund.fundName}`} value={JSON.stringify(fund)}>
-                {fund.userID}
+              <option key={`${fund.fundName}`} value={JSON.stringify(fund)}>
+                {fund.fundName}
               </option>
             ))}
           </select>
@@ -89,16 +77,10 @@ const MyFundOpps = () => {
 
         {selectedFund && (
           <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
-            <h3>Applicant ID: {selectedFund.userID}</h3>
-            <p>Fund Name: {selectedFund.fundName}</p>
-            <p>Motivation: {selectedFund.motivation}</p>
-            <p>Application Status: {selectedFund.applicationStatus}</p>
-            {selectedFund.pdf && (
-              <div>
-                <h3>Attached PDF:</h3>
-                <iframe src={getPdfUrl(selectedFund.pdf)} width="100%" height="600px" title="Application PDF" />
-              </div>
-            )}
+            <h3>Fund Name: {selectedFund.fundName}</h3>
+            <p>Total Amount allocated to fund: {selectedFund.totalAmount}</p>
+            <p>Remaining fund balance: {selectedFund.currentAmount}</p>
+            <p>Amount allocated to applicant: {selectedFund.currentAmount}</p>
           </div>
         )}
       </main>
