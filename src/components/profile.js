@@ -3,16 +3,23 @@ import { useAuth0 } from '@auth0/auth0-react';
 import logo from '../components/Images/logo1.png';
 
 const Profile = () => {
+  // Destructure Auth0 hook to get user, authentication status, and token functions
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  // State to store user information fetched from the server
   const [userInfo, setUserInfo] = useState(null);
+  // Ref to store the user role
   const userRoleRef = useRef('');
 
   useEffect(() => {
+    // Function to fetch user data from the server
     const fetchUserData = async () => {
-      if (!isAuthenticated || !user?.sub) return; // Early exit if not authenticated or user.sub is undefined
+      // Early exit if not authenticated or user.sub is undefined
+      if (!isAuthenticated || !user?.sub) return;
 
       try {
-        const token = await getAccessTokenSilently(); // Get the access token silently
+        // Get the access token silently
+        const token = await getAccessTokenSilently();
+        // Fetch user data from the server
         const response = await fetch('https://fundit.azurewebsites.net/login', {
           method: 'POST',
           headers: {
@@ -26,6 +33,7 @@ const Profile = () => {
           throw new Error(`HTTP error! status: ${response.status}`); // Throw error if response is not OK
         }
 
+        // Parse and set the user data
         const data = await response.json();
         setUserInfo(data);
         userRoleRef.current = data.role; // Store user role in ref
