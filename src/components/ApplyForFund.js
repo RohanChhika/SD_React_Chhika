@@ -4,22 +4,32 @@ import { useNavigate, useParams } from "react-router-dom";
 import logo from '../components/Images/logo1.png';
 
 const FundApplication = () => {
+  // Destructure Auth0 hook to get authentication status, user, and token functions
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
+  // Hook to navigate programmatically
   const navigate = useNavigate();
+  // Extract userId and fundName from the route parameters
   const { userId, fundName } = useParams();
+  // State to track the motivation input
   const [motivation, setMotivation] = useState('');
+  // State to track the selected file
   const [file, setFile] = useState(null);
+  // Store the manager user ID
   const managerUserID = userId;
 
+  // Handle change in the motivation textarea
   const handleChange = (e) => {
     setMotivation(e.target.value);
   };
 
+  // Handle file selection
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
+    // Prevent default form submission
     e.preventDefault();
     if (!isAuthenticated) {
       alert('You must be logged in to submit your application.');
@@ -42,7 +52,9 @@ const FundApplication = () => {
     pdfFormData.append('pdf', file);
 
     try {
+      // Get the access token silently
       const accessToken = await getAccessTokenSilently();
+      // Post the application data and PDF to the server
       const pdfResponse = await fetch('https://fundit.azurewebsites.net/uploadPDF', {
         method: 'POST',
         headers: {
@@ -51,11 +63,13 @@ const FundApplication = () => {
         body: pdfFormData
       });
 
+      // Check if the PDF upload response is not ok
       if (!pdfResponse.ok) {
         throw new Error('Failed to upload PDF');
       }
 
       // Create fund application
+      // Parse the response data
      const responseData = await pdfResponse.json();
       if (pdfResponse.status === 409) {
         alert('You have already applied to this fund.');
