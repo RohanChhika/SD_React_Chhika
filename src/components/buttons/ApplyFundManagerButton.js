@@ -58,7 +58,7 @@ const ApplyFundManagerButton = () => {
       {/* Render the Apply for Fund Manager button only if userInfo is available and user role is 'applicant' */}
       {userInfo && userRoleRef.current === 'applicant' && (
         <Link to="/fund-manager-request">   {/* Link to the fund-manager-request route */}
-          <button className='button'>Apply for Fund Manager Position</button>  {/* Button to apply for fund manager */}
+          <button className='button'>Apply for Fund Manager</button>  {/* Button to apply for fund manager */}
         </Link>
       )}
     </>
