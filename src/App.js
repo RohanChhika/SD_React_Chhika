@@ -79,7 +79,9 @@ const App = () => {
       <Route path="/apply/:userId/:fundName" element={<ApplyForFund />} />
       {/* Route to view user profile */}
       <Route path="/view-profile" element={<Profile />}/>
+      {/* Route to view user application status */}
       <Route path ="/fund-status" element = {<ViewFundStatus/>}/>
+      {/* Route to view user fund manager application status */}
       <Route path = "/fund-req-status" element = {<ViewMyFundManagerReqStatus/>} />
       {/* Wildcard route to handle all other routes */}
       <Route path="*" element={<NotFound />} />
