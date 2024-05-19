@@ -2,15 +2,23 @@ import React, { useState,useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from '../components/Images/logo1.png';
 import { useNavigate } from "react-router-dom";
+
 const AdminFundReq = () => {
+  // State to track the selected motivation
   const [selectedMotivation, setSelectedMotivation] = useState(null);
+  // State to store all motivations
   const [motivations, setMotivations] = useState([]);
+  // Destructure Auth0 hook to get the token function
   const { getAccessTokenSilently } = useAuth0();
+  // Hook to navigate programmatically
   const navigate = useNavigate();
+
   useEffect(() => {
+    // Function to fetch manager requests from the API
     const fetchManagerRequests = async () => {
       try {
-        const token = await getAccessTokenSilently(); // Assuming you have a way to retrieve the token
+        // Get the access token silently
+        const token = await getAccessTokenSilently();
         const response = await fetch('https://fundit.azurewebsites.net/viewManagerRequests', {
           method: 'GET', // Explicitly setting the method for clarity
           headers: {
@@ -18,10 +26,12 @@ const AdminFundReq = () => {
           }
         });
     
+        // Check if the response is not ok
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
     
+        // Parse and set the motivations data
         const data = await response.json();
         setMotivations(data); // Assuming setMotivations is a state setter function in your React component
         console.log('Requests fetched successfully.');
@@ -41,8 +51,11 @@ const AdminFundReq = () => {
   const handleAcceptMotivation = async() => {
     if (selectedMotivation) {
       try {
+        // Get the access token silently
         const token = await getAccessTokenSilently(); // Retrieve the token
+        // Construct the URL for processing the request
         const url = `https://fundit.azurewebsites.net/process-request/${selectedMotivation.userID}`;
+        // Post the decision to the server
         const response = await fetch(url, {
           method: 'POST',
           headers: {
@@ -52,6 +65,7 @@ const AdminFundReq = () => {
           body: JSON.stringify({ decision: 'accept'}) // Sending "accept" as true
         });
     
+        // Check if the response is not ok
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -72,7 +86,9 @@ const AdminFundReq = () => {
     if (selectedMotivation) {
       try {
         const token = await getAccessTokenSilently(); // Retrieve the token
+        // Construct the URL for processing the request
         const url = `https://fundit.azurewebsites.net/process-request/${selectedMotivation.userID}`;
+        // Post the decision to the server
         const response = await fetch(url, {
           method: 'POST',
           headers: {
@@ -81,7 +97,8 @@ const AdminFundReq = () => {
           },
           body: JSON.stringify({ decision: 'reject'}) // Sending "accept" as true
         });
-    
+        
+        // Check if the response is not ok
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -109,6 +126,7 @@ const AdminFundReq = () => {
         <h1 className='admin-page' style={{ textAlign: 'center' }}>Admin Page</h1>
         <h2 className='admin-page' style={{ textAlign: 'center' }}>Motivations List</h2>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+          {/* Dropdown to select a motivation */}
           <select className="motivation-select" style={{ width: '300px', textAlign: 'center' }} onChange={(e) => handleSelectMotivation(JSON.parse(e.target.value))}>
             <option value="">Select a motivation</option>
             {motivations.map(motivation => (
@@ -119,6 +137,7 @@ const AdminFundReq = () => {
         </select>
         </div>
 
+        {/* Display selected motivation details */}
         {selectedMotivation && (
           <div className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}>
             <h3>User ID: {selectedMotivation.userID}</h3>
@@ -126,7 +145,9 @@ const AdminFundReq = () => {
           </div>
         )}
         <div className="button-container" style={{ textAlign: 'center' }}>
+          {/* Accept button */}
           <button className='button' style={{ marginRight: '10px' }} onClick={handleAcceptMotivation} disabled={!selectedMotivation}>Accept</button>
+          {/* Decline button */}
           <button className='button' onClick={handleDeclineMotivation} disabled={!selectedMotivation}>Decline</button>
         </div>
       </main>
