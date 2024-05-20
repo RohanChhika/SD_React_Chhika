@@ -63,6 +63,8 @@ const App = () => {
             </div>
           </header>
           {/* Conditional rendering of FundsPage component based on user added state */}
+          
+
           {isUserAdded && <Profile />}
           <footer className="App-footer">
             © 2024 FundIT. All rights reserved.
@@ -87,7 +89,7 @@ const App = () => {
       <Route path ="/fund-status" element = {<ViewFundStatus/>}/>
       {/* Route to view user fund manager application status */}
       <Route path = "/fund-req-status" element = {<ViewMyFundManagerReqStatus/>} />
-      {/* Route to view user fund manager application status */}
+      {/* Route to view fund manager opportunities */}
       <Route path = "/my-fund-opps" element = {<MyFundOpps/>} />
 
       {/* Wildcard route to handle all other routes */}
