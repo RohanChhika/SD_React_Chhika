@@ -24,6 +24,7 @@ import ViewMyFundManagerReqStatusButton from "./components/buttons/ViewFundManag
 import ViewMyFundManagerReqStatus from "./components/ViewMyFundManagerReqStatus";
 import ViewMyFundOppButton from "./components/buttons/ViewMyFundOppButton";
 import MyFundOpps from "./components/MyFundOpps";
+import AboutUsTile from "./components/AboutUsTile";
 
 const App = () => {
   // State to track if the user has been added
@@ -62,9 +63,11 @@ const App = () => {
               <LogoutButton />
             </div>
           </header>
+
+          {/* Conditional rendering of Aboout Us component based on user added state */}
+          {!isUserAdded && <AboutUsTile/>}
           {/* Conditional rendering of FundsPage component based on user added state */}
           
-
           {isUserAdded && <Profile />}
           <footer className="App-footer">
             © 2024 FundIT. All rights reserved.
