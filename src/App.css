@@ -76,7 +76,7 @@ html, body {
   padding: 10px 20px;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   transition: background-color 0.3s, transform 0.2s;
   cursor: pointer;
 }
@@ -98,7 +98,7 @@ html, body {
 @media (max-width: 600px) {
   .button {
     padding: 8px 16px;
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
@@ -298,4 +298,5 @@ html, body {
   max-width: 40%;
   height: auto;
   border-radius: 8px;
+  left: 20px;
 }
