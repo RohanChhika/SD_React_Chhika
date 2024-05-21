@@ -295,6 +295,14 @@ html, body {
   left: 30px;
 }
 
+.image-container {
+  flex: 1;
+  margin-right: 20px;
+}
+.about-us-article {
+  flex: 2;
+  padding: 20px;
+}
 .about-us-section img {
   max-width: 40%;
   height: auto;
