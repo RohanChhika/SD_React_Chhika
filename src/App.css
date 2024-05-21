@@ -289,7 +289,7 @@ html, body {
 .about-us-section {
   display: flex;
   justify-content: flex-start; /* Aligns content to the left */
-  align-items: center;
+  align-items: left;
   margin: 20px;
   max-width: 50%; /* Adjust this value as needed for the desired width */
 }
