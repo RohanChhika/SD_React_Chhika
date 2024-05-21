@@ -3,7 +3,7 @@ import aboutUsImage from './Images/about-us.png';
 
 const AboutUsTile = () => {
     return (
-        <section className="about-us-section" style={{ padding: '0', margin: '90px' }}>
+        <section className="about-us-section" style={{ padding: '0', margin: '120px' }}>
             <img src={aboutUsImage} alt="About Us" />
         </section>
     );

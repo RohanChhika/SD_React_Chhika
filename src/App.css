@@ -290,13 +290,14 @@ html, body {
   display: flex;
   justify-content: flex-start; /* Aligns content to the left */
   align-items: left;
-  margin: 20px;
+  margin: 30px;
   max-width: 50%; /* Adjust this value as needed for the desired width */
+  left: 30px;
 }
 
 .about-us-section img {
   max-width: 40%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 5px;
   left: 20px;
 }
