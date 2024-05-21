@@ -10,7 +10,7 @@ const AboutUsTile = () => {
             <article className="about-us-article">
                 <h1>About Us</h1>
                 <p>
-                    Welcome to our company! We are dedicated to providing the best services in the industry. Our team of experts is committed to excellence and delivering funding catering to your needs.
+                    Welcome to FUNDIT! We are dedicated to providing the best services in the industry. Our team of experts is committed to excellence and delivering funding catering to your needs.
                 </p>
                 <p>
                     We provide funding in the form of bursaries, healthcare, and business. To learn more or apply for funding, please sign up and explore the variety of funding opportunities that we offer.
