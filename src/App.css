@@ -302,10 +302,20 @@ html, body {
 .about-us-article {
   flex: 2;
   padding: 10px;
+  background: transparent;
 }
 .about-us-section img {
   max-width: 70%;
   height: auto;
   border-radius: 5px;
   left: 20px;
+}
+
+body {
+  background: url('./Images/background.png') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
