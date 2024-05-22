@@ -129,12 +129,12 @@ const CreateFund = () => {
         <label>Description:<textarea value={description} onChange={handleDescriptionChange} /></label>
         <label>Total Amount Allocated to fund:<input type="number" value={totalAmount} onChange={handleTotalAmountChange} /></label>
         <label>Amount Per Applicant:<input type="number" value={amountPerApplicant} onChange={handleAmountPerApplicantChange} /></label>
-        {/* <button className='button' type="submit">Create Fund</button> */}
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <button className='button' type="submit">Create Fund</button>
+        {/* <div style={{ textAlign: 'center', marginTop: '20px' }}>
               <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
                 Create Fund
               </button>
-        </div>
+        </div> */}
       </form>
     </div>
   </div>
