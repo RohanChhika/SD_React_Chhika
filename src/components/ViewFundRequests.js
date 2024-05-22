@@ -45,7 +45,13 @@ const ViewFundRequests = () => {
   };
 
   const handleAcceptApplication = async () => {
-    if (!selectedApplication) return;
+    console.log('Attempting to accept application');
+    if (!selectedApplication) {
+      console.log('No application selected');
+      return;
+    }
+
+    console.log('Selected application status:', selectedApplication.applicationStatus);
 
     if (selectedApplication.applicationStatus === 'pending') {
       const dataBody = {
@@ -89,13 +95,22 @@ const ViewFundRequests = () => {
       } catch (error) {
         console.error('Failed to accept request:', error.message);
       }
-    } else {
-      alert(`This application has already been ${selectedApplication.applicationStatus}, please choose a pending application`);
+    } else if (selectedApplication.applicationStatus === 'accepted') {
+      alert("This application has already been accepted. Please choose a pending application.");
+      console.log("Cant accept whats already accepted")
+    } else if (selectedApplication.applicationStatus === 'rejected') {
+      alert("This application has already been rejected. Please choose a pending application.");
     }
   };
 
   const handleDeclineApplication = async () => {
-    if (!selectedApplication) return;
+    console.log('Attempting to decline application');
+    if (!selectedApplication) {
+      console.log('No application selected');
+      return;
+    }
+
+    console.log('Selected application status:', selectedApplication.applicationStatus);
 
     if (selectedApplication.applicationStatus === 'pending') {
       const dataBody = {
@@ -122,10 +137,12 @@ const ViewFundRequests = () => {
         alert('Application rejected successfully!');
         navigate(0);
       } catch (error) {
-        console.error('Failed to accept request:', error.message);
+        console.error('Failed to reject request:', error.message);
       }
-    } else {
-      alert(`This application has already been ${selectedApplication.applicationStatus}, please choose a pending application`);
+    } else if (selectedApplication.applicationStatus === 'accepted') {
+      alert("This application has already been accepted. Please choose a pending application.");
+    } else if (selectedApplication.applicationStatus === 'rejected') {
+      alert("This application has already been rejected. Please choose a pending application.");
     }
   };
 
