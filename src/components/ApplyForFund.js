@@ -100,7 +100,6 @@ const FundApplication = () => {
       <main style={{ paddingTop: '100px' }}>
         <h1 style={{ textAlign: 'center' }}>Apply for a fund</h1>
         <h2 style={{ textAlign: 'center' }}>Fund Name: {decodeURIComponent(fundName)}</h2>
-        <h2 style={{ textAlign: 'center' }}>Manager User ID: {managerUserID}</h2>
         <h3 style={{ textAlign: 'center' }}>Please provide your motivation</h3>
         <form className='fund-manager-form' onSubmit={handleSubmit}>
           <label>
