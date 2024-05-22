@@ -70,9 +70,9 @@ const FundManagerApplication = () => {
         <div className="center-text">
           <h1>Fund Manager Application</h1>
         </div>
-        <div className="login-container">
-        <BackButton/>
-       </div>
+      <div className="login-container">
+      <BackButton/>
+      </div>
       </header>
       <main style={{ paddingTop: '100px' }}>
       <h1 style={{textAlign: 'center'}}>Apply to be a Fund Manager</h1>
