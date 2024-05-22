@@ -106,7 +106,7 @@ const CreateFund = () => {
     <img src={logo} className="App-logo" alt="logo" />
     <h1>Create Fund</h1>
     <div className="login-container">
-      <BackButton/>
+    <BackButton/>
     </div>
   </header>
   <div className="App"> {/* This ensures flex centering takes full effect */}
