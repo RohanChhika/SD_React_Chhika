@@ -46,6 +46,7 @@ const ViewFundRequests = () => {
 
   const handleAcceptApplication = async () => {
     if (!selectedApplication) return;
+
     if (selectedApplication.applicationStatus === 'pending') {
       const dataBody = {
         fundName: selectedApplication.fundName,
@@ -88,15 +89,14 @@ const ViewFundRequests = () => {
       } catch (error) {
         console.error('Failed to accept request:', error.message);
       }
-    } else if (selectedApplication.applicationStatus==='accepted') {
-      alert("This application has already been accepted please choose a pending application");
-    }else if(selectedApplication.applicationStatus==='rejected'){
-      alert("This application has already been rejected please choose a pending application")
+    } else {
+      alert(`This application has already been ${selectedApplication.applicationStatus}, please choose a pending application`);
     }
   };
 
   const handleDeclineApplication = async () => {
     if (!selectedApplication) return;
+
     if (selectedApplication.applicationStatus === 'pending') {
       const dataBody = {
         fundName: selectedApplication.fundName,
@@ -124,10 +124,8 @@ const ViewFundRequests = () => {
       } catch (error) {
         console.error('Failed to accept request:', error.message);
       }
-    } else if (selectedApplication.applicationStatus==='accepted') {
-      alert("This application has already been accepted please choose a pending application");
-    }else if(selectedApplication.applicationStatus==='rejected'){
-      alert("This application has already been rejected please choose a pending application")
+    } else {
+      alert(`This application has already been ${selectedApplication.applicationStatus}, please choose a pending application`);
     }
   };
 
