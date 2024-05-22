@@ -12,10 +12,8 @@ const ViewFundRequests = () => {
 
   useEffect(() => {
     if (!user?.sub) return;
-    // Check if user is available
     const managerUserID = user?.sub;
 
-    // Fetch applications for the logged-in user
     const fetchApplications = async () => {
       try {
         const token = await getAccessTokenSilently();
@@ -26,12 +24,10 @@ const ViewFundRequests = () => {
           }
         });
 
-        // Check if the response is not ok
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        // Parse and set the applications data
         const data = await response.json();
         setApplications(data);
         console.log('Requests fetched successfully.');
@@ -44,14 +40,12 @@ const ViewFundRequests = () => {
     fetchApplications();
   }, [getAccessTokenSilently, user?.sub]);
 
-  // Handle application selection from the dropdown
   const handleSelectApplication = (application) => {
     setSelectedApplication(application);
   };
 
-  // Handle accepting an application
   const handleAcceptApplication = async () => {
-    if (selectedApplication) {
+    if (selectedApplication && selectedApplication.applicationStatus === 'pending') {
       const dataBody = {
         fundName: selectedApplication.fundName,
         decision: 'accepted'
@@ -67,12 +61,11 @@ const ViewFundRequests = () => {
           },
           body: JSON.stringify(dataBody)
         });
-  
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-  
-        // Call the new endpoint to update the fund amount
+
         const updateFundAmountResponse = await fetch(`https://fundit.azurewebsites.net/updateFundAmount`, {
           method: 'POST',
           headers: {
@@ -83,11 +76,11 @@ const ViewFundRequests = () => {
             fundName: selectedApplication.fundName,
           })
         });
-  
+
         if (!updateFundAmountResponse.ok) {
           throw new Error(`HTTP error! status: ${updateFundAmountResponse.status}`);
         }
-  
+
         console.log("Accepted:", selectedApplication);
         alert('Application accepted successfully!');
         navigate(0);
@@ -95,13 +88,12 @@ const ViewFundRequests = () => {
         console.error('Failed to accept request:', error.message);
       }
     } else {
-      console.log("Please select an application first.");
+      alert("This application has already been accepted or rejected");
     }
   };
 
-  // Handle declining an application
   const handleDeclineApplication = async () => {
-    if (selectedApplication) {
+    if (selectedApplication && selectedApplication.applicationStatus === 'pending') {
       const dataBody = {
         fundName: selectedApplication.fundName,
         decision: 'rejected'
@@ -129,16 +121,15 @@ const ViewFundRequests = () => {
         console.error('Failed to accept request:', error.message);
       }
     } else {
-      console.log("Please select an application first.");
+      alert("This application has already been accepted or rejected");
     }
   };
 
-  // Function to create a URL for the PDF
   const getPdfUrl = (pdfData) => {
     if (!pdfData) return null;
     try {
-      console.log('PDF Data:', pdfData); // Debugging log
-      const byteArray = new Uint8Array(pdfData.data.data); // Adjusted for potential structure
+      console.log('PDF Data:', pdfData);
+      const byteArray = new Uint8Array(pdfData.data.data);
       const blob = new Blob([byteArray], { type: pdfData.contentType });
       return URL.createObjectURL(blob);
     } catch (error) {
@@ -155,10 +146,10 @@ const ViewFundRequests = () => {
           <h1>Funding Applications</h1>
         </div>
         <div className="login-container">
-        <BackButton/>
-       </div>
+          <BackButton />
+        </div>
       </header>
-      <main style={{ paddingTop: '120px', paddingBottom: '80px' }}> {/* Adjust padding to account for fixed header and footer */}
+      <main style={{ paddingTop: '120px', paddingBottom: '80px' }}>
         <h1 className='admin-page' style={{ textAlign: 'center' }}>Applications Page</h1>
         <h2 className='admin-page' style={{ textAlign: 'center' }}>Applications List</h2>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
@@ -172,7 +163,6 @@ const ViewFundRequests = () => {
           </select>
         </div>
 
-        {/* Display selected application details */}
         {selectedApplication && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
             <div className='motivation-detail' style={{ maxWidth: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', width: '90%' }}>
@@ -188,8 +178,8 @@ const ViewFundRequests = () => {
               )}
             </div>
             <div className="button-container" style={{ textAlign: 'center', marginBottom: '20px' }}>
-              <button className='button' style={{ marginRight: '10px' }} onClick={handleAcceptApplication} disabled={!selectedApplication}>Accept</button>
-              <button className='button' onClick={handleDeclineApplication} disabled={!selectedApplication}>Decline</button>
+              <button className='button' style={{ marginRight: '10px' }} onClick={handleAcceptApplication} disabled={!selectedApplication || selectedApplication.applicationStatus !== 'pending'}>Accept</button>
+              <button className='button' onClick={handleDeclineApplication} disabled={!selectedApplication || selectedApplication.applicationStatus !== 'pending'}>Decline</button>
             </div>
           </div>
         )}
