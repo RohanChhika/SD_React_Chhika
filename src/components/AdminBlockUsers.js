@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from '../components/Images/logo1.png';
 import { useNavigate } from "react-router-dom";
+import BackButton from './buttons/BackButton';
 
 const AdminBlockUsers = () => {
   // State to track the selected user
