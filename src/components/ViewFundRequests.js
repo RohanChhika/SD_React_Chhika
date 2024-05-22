@@ -45,87 +45,85 @@ const ViewFundRequests = () => {
   };
 
   const handleAcceptApplication = async () => {
-    if (selectedApplication) {
-      if (selectedApplication.applicationStatus === 'pending') {
-        const dataBody = {
-          fundName: selectedApplication.fundName,
-          decision: 'accepted'
-        };
-        try {
-          const token = await getAccessTokenSilently();
-          const url = `https://fundit.azurewebsites.net/process-fundApplication/${selectedApplication.userID}`;
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(dataBody)
-          });
+    if (!selectedApplication) return;
+    if (selectedApplication.applicationStatus === 'pending') {
+      const dataBody = {
+        fundName: selectedApplication.fundName,
+        decision: 'accepted'
+      };
+      try {
+        const token = await getAccessTokenSilently();
+        const url = `https://fundit.azurewebsites.net/process-fundApplication/${selectedApplication.userID}`;
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(dataBody)
+        });
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          const updateFundAmountResponse = await fetch(`https://fundit.azurewebsites.net/updateFundAmount`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-              fundName: selectedApplication.fundName,
-            })
-          });
-
-          if (!updateFundAmountResponse.ok) {
-            throw new Error(`HTTP error! status: ${updateFundAmountResponse.status}`);
-          }
-
-          console.log("Accepted:", selectedApplication);
-          alert('Application accepted successfully!');
-          navigate(0);
-        } catch (error) {
-          console.error('Failed to accept request:', error.message);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      } else {
-        alert("This application has already been accepted or rejected");
+
+        const updateFundAmountResponse = await fetch(`https://fundit.azurewebsites.net/updateFundAmount`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            fundName: selectedApplication.fundName,
+          })
+        });
+
+        if (!updateFundAmountResponse.ok) {
+          throw new Error(`HTTP error! status: ${updateFundAmountResponse.status}`);
+        }
+
+        console.log("Accepted:", selectedApplication);
+        alert('Application accepted successfully!');
+        navigate(0);
+      } catch (error) {
+        console.error('Failed to accept request:', error.message);
       }
+    } else {
+      alert("This application has already been accepted or rejected");
     }
   };
 
   const handleDeclineApplication = async () => {
-    if (selectedApplication) {
-      if (selectedApplication.applicationStatus === 'pending') {
-        const dataBody = {
-          fundName: selectedApplication.fundName,
-          decision: 'rejected'
-        };
-        try {
-          const token = await getAccessTokenSilently();
-          const url = `https://fundit.azurewebsites.net/process-fundApplication/${selectedApplication.userID}`;
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(dataBody)
-          });
+    if (!selectedApplication) return;
+    if (selectedApplication.applicationStatus === 'pending') {
+      const dataBody = {
+        fundName: selectedApplication.fundName,
+        decision: 'rejected'
+      };
+      try {
+        const token = await getAccessTokenSilently();
+        const url = `https://fundit.azurewebsites.net/process-fundApplication/${selectedApplication.userID}`;
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(dataBody)
+        });
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-          console.log("Rejected:", selectedApplication);
-          alert('Application rejected successfully!');
-          navigate(0);
-        } catch (error) {
-          console.error('Failed to accept request:', error.message);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      } else {
-        alert("This application has already been accepted or rejected");
+
+        console.log("Rejected:", selectedApplication);
+        alert('Application rejected successfully!');
+        navigate(0);
+      } catch (error) {
+        console.error('Failed to accept request:', error.message);
       }
+    } else {
+      alert("This application has already been accepted or rejected");
     }
   };
 
