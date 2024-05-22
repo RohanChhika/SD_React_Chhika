@@ -199,8 +199,8 @@ const ViewFundRequests = () => {
               )}
             </div>
             <div className="button-container" style={{ textAlign: 'center', marginBottom: '20px' }}>
-              <button className='button' style={{ marginRight: '10px' }} onClick={handleAcceptApplication} disabled={!selectedApplication || selectedApplication.applicationStatus !== 'pending'}>Accept</button>
-              <button className='button' onClick={handleDeclineApplication} disabled={!selectedApplication || selectedApplication.applicationStatus !== 'pending'}>Decline</button>
+              <button className='button' style={{ marginRight: '10px' }} onClick={handleAcceptApplication} disabled={!selectedApplication}>Accept</button>
+              <button className='button' onClick={handleDeclineApplication} disabled={!selectedApplication}>Decline</button>
             </div>
           </div>
         )}
