@@ -109,8 +109,9 @@ const CreateFund = () => {
       <BackButton />
     </div> */}
     <div>
-      <Backbutton />
+      <BackButton />
     </div>
+
   </header>
   <div className="App"> {/* This ensures flex centering takes full effect */}
     <div className="create-fund-form">
