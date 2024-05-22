@@ -288,28 +288,94 @@ html, body {
     width: 80%;
   }
 }
-.about-us-section {
+
+
+
+
+/* General styling for the loading screen */
+.loading-screen {
   display: flex;
-  justify-content: flex-start; /* Aligns content to the left */
-  align-items: left;
-  margin: 110px;
-  max-width: 70%; /* Adjust this value as needed for the desired width */
-  left: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f0f0f0; /* Light gray background for better contrast */
+  font-family: 'Arial, sans-serif'; /* Modern, clean font */
 }
 
+/* Styling for the loading spinner */
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin-bottom: 20px; /* Spacing between spinner and content */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Styling for the About Us section */
+.about-us-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  background-color: #ffffff; /* White background for content */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for better depth */
+  max-width: 800px; /* Limiting the width for better readability */
+  margin: 0 20px; /* Responsive margin */
+}
+
+/* Styling for the image container */
 .image-container {
   flex: 1;
-  margin-right: 10px;
+  margin-right: 20px;
 }
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Styling for the article content */
 .about-us-article {
   flex: 2;
   padding: 10px;
-  background: transparent;
 }
-.about-us-section img {
-  max-width: 70%;
-  height: auto;
-  border-radius: 5px;
-  left: 20px;
+
+.about-us-article h1 {
+  font-size: 2em;
+  color: #333; /* Dark text color for better readability */
+  margin-bottom: 10px;
+}
+
+.about-us-article p {
+  font-size: 1.2em;
+  color: #666; /* Lighter text color for contrast */
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  /* Responsive styling for smaller screens */
+  .about-us-section {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .image-container {
+      margin-right: 0;
+      margin-bottom: 20px;
+  }
 }
 
