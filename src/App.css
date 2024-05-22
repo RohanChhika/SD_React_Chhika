@@ -14,6 +14,8 @@ html, body {
   align-items: center;
   min-height: 100vh;
   width: 100vw;
+  padding-top: 120px; /* Ensuring enough space from fixed header */
+  padding-bottom: 100px; /* Ensuring enough space from fixed footer */
 }
 
 .App-logo {
