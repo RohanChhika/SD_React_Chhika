@@ -64,7 +64,7 @@ const FundsPage = () => {
     <header className="App-header">
     <img src={logo} className="App-logo" alt="logo" />
     <h1>All Funds</h1>
-    <div style={{ position: 'absolute', right: '10px', top: '100px' }}>
+    <div style={{ position: 'absolute', right: '10px', top: '50px' }}>
       <BackButton />
     </div>
     </header>
