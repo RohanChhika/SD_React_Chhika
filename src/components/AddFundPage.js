@@ -105,12 +105,12 @@ const CreateFund = () => {
   <header className="App-header">
     <img src={logo} className="App-logo" alt="logo" />
     <h1>Create Fund</h1>
-    {/* <div style={{ position: 'absolute', right: '10px', top: '35px' }}>
-      <BackButton />
-    </div> */}
-    <div>
+    <div style={{ position: 'absolute', right: '10px', top: '35px' }}>
       <BackButton />
     </div>
+    {/* <div>
+      <BackButton />
+    </div> */}
 
   </header>
   <div className="App"> {/* This ensures flex centering takes full effect */}
@@ -129,12 +129,16 @@ const CreateFund = () => {
         <label>Description:<textarea value={description} onChange={handleDescriptionChange} /></label>
         <label>Total Amount Allocated to fund:<input type="number" value={totalAmount} onChange={handleTotalAmountChange} /></label>
         <label>Amount Per Applicant:<input type="number" value={amountPerApplicant} onChange={handleAmountPerApplicantChange} /></label>
-        <button className='button' type="submit">Create Fund</button>
+        {/* <button className='button' type="Submit">Create Fund</button> */}
         {/* <div style={{ textAlign: 'center', marginTop: '20px' }}>
               <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
                 Create Fund
               </button>
         </div> */}
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+              {/* Ensuring the Create Fund button is visible */}
+              <button type="submit" className="button">Create Fund</button>
+        </div>
       </form>
     </div>
   </div>
