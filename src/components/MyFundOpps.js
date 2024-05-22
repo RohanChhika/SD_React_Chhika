@@ -60,6 +60,9 @@ const MyFundOpps = () => {
         <div className="center-text">
           <h1>My Fund Opportunity</h1>
         </div>
+        <div className="login-container">
+        <BackButton/>
+       </div>
       </header>
       <main>
         <h1 className='admin-page' style={{ textAlign: 'center' }}>My Funds</h1>

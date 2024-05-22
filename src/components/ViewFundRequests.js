@@ -153,6 +153,9 @@ const ViewFundRequests = () => {
         <div className="center-text">
           <h1>Funding Applications</h1>
         </div>
+        <div className="login-container">
+        <BackButton/>
+       </div>
       </header>
       <main style={{ paddingTop: '120px', paddingBottom: '80px' }}> {/* Adjust padding to account for fixed header and footer */}
         <h1 className='admin-page' style={{ textAlign: 'center' }}>Applications Page</h1>

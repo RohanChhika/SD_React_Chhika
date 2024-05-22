@@ -92,6 +92,9 @@ const FundApplication = () => {
         <div className="center-text">
           <h1>Application for Fund</h1>
         </div>
+        <div className="login-container">
+        <BackButton/>
+       </div>
       </header>
       <main style={{ paddingTop: '100px' }}>
         <h1 style={{ textAlign: 'center' }}>Apply for a fund</h1>

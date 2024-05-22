@@ -72,6 +72,9 @@ const ViewFundStatus = () => {
         <div className="center-text">
           <h1>My Fund Status</h1>
         </div>
+        <div className="login-container">
+        <BackButton/>
+       </div>
       </header>
       <main>
         <h1 className='admin-page' style={{ textAlign: 'center' }}>My Fund Status</h1>

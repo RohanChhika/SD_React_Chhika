@@ -71,6 +71,9 @@ const ViewMyFundManagerReqStatus = () => {
         <div className="center-text">
           <h1>My Fund Manager Application Status</h1>
         </div>
+        <div className="login-container">
+        <BackButton/>
+       </div>
       </header>
       <main>
         <h1 className='admin-page' style={{ textAlign: 'center' }}>My Funds Statuses</h1>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import logo from '../components/Images/logo1.png';
+import BackButton from './buttons/BackButton';
 
 const CreateFund = () => {
   // State for fund name input
@@ -104,6 +105,9 @@ const CreateFund = () => {
   <header className="App-header">
     <img src={logo} className="App-logo" alt="logo" />
     <h1>Create Fund</h1>
+    <div className="login-container">
+      <BackButton/>
+    </div>
   </header>
   <div className="App"> {/* This ensures flex centering takes full effect */}
     <div className="create-fund-form">

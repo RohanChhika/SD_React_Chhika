@@ -121,6 +121,9 @@ const AdminFundReq = () => {
         <div className="center-text">
           <h1>Fund Requests</h1>
         </div>
+        <div className="login-container">
+       <BackButton/>
+      </div>
       </header>
       <main>
         <h1 className='admin-page' style={{ textAlign: 'center' }}>Admin Page</h1>
