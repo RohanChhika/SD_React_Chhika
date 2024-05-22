@@ -88,8 +88,10 @@ const ViewFundRequests = () => {
       } catch (error) {
         console.error('Failed to accept request:', error.message);
       }
-    } else {
-      alert("This application has already been accepted or rejected");
+    } else if (selectedApplication.applicationStatus==='accepted') {
+      alert("This application has already been accepted please choose a pending application");
+    }else if(selectedApplication.applicationStatus==='rejected'){
+      alert("This application has already been rejected please choose a pending application")
     }
   };
 
@@ -122,8 +124,10 @@ const ViewFundRequests = () => {
       } catch (error) {
         console.error('Failed to accept request:', error.message);
       }
-    } else {
-      alert("This application has already been accepted or rejected");
+    } else if (selectedApplication.applicationStatus==='accepted') {
+      alert("This application has already been accepted please choose a pending application");
+    }else if(selectedApplication.applicationStatus==='rejected'){
+      alert("This application has already been rejected please choose a pending application")
     }
   };
 
