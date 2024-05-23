@@ -65,12 +65,29 @@ const App = () => {
           </header>
 
           {/* Conditional rendering of Aboout Us component based on user added state */}
-          {!isUserAdded && <AboutUsTile/>}
+          {!isUserAdded && <AboutUsTile showHeaderFooter={false} />}
           {/* Conditional rendering of FundsPage component based on user added state */}
           
           {isUserAdded && <Profile />}
           <footer className="App-footer">
             © 2024 FundIT. All rights reserved.
+            <div className="social-media">
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:compsciwarriors@gmail.com" target="_blank" rel="noopener noreferrer">
+                        <i className="fas fa-envelope"></i> {/* Font Awesome envelope icon */}
+                    </a>
+                </div>
           </footer>
         </main>
       } />
