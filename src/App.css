@@ -349,6 +349,7 @@ html, body {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
+  transform: translateY(-50px);
 }
 
 .hero-section h1 {
@@ -387,7 +388,7 @@ html, body {
   color: white;
   text-decoration: none;
   padding: 8px 15px;
-  background-color: #444;
+  background-color: #21a1f1;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }

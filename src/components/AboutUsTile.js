@@ -2,7 +2,6 @@ import React from "react";
 import aboutUsImage from './Images/about-us.png';
 import heroBackground1 from './Images/hero-background1.jpg';
 import '../App.css';
-import LoginButton from "./buttons/LoginButton";
 
 const AboutUsTile = ({ showHeaderFooter = true }) => {
     return (
@@ -10,9 +9,9 @@ const AboutUsTile = ({ showHeaderFooter = true }) => {
             {showHeaderFooter && (
                 <nav className="navbar">
                     <div className="navbar-logo">FUNDIT</div>
-                    <ul className="navbar-links">
+                    {/* <ul className="navbar-links">
                         <li><LoginButton className="login-button" /></li>
-                    </ul>
+                    </ul> */}
                 </nav>
             )}
 
@@ -20,10 +19,11 @@ const AboutUsTile = ({ showHeaderFooter = true }) => {
                 <div className="hero-content">
                     <h1>Welcome to FUNDIT</h1>
                     <p>Your gateway to funding opportunities.</p>
-                    <button className="cta-button">Get Started</button>
+                    {/* <button className="cta-button">Get Started</button> */}
+                    {/* <LoginButton className="cta-button" /> */}
                     <div className="hero-links">
-                        <a href="#about">About Us</a>
-                        <a href="#features">Our Features</a>
+                        <a href="#about" className="cta-button">About Us</a>
+                        <a href="#features" className="cta-button">Our Features</a>
                     </div>
                 </div>
             </header>
