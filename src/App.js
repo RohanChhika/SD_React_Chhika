@@ -20,7 +20,6 @@ import Profile from "./components/profile"
 import ViewAllFunds from "./components/buttons/ViewAllFundsButton";
 import ViewMyFundButton from "./components/buttons/ViewMyFundButton";
 import ViewFundStatus from "./components/ViewFundStatus";
-import ViewMyFundManagerReqStatus from "./components/ViewMyFundManagerReqStatus";
 import ViewMyFundOppButton from "./components/buttons/ViewMyFundOppButton";
 import MyFundOpps from "./components/MyFundOpps";
 import AboutUsTile from "./components/AboutUsTile";
