@@ -145,7 +145,9 @@ const MyFundOpps = () => {
     <main className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>My Fund Opportunity</h1>
+        <section className="center-text">
+          <h1>My Fund Opportunity</h1>
+        </section>
         <aside className="login-container">
           <BackButton />
         </aside>
