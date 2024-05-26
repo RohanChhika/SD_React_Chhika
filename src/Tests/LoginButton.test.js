@@ -1,80 +1,99 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import LoginButton from '../components//buttons/LoginButton';
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from '../components/LoginButton';
 
-// Mock the Auth0 hook and its return values
-jest.mock("@auth0/auth0-react");
+jest.mock('@auth0/auth0-react');
 
-describe('LoginButton Component', () => {
-  // Setup common variables for test cases
-  const user = {
-    email: 'test@example.com',
-    sub: 'auth0|123456'
-  };
-
-  const mockedLoginWithRedirect = jest.fn();
-  const mockedGetAccessTokenSilently = jest.fn();
-  const mockedOnUserAdded = jest.fn();
+describe('LoginButton', () => {
+  const onUserAddedMock = jest.fn();
+  const loginWithRedirectMock = jest.fn();
+  const getAccessTokenSilentlyMock = jest.fn();
 
   beforeEach(() => {
-    // Reset mocks before each test
+    jest.clearAllMocks();
     useAuth0.mockReturnValue({
       isAuthenticated: false,
       user: null,
-      loginWithRedirect: mockedLoginWithRedirect,
-      getAccessTokenSilently: mockedGetAccessTokenSilently
+      loginWithRedirect: loginWithRedirectMock,
+      getAccessTokenSilently: getAccessTokenSilentlyMock,
     });
   });
 
-  test('renders login button when not authenticated', () => {
-    const { getByRole } = render(<LoginButton onUserAdded={mockedOnUserAdded} />);
-    const loginButton = getByRole('button', { name: /log in/i });
-    expect(loginButton).toBeInTheDocument();
+  test('renders login button when user is not authenticated', () => {
+    render(<LoginButton onUserAdded={onUserAddedMock} />);
+    expect(screen.getByRole('button', { name: /log in/i })).toBeInTheDocument();
   });
 
-  test('does not render login button when authenticated', () => {
+  test('does not render login button when user is authenticated', () => {
     useAuth0.mockReturnValue({
       isAuthenticated: true,
-      user,
-      loginWithRedirect: mockedLoginWithRedirect,
-      getAccessTokenSilently: mockedGetAccessTokenSilently
+      user: { sub: 'auth0|123456', email: 'user@example.com' },
+      loginWithRedirect: loginWithRedirectMock,
+      getAccessTokenSilently: getAccessTokenSilentlyMock,
     });
-    const { queryByRole } = render(<LoginButton onUserAdded={mockedOnUserAdded} />);
-    const loginButton = queryByRole('button', { name: /log in/i });
-    expect(loginButton).not.toBeInTheDocument();
+    render(<LoginButton onUserAdded={onUserAddedMock} />);
+    expect(screen.queryByRole('button', { name: /log in/i })).not.toBeInTheDocument();
   });
 
   test('calls loginWithRedirect when login button is clicked', () => {
-    const { getByRole } = render(<LoginButton onUserAdded={mockedOnUserAdded} />);
-    const loginButton = getByRole('button', { name: /log in/i });
-    fireEvent.click(loginButton);
-    expect(mockedLoginWithRedirect).toHaveBeenCalledTimes(1);
+    render(<LoginButton onUserAdded={onUserAddedMock} />);
+    const button = screen.getByRole('button', { name: /log in/i });
+    fireEvent.click(button);
+    expect(loginWithRedirectMock).toHaveBeenCalled();
   });
 
   test('calls API to add user when authenticated', async () => {
-    // Mock successful authentication and token retrieval
     useAuth0.mockReturnValue({
       isAuthenticated: true,
-      user,
-      loginWithRedirect: mockedLoginWithRedirect,
-      getAccessTokenSilently: mockedGetAccessTokenSilently
+      user: { sub: 'auth0|123456', email: 'user@example.com' },
+      loginWithRedirect: loginWithRedirectMock,
+      getAccessTokenSilently: getAccessTokenSilentlyMock.mockResolvedValue('fakeToken'),
+    });
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(),
     });
 
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({ message: 'User added successfully' })
-      })
-    );
-
-    render(<LoginButton onUserAdded={mockedOnUserAdded} />);
-    await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
-    expect(mockedOnUserAdded).toHaveBeenCalled();
+    render(<LoginButton onUserAdded={onUserAddedMock} />);
+    await waitFor(() => expect(getAccessTokenSilentlyMock).toHaveBeenCalled());
+    await waitFor(() => expect(fetch).toHaveBeenCalledWith(
+      'https://fundit.azurewebsites.net/signup',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer fakeToken',
+        },
+        body: JSON.stringify({
+          userID: 'auth0|123456',
+          role: 'applicant',
+          contact: 'user@example.com',
+        }),
+      }
+    ));
+    await waitFor(() => expect(onUserAddedMock).toHaveBeenCalled());
   });
 
-  // Cleanup mock
-  afterEach(() => {
-    jest.restoreAllMocks();
+  test('handles API failure gracefully', async () => {
+    useAuth0.mockReturnValue({
+      isAuthenticated: true,
+      user: { sub: 'auth0|123456', email: 'user@example.com' },
+      loginWithRedirect: loginWithRedirectMock,
+      getAccessTokenSilently: getAccessTokenSilentlyMock.mockResolvedValue('fakeToken'),
+    });
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      status: 500,
+    });
+
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    render(<LoginButton onUserAdded={onUserAddedMock} />);
+    await waitFor(() => expect(fetch).toHaveBeenCalled());
+    expect(consoleSpy).toHaveBeenCalledWith('Failed to add user to the database:', expect.any(Error));
+
+    consoleSpy.mockRestore();
   });
 });

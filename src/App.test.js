@@ -8,6 +8,9 @@ test('renders learn react link', () => {
       <App />
     </BrowserRouter>
   );
-  const linkElement = screen.getByText(/welcome to fundit/i);
-  expect(linkElement).toBeInTheDocument();
+  const linkElements = screen.getAllByText(/welcome to fundit/i);
+  linkElements.forEach(linkElement => {
+    expect(linkElement).toBeInTheDocument();
+  });  
 });
+
