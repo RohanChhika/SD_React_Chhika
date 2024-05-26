@@ -218,7 +218,7 @@ const CreateFund = () => {
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Create Fund</h1>
         <aside style={{ position: 'absolute', right: '10px', top: '35px' }}> {/* Used <aside> for positioning BackButton */}
-          <BackButton />
+          <BackButton style={{ position: 'absolute', right: '10px', top: '35px' }}/>
         </aside>
       </header>
       <main className="App">
