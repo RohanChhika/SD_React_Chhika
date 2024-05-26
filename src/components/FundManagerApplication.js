@@ -54,14 +54,14 @@ const FundManagerApplication = () => {
     <main className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <section className="center-text"> {/* Changed div to section */}
+        <section className="center-text"> 
           <h1>Fund Manager Application</h1>
         </section>
-        <aside className="login-container"> {/* Changed div to aside */}
+        <aside className="login-container"> 
           <BackButton/>
         </aside>
       </header>
-      <article style={{ paddingTop: '100px' }}> {/* Changed main to article */}
+      <article style={{ paddingTop: '100px' }}> 
         <h1 style={{textAlign: 'center'}}>Apply to be a Fund Manager</h1>
         <h2 style={{textAlign: 'center'}}>Please provide your motivation</h2>
         <form className='fund-manager-form' onSubmit={handleSubmit}>

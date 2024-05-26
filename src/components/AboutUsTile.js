@@ -5,10 +5,10 @@ import '../App.css';
 
 const AboutUsTile = ({ showHeaderFooter = true }) => {
     return (
-        <main className="home-screen"> {/* Replaced <div> with <main> */}
+        <main className="home-screen"> 
             {showHeaderFooter && (
                 <nav className="navbar">
-                    <section className="navbar-logo">FUNDIT</section> {/* Replaced <div> with <section> */}
+                    <section className="navbar-logo">FUNDIT</section> 
                     {/* <ul className="navbar-links">
                         <li><LoginButton className="login-button" /></li>
                     </ul> */}
@@ -16,12 +16,12 @@ const AboutUsTile = ({ showHeaderFooter = true }) => {
             )}
 
             <header className="hero-section" style={{ backgroundImage: `url(${heroBackground1})` }}>
-                <section className="hero-content"> {/* Replaced <div> with <section> */}
+                <section className="hero-content"> 
                     <h1>Welcome to FUNDIT</h1>
                     <p>Your gateway to funding opportunities.</p>
                     {/* <button className="cta-button">Get Started</button> */}
                     {/* <LoginButton className="cta-button" /> */}
-                    <aside className="hero-links"> {/* Replaced <div> with <aside> for link grouping */}
+                    <aside className="hero-links"> 
                         <a href="#about" className="cta-button">About Us</a>
                         <a href="#features" className="cta-button">Our Features</a>
                     </aside>
@@ -29,7 +29,7 @@ const AboutUsTile = ({ showHeaderFooter = true }) => {
             </header>
 
             <section id="about" className="about-us-section">
-                <figure className="image-container"> {/* Replaced <div> with <figure> for image grouping */}
+                <figure className="image-container"> 
                     <img src={aboutUsImage} alt="About Us" />
                 </figure>
                 <article className="about-us-article">
@@ -45,8 +45,8 @@ const AboutUsTile = ({ showHeaderFooter = true }) => {
 
             <section id="features" className="features-section">
                 <h2>Our Features</h2>
-                <article className="features-container"> {/* Replaced <div> with <article> */}
-                    <section className="feature"> {/* Replaced <div> with <section> for each feature */}
+                <article className="features-container"> 
+                    <section className="feature"> 
                         <h3>Bursaries</h3>
                         <p>Access a variety of educational bursaries to support your academic journey.</p>
                     </section>
@@ -64,7 +64,7 @@ const AboutUsTile = ({ showHeaderFooter = true }) => {
             {showHeaderFooter && (
                 <footer className="footer">
                     <p>© 2024 FUNDIT. All rights reserved.</p>
-                    <aside className="footer-links"> {/* Replaced <div> with <aside> for link grouping */}
+                    <aside className="footer-links"> 
                         <a href="#about">About</a>
                         <a href="#features">Features</a>
                         <a href="#contact">Contact</a>

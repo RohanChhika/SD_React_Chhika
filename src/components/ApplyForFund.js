@@ -75,14 +75,14 @@ const FundApplication = () => {
     <main className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <section className="center-text"> {/* Changed div to section */}
+        <section className="center-text"> 
           <h1>Application for Fund</h1>
         </section>
-        <aside className="login-container"> {/* Changed div to aside */}
+        <aside className="login-container"> 
           <BackButton/>
         </aside>
       </header>
-      <article style={{ paddingTop: '100px' }}> {/* Changed main to article */}
+      <article style={{ paddingTop: '100px' }}> 
         <h1 style={{ textAlign: 'center' }}>Apply for a fund</h1>
         <h2 style={{ textAlign: 'center' }}>Fund Name: {decodeURIComponent(fundName)}</h2>
         <h3 style={{ textAlign: 'center' }}>Please provide your motivation</h3>

@@ -68,17 +68,17 @@ const AdminBlockUsers = () => {
     <main className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <aside className="center-text"> {/* Changed div to aside */}
+        <aside className="center-text"> 
           <h1> All Users</h1>
         </aside>
-        <aside className="login-container"> {/* Changed div to aside */}
+        <aside className="login-container"> 
           <BackButton />
         </aside>
       </header>
-      <section> {/* Changed main to section */}
+      <section> 
         <h1 className='admin-page' style={{ textAlign: 'center' }}>Admin View Users Page</h1>
         <h2 className='admin-page' style={{ textAlign: 'center' }}>Users</h2>
-        <section style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}> {/* Changed div to section */}
+        <section style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}> 
           <select className="motivation-select" style={{ width: '300px', textAlign: 'center' }} onChange={(e) => handleSelectUser(JSON.parse(e.target.value))}>
             <option value="">Select a User</option>
             {Users.map(user => (
@@ -89,13 +89,13 @@ const AdminBlockUsers = () => {
           </select>
         </section>
         {selectedUser && (
-          <article className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}> {/* Changed div to article */}
+          <article className='motivation-detail' style={{ width: '600px', border: '1px solid #ccc', padding: '10px', textAlign: 'left', marginBottom: '20px', margin: '0 auto' }}> 
             <h3>User ID: {selectedUser.userID}</h3>
             <p>Username: {userInfo.username}</p>
             <p>Role: {userInfo.role}</p>
           </article>
         )}
-        <footer className="button-container" style={{ textAlign: 'center' }}> {/* Changed div to footer */}
+        <footer className="button-container" style={{ textAlign: 'center' }}> 
           <button className='button' style={{ marginRight: '10px' }} onClick={handleBlockUser} disabled={!selectedUser}>Block User</button>
         </footer>
       </section>

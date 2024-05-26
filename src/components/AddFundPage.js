@@ -70,7 +70,7 @@ const CreateFund = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Create Fund</h1>
-        <aside style={{ position: 'absolute', right: '10px', top: '35px' }}> {/* Used <aside> for positioning BackButton */}
+        <aside style={{ position: 'absolute', right: '10px', top: '35px' }}> 
           <BackButton/>
         </aside>
       </header>
@@ -90,7 +90,7 @@ const CreateFund = () => {
             <label>Description:<textarea value={description} onChange={handleDescriptionChange} /></label>
             <label>Total Amount Allocated to fund:<input type="number" value={totalAmount} onChange={handleTotalAmountChange} /></label>
             <label>Amount Per Applicant:<input type="number" value={amountPerApplicant} onChange={handleAmountPerApplicantChange} /></label>
-            <footer style={{ textAlign: 'center', marginTop: '20px' }}> {/* Used <footer> for submit button area */}
+            <footer style={{ textAlign: 'center', marginTop: '20px' }}> 
               <button type="submit" className="button">Create Fund</button>
             </footer>
           </form>

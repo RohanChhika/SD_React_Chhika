@@ -37,8 +37,8 @@ const Profile = () => {
   }, [isAuthenticated, getAccessTokenSilently, user?.sub]);
 
   return (
-    <main className="profile-centered"> {/* Main content container */}
-      <article className='profile-details'> {/* Semantically groups the user details */}
+    <main className="profile-centered"> 
+      <article className='profile-details'> 
         {userRoleRef.current === 'blocked' ? (
           <p className="blocked">Your account has been blocked. Please contact the administrator for assistance.</p>
         ) : (
