@@ -220,14 +220,14 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import logo from '../components/Images/logo1.png';
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BackButton from './buttons/BackButton';
 
 const ViewFundRequests = () => {
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [applications, setApplications] = useState([]);
   const { getAccessTokenSilently, user } = useAuth0();
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user?.sub) return;
