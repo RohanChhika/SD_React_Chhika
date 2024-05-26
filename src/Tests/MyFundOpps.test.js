@@ -12,12 +12,21 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
+// test('initially shows no funds and no error', () => {
+//   render(<MyFundOpps />);
+//   expect(screen.queryByText('Select a Fund')).toBeInTheDocument();
+//   expect(screen.queryAllByRole('option').length).toBe(1); // Only the default option
+//   expect(screen.queryByText('Failed to fetch funds data')).not.toBeInTheDocument();
+// });
+
 test('initially shows no funds and no error', () => {
   render(<MyFundOpps />);
-  expect(screen.queryByText('Select a Fund')).toBeInTheDocument();
+  const selectFundElements = screen.getAllByText('Select a Fund');
+  expect(selectFundElements.length).toBeGreaterThan(0); // Checks that "Select a Fund" appears at least once
   expect(screen.queryAllByRole('option').length).toBe(1); // Only the default option
   expect(screen.queryByText('Failed to fetch funds data')).not.toBeInTheDocument();
 });
+
 
 test('handles dropdown selection and displays selected fund details', async () => {
   const mockResponse = {

@@ -1,33 +1,6 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
-// import ViewFundStatus from '../components/ViewFundStatus';
-
-// describe('ViewFundStatus Component Tests', () => {
-//   let wrapper;
-
-//   beforeEach(() => {
-//     wrapper = shallow(<ViewFundStatus status="active" />);
-//   });
-
-//   test('should render without crashing', () => {
-//     expect(wrapper.exists()).toBeTruthy();
-//   });
-
-//   test('should display status prop correctly', () => {
-//     expect(wrapper.text()).toContain('My Fund Status<BackButton />My Fund StatusFunds ListSelect a Fund© 2024 FundIT. All rights reserved.');
-//   });
-
-//   test('should handle status change correctly', () => {
-//     wrapper.setProps({ status: 'inactive' });
-//     expect(wrapper.text()).toContain('My Fund Status<BackButton />My Fund StatusFunds ListSelect a Fund© 2024 FundIT. All rights reserved.');
-//   });
-// });
-
-
 import React from 'react';
 import { shallow } from 'enzyme';
 import ViewFundStatus from '../components/ViewFundStatus';
-import renderer from 'react-test-renderer';
 
 describe('ViewFundStatus Tests', () => {
   let wrapper;

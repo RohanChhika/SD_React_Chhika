@@ -19,6 +19,4 @@ test('renders AddFundPage and interacts with form', () => {
   fireEvent.change(screen.getByLabelText('Amount Per Applicant:'), { target: { value: '1000' } });
 
   fireEvent.click(screen.getByRole('button', { name: 'Create Fund' }));
-  // Assuming you have some success message or redirect
-  // expect(screen.getByText('Fund submitted successfully!')).toBeInTheDocument();
 });
