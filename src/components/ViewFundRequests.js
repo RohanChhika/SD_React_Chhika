@@ -382,7 +382,7 @@ const ViewFundRequests = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <section className="center-text">
-          <h1>Funding Applications</h1>
+          <h1>Funding Application</h1>
         </section>
         <aside className="login-container">
           <BackButton />
